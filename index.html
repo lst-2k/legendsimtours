@@ -27,40 +27,39 @@
             overflow: hidden;
         }
 
-        /* Full Width Responsive Header */
+        /* FULL WIDTH STRETCHED HEADER */
         header.top-bar {
             width: 100%;
             background-color: var(--header-bg);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 15px 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border-bottom: 1px solid #333;
             z-index: 100;
         }
 
         .header-content {
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            text-align: center;
         }
 
-        /* Logo stretches to fit container width on mobile */
+        /* Logo stretches to 100% of the screen width */
         .header-content img {
-            max-width: 90%;
+            width: 100%;
             height: auto;
-            max-height: 80px;
-            object-fit: contain;
+            display: block;
+            object-fit: cover; /* Ensures it fills area if aspect ratio differs */
         }
 
-        .header-content h1 {
+        .header-title-bar {
+            background: rgba(0,0,0,0.5);
+            width: 100%;
+            padding: 10px 0;
             color: white;
-            margin: 0;
-            font-size: 1.8rem;
-            letter-spacing: 1px;
+            font-size: 1.5rem;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* Layout Wrapper */
@@ -77,8 +76,8 @@
             border-right: 1px solid #ddd;
             display: flex;
             flex-direction: column;
-            padding: 25px;
-            gap: 12px;
+            padding: 20px;
+            gap: 10px;
             overflow-y: auto;
             flex-shrink: 0;
         }
@@ -86,19 +85,18 @@
         .nav-btn {
             border: none;
             color: white;
-            padding: 16px;
-            border-radius: 8px;
+            padding: 15px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 700;
             font-size: 1rem;
             text-align: left;
             transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .nav-btn:hover { transform: translateX(8px); filter: brightness(1.1); }
+        .nav-btn:hover { transform: translateX(5px); filter: brightness(1.1); }
         
-        .btn-home { background-color: #333; }
+        .btn-home { background-color: #444; }
         .btn-emerald { background-color: var(--emerald); }
         .btn-grip { background-color: var(--grip); }
         .btn-links { background-color: var(--links); }
@@ -109,14 +107,13 @@
         /* Main Content Area */
         main {
             flex-grow: 1;
-            padding: 40px;
+            padding: 30px;
             overflow-y: auto;
-            position: relative;
         }
 
         .page-content {
             display: none;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             animation: fadeIn 0.3s ease;
         }
@@ -125,61 +122,68 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Card Styles */
         .card {
             background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .tour-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
         }
 
         .leaderboard-btn {
-            background-color: var(--owgr);
+            background-color: var(--dark-btn, #2c3e50);
             color: white;
-            padding: 12px 24px;
+            padding: 10px 20px;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 5px;
             font-weight: 600;
         }
 
         textarea {
             width: 100%;
-            padding: 20px;
+            padding: 15px;
             border: 1px solid #ddd;
-            border-radius: 10px;
-            min-height: 200px;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            min-height: 250px;
+            font-size: 1rem;
             margin-bottom: 20px;
             box-sizing: border-box;
+            font-family: inherit;
         }
 
         .drop-zone {
             width: 100%;
-            height: 180px;
+            height: 150px;
             border: 2px dashed #ccc;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fafafa;
-            color: #888;
+            background: #fdfdfd;
+            color: #999;
         }
 
-        /* Mobile Adjustments */
+        /* Mobile Viewport */
         @media (max-width: 768px) {
             .wrapper { flex-direction: column; }
-            nav { width: 100%; height: auto; border-right: none; border-bottom: 1px solid #ddd; padding: 15px; }
-            .nav-btn { padding: 12px; font-size: 0.9rem; }
-            .header-content h1 { font-size: 1.2rem; }
+            nav { 
+                width: 100%; 
+                height: auto; 
+                flex-direction: row; 
+                overflow-x: auto; 
+                white-space: nowrap;
+                padding: 10px;
+            }
+            .nav-btn { padding: 10px 15px; font-size: 0.8rem; }
+            main { padding: 15px; }
         }
     </style>
 </head>
@@ -187,14 +191,14 @@
 
     <header class="top-bar">
         <div class="header-content">
-            <img src="logo.png" alt="Legend Sim Tours Logo" onerror="this.src='https://via.placeholder.com/800x150?text=LEGEND+SIM+TOURS'">
-            <h1>Legend Sim Tours</h1>
+            <img src="logo.png" alt="Legend Sim Tours Banner" onerror="this.src='https://via.placeholder.com/1920x400?text=LEGEND+SIM+TOURS+BANNER'">
         </div>
+        <div class="header-title-bar">Legend Sim Tours</div>
     </header>
 
     <div class="wrapper">
         <nav>
-            <button class="nav-btn btn-home" onclick="showPage('home')">🏠 Home Area</button>
+            <button class="nav-btn btn-home" onclick="showPage('home')">Home Area</button>
             <button class="nav-btn btn-emerald" onclick="showPage('emerald')">Emerald Tour</button>
             <button class="nav-btn btn-grip" onclick="showPage('grip')">Grip & Rip</button>
             <button class="nav-btn btn-links" onclick="showPage('links')">Linksland</button>
@@ -207,15 +211,9 @@
             <div id="home" class="page-content active">
                 <h1>Welcome to Legend Sim Tours</h1>
                 <div class="card">
-                    <p>Welcome to Legend Sim Tours (LST) Stock 74. We have a few different societies in here, they are all using the stock 74 golfer.
-
-What's a stock 74 golfer I hear you ask, the greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74, no more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller!
-We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love  what's provided for the great community of Legend true simmers we have here.
-
-Each society offers something different, formats, scoring, bonus points etc. On the left is a link to each, just click on the link per society to give you an overview of what each society can offer, as always just ask in the Discord channel if you need anymore help or anything explained there will always be someone about who can help out.
-Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em 👍  </p>
-                    <textarea placeholder="Write a general introduction or tour-wide announcement here..."></textarea>
-                    <div class="drop-zone">📸 Drag general tour imagery or logos here</div>
+                    <p>Enter general tour information, seasonal announcements, or introduction text below.</p>
+                    <textarea placeholder="Main tour description..."></textarea>
+                    <div class="drop-zone">📸 Drag general images here</div>
                 </div>
             </div>
 
@@ -225,10 +223,7 @@ Hopefully there is something in here which you enjoy, or they might all be right
                     <a href="#" id="leaderboard-link" target="_blank" class="leaderboard-btn">Current Leaderboard</a>
                 </div>
                 <div class="card">
-                    <label style="font-weight:700; display:block; margin-bottom:10px;">Tournament Management</label>
-                    <textarea id="tour-notes" placeholder="Enter tour-specific rules, dates, and info..."></textarea>
-                    
-                    <label style="font-weight:700; display:block; margin-bottom:10px;">Gallery</label>
+                    <textarea placeholder="Tour-specific details..."></textarea>
                     <div class="drop-zone">📸 Drag images for this tour here</div>
                 </div>
             </div>
@@ -246,7 +241,6 @@ Hopefully there is something in here which you enjoy, or they might all be right
         };
 
         function showPage(id) {
-            // Hide everything
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
 
             if (id === 'home') {
@@ -254,13 +248,10 @@ Hopefully there is something in here which you enjoy, or they might all be right
             } else {
                 const tourData = tours[id];
                 const view = document.getElementById('tour-view');
-                
-                // Update dynamic content
                 document.getElementById('tour-title').innerText = tourData.name;
                 const linkBtn = document.getElementById('leaderboard-link');
                 linkBtn.href = tourData.url;
                 linkBtn.innerText = tourData.btnText || "Current Leaderboard";
-                
                 view.classList.add('active');
             }
         }
