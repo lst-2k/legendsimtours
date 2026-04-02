@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legend Sim Tours</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --emerald: #2ecc71;
@@ -34,42 +35,39 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            border-bottom: 1px solid #333;
             z-index: 100;
         }
 
         .header-content {
             width: 100%;
-            text-align: center;
         }
 
-        /* Logo stretches to 100% of the screen width */
         .header-content img {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: cover; /* Ensures it fills area if aspect ratio differs */
+            object-fit: cover;
         }
 
         .header-title-bar {
-            background: rgba(0,0,0,0.5);
+            background: #000;
             width: 100%;
-            padding: 10px 0;
+            padding: 12px 0;
             color: white;
-            font-size: 1.5rem;
+            text-align: center;
+            font-size: 1.6rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
-        /* Layout Wrapper */
         .wrapper {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
 
-        /* Persistent Sidebar */
+        /* Sidebar */
         nav {
             width: 280px;
             background-color: var(--sidebar-bg);
@@ -104,18 +102,18 @@
         .btn-stable { background-color: var(--stable); }
         .btn-owgr { background-color: var(--owgr); }
 
-        /* Main Content Area */
+        /* Main Content */
         main {
             flex-grow: 1;
-            padding: 30px;
+            padding: 40px;
             overflow-y: auto;
         }
 
         .page-content {
             display: none;
-            max-width: 1100px;
+            max-width: 900px;
             margin: 0 auto;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
 
         .page-content.active { display: block; }
@@ -124,9 +122,30 @@
 
         .card {
             background: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+            line-height: 1.6;
+        }
+
+        /* Crimson Text Styling for Home Section */
+        .crimson-style {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.35rem;
+            color: #2c3e50;
+            white-space: pre-line;
+            margin-bottom: 30px;
+        }
+
+        /* Settings Image Styling */
+        .settings-img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .tour-header {
@@ -139,9 +158,9 @@
         }
 
         .leaderboard-btn {
-            background-color: var(--dark-btn, #2c3e50);
+            background-color: var(--owgr);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: 600;
@@ -152,38 +171,32 @@
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            min-height: 250px;
+            min-height: 150px;
             font-size: 1rem;
-            margin-bottom: 20px;
+            margin-top: 20px;
             box-sizing: border-box;
             font-family: inherit;
         }
 
         .drop-zone {
             width: 100%;
-            height: 150px;
+            height: 120px;
             border: 2px dashed #ccc;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fdfdfd;
+            background: #fafafa;
             color: #999;
+            margin-top: 20px;
         }
 
-        /* Mobile Viewport */
         @media (max-width: 768px) {
             .wrapper { flex-direction: column; }
-            nav { 
-                width: 100%; 
-                height: auto; 
-                flex-direction: row; 
-                overflow-x: auto; 
-                white-space: nowrap;
-                padding: 10px;
-            }
-            .nav-btn { padding: 10px 15px; font-size: 0.8rem; }
-            main { padding: 15px; }
+            nav { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 10px; }
+            .nav-btn { padding: 10px 15px; font-size: 0.8rem; white-space: nowrap; }
+            main { padding: 20px; }
+            .settings-img { max-width: 100%; }
         }
     </style>
 </head>
@@ -209,11 +222,21 @@
 
         <main>
             <div id="home" class="page-content active">
-                <h1>Welcome to Legend Sim Tours</h1>
                 <div class="card">
-                    <p>Enter general tour information, seasonal announcements, or introduction text below.</p>
-                    <textarea placeholder="Main tour description..."></textarea>
-                    <div class="drop-zone">📸 Drag general images here</div>
+                    <div class="crimson-style">
+                        Welcome to Legend Sim Tours (LST) Stock 74. We have a few different societies in here, they are all using the stock 74 golfer.
+
+                        What's a stock 74 golfer I hear you ask, the greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74, no more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller!
+                        We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love what's provided for the great community of Legend true simmers we have here.
+
+                        Each society offers something different, formats, scoring, bonus points etc. On the left is a link to each, just click on the link per society to give you an overview of what each society can offer, as always just ask in the Discord channel if you need anymore help or anything explained there will always be someone about who can help out.
+                        Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em 👍
+                    </div>
+                    
+                    <img src="settings.png" alt="Tour Settings" class="settings-img" onerror="this.style.display='none'">
+                    
+                    <textarea placeholder="Admin Notes (Private or for internal tour drafting)..."></textarea>
+                    <div class="drop-zone">📸 Drag imagery or infographics here</div>
                 </div>
             </div>
 
