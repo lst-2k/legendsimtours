@@ -12,9 +12,9 @@
             --match: #e74c3c;
             --stable: #9b59b6;
             --owgr: #34495e;
-            --header-bg: #ffffff;
+            --header-bg: #1a1a1a;
+            --sidebar-bg: #ffffff;
             --bg: #f0f2f5;
-            --dark-btn: #2c3e50;
         }
 
         body {
@@ -24,65 +24,81 @@
             flex-direction: column;
             height: 100vh;
             background-color: var(--bg);
-            color: #333;
             overflow: hidden;
         }
 
-        /* Full Width Header */
+        /* Full Width Responsive Header */
         header.top-bar {
-            height: 60px;
+            width: 100%;
             background-color: var(--header-bg);
             display: flex;
             align-items: center;
-            justify-content: center; /* Centers logo when visible */
-            padding: 0 20px;
-            border-bottom: 1px solid #ddd;
-            transition: all 0.3s ease;
+            justify-content: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
         }
 
-        .logo-container img {
-            height: 40px;
+        .header-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Logo stretches to fit container width on mobile */
+        .header-content img {
+            max-width: 90%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+        }
+
+        .header-content h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         /* Layout Wrapper */
         .wrapper {
             display: flex;
             flex: 1;
-            position: relative;
+            overflow: hidden;
         }
 
-        /* Sidebar Navigation */
+        /* Persistent Sidebar */
         nav {
-            width: 100%;
-            max-width: 400px;
-            margin: auto;
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid #ddd;
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-
-        /* Hidden State for Navigation */
-        .nav-hidden nav, .nav-hidden header.top-bar {
-            display: none;
+            padding: 25px;
+            gap: 12px;
+            overflow-y: auto;
+            flex-shrink: 0;
         }
 
         .nav-btn {
             border: none;
             color: white;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 1.1rem;
-            text-align: center;
-            transition: transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-size: 1rem;
+            text-align: left;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .nav-btn:hover { transform: translateY(-3px); opacity: 0.9; }
-
+        .nav-btn:hover { transform: translateX(8px); filter: brightness(1.1); }
+        
+        .btn-home { background-color: #333; }
         .btn-emerald { background-color: var(--emerald); }
         .btn-grip { background-color: var(--grip); }
         .btn-links { background-color: var(--links); }
@@ -90,193 +106,157 @@
         .btn-stable { background-color: var(--stable); }
         .btn-owgr { background-color: var(--owgr); }
 
-        /* Main Content Viewport */
+        /* Main Content Area */
         main {
-            display: none; /* Hidden until a button is clicked */
             flex-grow: 1;
             padding: 40px;
             overflow-y: auto;
-            width: 100%;
+            position: relative;
         }
-
-        .nav-hidden main {
-            display: block;
-        }
-
-        /* Controls */
-        .top-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1000px;
-            margin: 0 auto 30px auto;
-        }
-
-        .back-btn {
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            color: #666;
-        }
-
-        .back-btn:hover { background: #eee; }
 
         .page-content {
             display: none;
             max-width: 1000px;
             margin: 0 auto;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.3s ease;
         }
 
         .page-content.active { display: block; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .content-card {
+        /* Card Styles */
+        .card {
             background: white;
-            padding: 40px;
+            padding: 35px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .leaderboard-link {
-            display: inline-block;
-            background-color: var(--dark-btn);
+        .tour-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .leaderboard-btn {
+            background-color: var(--owgr);
             color: white;
             padding: 12px 24px;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
         }
 
         textarea {
             width: 100%;
             padding: 20px;
-            border: 1px solid #eee;
+            border: 1px solid #ddd;
             border-radius: 10px;
-            min-height: 250px;
+            min-height: 200px;
             font-size: 1.1rem;
-            background: #fafafa;
+            margin-bottom: 20px;
+            box-sizing: border-box;
         }
 
         .drop-zone {
             width: 100%;
-            height: 200px;
+            height: 180px;
             border: 2px dashed #ccc;
-            border-radius: 15px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
             background: #fafafa;
+            color: #888;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .wrapper { flex-direction: column; }
+            nav { width: 100%; height: auto; border-right: none; border-bottom: 1px solid #ddd; padding: 15px; }
+            .nav-btn { padding: 12px; font-size: 0.9rem; }
+            .header-content h1 { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <header class="top-bar" id="mainHeader">
-        <div class="logo-container">
-            <img src="logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/200x50?text=LOGO'">
+    <header class="top-bar">
+        <div class="header-content">
+            <img src="logo.png" alt="Legend Sim Tours Logo" onerror="this.src='https://via.placeholder.com/800x150?text=LEGEND+SIM+TOURS'">
+            <h1>Legend Sim Tours</h1>
         </div>
     </header>
 
-    <div class="wrapper" id="appWrapper">
-        <nav id="mainNav">
-            <button class="nav-btn btn-emerald" onclick="openTour('emerald')">Emerald Tour</button>
-            <button class="nav-btn btn-grip" onclick="openTour('grip')">Grip & Rip</button>
-            <button class="nav-btn btn-links" onclick="openTour('links')">Linksland</button>
-            <button class="nav-btn btn-match" onclick="openTour('match')">Matchplay</button>
-            <button class="nav-btn btn-stable" onclick="openTour('stable')">Stableford</button>
-            <button class="nav-btn btn-owgr" onclick="openTour('owgr')">LST OWGR</button>
+    <div class="wrapper">
+        <nav>
+            <button class="nav-btn btn-home" onclick="showPage('home')">🏠 Home Area</button>
+            <button class="nav-btn btn-emerald" onclick="showPage('emerald')">Emerald Tour</button>
+            <button class="nav-btn btn-grip" onclick="showPage('grip')">Grip & Rip</button>
+            <button class="nav-btn btn-links" onclick="showPage('links')">Linksland</button>
+            <button class="nav-btn btn-match" onclick="showPage('match')">Matchplay</button>
+            <button class="nav-btn btn-stable" onclick="showPage('stable')">Stableford</button>
+            <button class="nav-btn btn-owgr" onclick="showPage('owgr')">LST OWGR</button>
         </nav>
 
         <main>
-            <div class="top-controls">
-                <button class="back-btn" onclick="closeTour()">← Back to Menu</button>
-                <div id="dynamic-leaderboard-placeholder"></div>
-            </div>
-
-            <div id="emerald" class="page-content">
-                <h1>Emerald Tour</h1>
-                <div class="content-card">
-                    <textarea placeholder="Tournament Notes..."></textarea>
-                    <div class="drop-zone">📸 Drag imagery here</div>
+            <div id="home" class="page-content active">
+                <h1>Welcome to Legend Sim Tours</h1>
+                <div class="card">
+                    <p>Welcome to the central hub for Legend Sim Tours. Select a tour from the sidebar to manage specific event details, leaderboard links, and imagery.</p>
+                    <textarea placeholder="Write a general introduction or tour-wide announcement here..."></textarea>
+                    <div class="drop-zone">📸 Drag general tour imagery or logos here</div>
                 </div>
             </div>
 
-            <div id="grip" class="page-content">
-                <h1>Grip & Rip</h1>
-                <div class="content-card">
-                    <textarea placeholder="Tournament Notes..."></textarea>
-                    <div class="drop-zone">📸 Drag imagery here</div>
+            <div id="tour-view" class="page-content">
+                <div class="tour-header">
+                    <h1 id="tour-title">Tour Name</h1>
+                    <a href="#" id="leaderboard-link" target="_blank" class="leaderboard-btn">Current Leaderboard</a>
                 </div>
-            </div>
-
-            <div id="links" class="page-content">
-                <h1>Linksland</h1>
-                <div class="content-card">
-                    <textarea placeholder="Tournament Notes..."></textarea>
-                    <div class="drop-zone">📸 Drag imagery here</div>
-                </div>
-            </div>
-
-            <div id="match" class="page-content">
-                <h1>Matchplay</h1>
-                <div class="content-card">
-                    <textarea placeholder="Tournament Notes..."></textarea>
-                    <div class="drop-zone">📸 Drag imagery here</div>
-                </div>
-            </div>
-
-            <div id="stable" class="page-content">
-                <h1>Stableford</h1>
-                <div class="content-card">
-                    <textarea placeholder="Tournament Notes..."></textarea>
-                    <div class="drop-zone">📸 Drag imagery here</div>
-                </div>
-            </div>
-
-            <div id="owgr" class="page-content">
-                <h1>LST OWGR</h1>
-                <div class="content-card">
-                    <textarea placeholder="Rankings updates..."></textarea>
-                    <div class="drop-zone">📸 Drag screenshots here</div>
+                <div class="card">
+                    <label style="font-weight:700; display:block; margin-bottom:10px;">Tournament Management</label>
+                    <textarea id="tour-notes" placeholder="Enter tour-specific rules, dates, and info..."></textarea>
+                    
+                    <label style="font-weight:700; display:block; margin-bottom:10px;">Gallery</label>
+                    <div class="drop-zone">📸 Drag images for this tour here</div>
                 </div>
             </div>
         </main>
     </div>
 
     <script>
-        const links = {
-            emerald: "https://lst-2k.github.io/newemeraldtourseason2/",
-            grip: "https://geordieboy85.github.io/GripRipRebirth74Leaderboards/",
-            links: "https://lst-2k.github.io/linksland/",
-            match: "https://lst-2k.github.io/matchplay/",
-            stable: "https://lst-2k.github.io/stableford/",
-            owgr: "https://lst-2k.github.io/lst-owgr/"
+        const tours = {
+            emerald: { name: "Emerald Tour", url: "https://lst-2k.github.io/newemeraldtourseason2/" },
+            grip: { name: "Grip & Rip", url: "https://geordieboy85.github.io/GripRipRebirth74Leaderboards/" },
+            links: { name: "Linksland", url: "https://lst-2k.github.io/linksland/" },
+            match: { name: "Matchplay", url: "https://lst-2k.github.io/matchplay/" },
+            stable: { name: "Stableford", url: "https://lst-2k.github.io/stableford/" },
+            owgr: { name: "LST OWGR", url: "https://lst-2k.github.io/lst-owgr/", btnText: "View Rankings" }
         };
 
-        function openTour(tourId) {
-            // Hide Menu, Show Main
-            document.body.classList.add('nav-hidden');
-            
-            // Activate Content
+        function showPage(id) {
+            // Hide everything
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            document.getElementById(tourId).classList.add('active');
 
-            // Set Leaderboard Link
-            const linkArea = document.getElementById('dynamic-leaderboard-placeholder');
-            linkArea.innerHTML = `<a href="${links[tourId]}" target="_blank" class="leaderboard-link">Current Leaderboard</a>`;
-        }
-
-        function closeTour() {
-            document.body.classList.remove('nav-hidden');
+            if (id === 'home') {
+                document.getElementById('home').classList.add('active');
+            } else {
+                const tourData = tours[id];
+                const view = document.getElementById('tour-view');
+                
+                // Update dynamic content
+                document.getElementById('tour-title').innerText = tourData.name;
+                const linkBtn = document.getElementById('leaderboard-link');
+                linkBtn.href = tourData.url;
+                linkBtn.innerText = tourData.btnText || "Current Leaderboard";
+                
+                view.classList.add('active');
+            }
         }
     </script>
 </body>
