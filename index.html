@@ -111,7 +111,7 @@
 
         .page-content {
             display: none;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             animation: fadeIn 0.4s ease;
         }
@@ -128,7 +128,6 @@
             line-height: 1.6;
         }
 
-        /* Crimson Text Styling for Home Section */
         .crimson-style {
             font-family: 'Crimson Text', serif;
             font-size: 1.35rem;
@@ -137,22 +136,14 @@
             margin-bottom: 30px;
         }
 
-        /* Settings & Tour Logo Styling */
-        .settings-img {
+        .settings-img, .tour-logo-header {
             width: 100%;
-            max-width: 600px;
+            max-width: 100%;
             height: auto;
             display: block;
             margin: 20px auto;
             border-radius: 8px;
-        }
-
-        .tour-logo-header {
-            width: 100%;
-            max-width: 450px; 
-            height: auto;
-            display: block;
-            margin: 0 auto 15px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         /* CENTERED TOUR HEADER */
@@ -166,24 +157,30 @@
             border-bottom: 2px solid #f0f0f0;
         }
 
+        #title-container {
+            width: 100%;
+        }
+
         #title-container h1 {
             margin: 0 0 15px 0;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
         }
 
         .leaderboard-btn {
             background-color: var(--owgr);
             color: white;
-            padding: 12px 30px;
+            padding: 14px 40px;
             text-decoration: none;
             border-radius: 8px;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-block;
-            transition: transform 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .leaderboard-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
         textarea {
@@ -216,7 +213,6 @@
             nav { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 10px; }
             .nav-btn { padding: 10px 15px; font-size: 0.8rem; white-space: nowrap; }
             main { padding: 20px; }
-            .tour-logo-header { max-width: 80%; }
         }
     </style>
 </head>
@@ -278,7 +274,8 @@
     <script>
         const tours = {
             emerald: { name: "Emerald Tour", url: "https://lst-2k.github.io/newemeraldtourseason2/", logo: "emeraldlogo.png" },
-            grip: { name: "Grip & Rip", url: "https://geordieboy85.github.io/GripRipRebirth74Leaderboards/" },
+            // Updated Grip & Rip URL for Season 6
+            grip: { name: "Grip & Rip", url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", logo: "gripnriplogo.png" },
             links: { name: "Linksland", url: "https://lst-2k.github.io/linksland/", logo: "linkslandlogo.png" },
             match: { name: "Matchplay", url: "https://lst-2k.github.io/matchplay/", logo: "matchplaylogo.png" },
             stable: { name: "Stableford", url: "https://lst-2k.github.io/stableford/", logo: "stablefordlogo.png" },
