@@ -18,17 +18,16 @@
             --bg: #f0f2f5;
         }
 
+        /* CHANGED: Allow body to scroll naturally */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
+            background-color: var(--bg);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            background-color: var(--bg);
-            overflow: hidden;
         }
 
-        /* FULL WIDTH STRETCHED HEADER */
         header.top-bar {
             width: 100%;
             background-color: var(--header-bg);
@@ -61,13 +60,12 @@
             letter-spacing: 3px;
         }
 
+        /* CHANGED: Removed fixed height/overflow constraints */
         .wrapper {
             display: flex;
             flex: 1;
-            overflow: hidden;
         }
 
-        /* Sidebar */
         nav {
             width: 280px;
             background-color: var(--sidebar-bg);
@@ -76,7 +74,6 @@
             flex-direction: column;
             padding: 20px;
             gap: 10px;
-            overflow-y: auto;
             flex-shrink: 0;
         }
 
@@ -102,11 +99,9 @@
         .btn-stable { background-color: var(--stable); }
         .btn-owgr { background-color: var(--owgr); }
 
-        /* Main Content */
         main {
             flex-grow: 1;
             padding: 40px;
-            overflow-y: auto;
         }
 
         .page-content {
@@ -126,6 +121,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 25px rgba(0,0,0,0.06);
             line-height: 1.6;
+            margin-bottom: 40px; /* Space at bottom for scrolling comfort */
         }
 
         .crimson-style {
@@ -146,7 +142,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* CENTERED TOUR HEADER */
         .tour-header {
             display: flex;
             flex-direction: column;
@@ -157,9 +152,7 @@
             border-bottom: 2px solid #f0f0f0;
         }
 
-        #title-container {
-            width: 100%;
-        }
+        #title-container { width: 100%; }
 
         #title-container h1 {
             margin: 0 0 15px 0;
@@ -210,7 +203,16 @@
 
         @media (max-width: 768px) {
             .wrapper { flex-direction: column; }
-            nav { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 10px; }
+            nav { 
+                width: 100%; 
+                height: auto; 
+                flex-direction: row; 
+                overflow-x: auto; 
+                padding: 10px;
+                position: sticky; /* Keeps nav visible on mobile while scrolling */
+                top: 0;
+                z-index: 90;
+            }
             .nav-btn { padding: 10px 15px; font-size: 0.8rem; white-space: nowrap; }
             main { padding: 20px; }
         }
@@ -274,7 +276,6 @@
     <script>
         const tours = {
             emerald: { name: "Emerald Tour", url: "https://lst-2k.github.io/newemeraldtourseason2/", logo: "emeraldlogo.png" },
-            // Updated Grip & Rip URL for Season 6
             grip: { name: "Grip & Rip", url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", logo: "gripnriplogo.png" },
             links: { name: "Linksland", url: "https://lst-2k.github.io/linksland/", logo: "linkslandlogo.png" },
             match: { name: "Matchplay", url: "https://lst-2k.github.io/matchplay/", logo: "matchplaylogo.png" },
@@ -284,6 +285,8 @@
 
         function showPage(id) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            // Scroll to top when switching pages
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if (id === 'home') {
                 document.getElementById('home').classList.add('active');
