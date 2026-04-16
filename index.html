@@ -137,7 +137,7 @@
             margin-bottom: 30px;
         }
 
-        /* Settings Image Styling */
+        /* Settings & Tour Logo Styling */
         .settings-img {
             width: 100%;
             max-width: 600px;
@@ -145,25 +145,45 @@
             display: block;
             margin: 20px auto;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
+        .tour-logo-header {
+            width: 100%;
+            max-width: 450px; /* Sized for tour logos */
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+        }
+
+        /* CENTERED TOUR HEADER */
         .tour-header {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
             border-bottom: 2px solid #f0f0f0;
+        }
+
+        #title-container h1 {
+            margin: 0 0 15px 0;
+            font-size: 2.5rem;
         }
 
         .leaderboard-btn {
             background-color: var(--owgr);
             color: white;
-            padding: 12px 24px;
+            padding: 12px 30px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: 600;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .leaderboard-btn:hover {
+            transform: scale(1.05);
         }
 
         textarea {
@@ -196,7 +216,7 @@
             nav { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 10px; }
             .nav-btn { padding: 10px 15px; font-size: 0.8rem; white-space: nowrap; }
             main { padding: 20px; }
-            .settings-img { max-width: 100%; }
+            .tour-logo-header { max-width: 80%; }
         }
     </style>
 </head>
@@ -242,7 +262,9 @@
 
             <div id="tour-view" class="page-content">
                 <div class="tour-header">
-                    <h1 id="tour-title">Tour Name</h1>
+                    <div id="title-container">
+                        <h1 id="tour-title">Tour Name</h1>
+                    </div>
                     <a href="#" id="leaderboard-link" target="_blank" class="leaderboard-btn">Current Leaderboard</a>
                 </div>
                 <div class="card">
@@ -255,7 +277,7 @@
 
     <script>
         const tours = {
-            emerald: { name: "Emerald Tour", url: "https://lst-2k.github.io/newemeraldtourseason2/" },
+            emerald: { name: "Emerald Tour", url: "https://lst-2k.github.io/newemeraldtourseason2/", logo: "emeraldlogo.png" },
             grip: { name: "Grip & Rip", url: "https://geordieboy85.github.io/GripRipRebirth74Leaderboards/" },
             links: { name: "Linksland", url: "https://lst-2k.github.io/linksland/" },
             match: { name: "Matchplay", url: "https://lst-2k.github.io/matchplay/" },
@@ -271,7 +293,14 @@
             } else {
                 const tourData = tours[id];
                 const view = document.getElementById('tour-view');
-                document.getElementById('tour-title').innerText = tourData.name;
+                const titleContainer = document.getElementById('title-container');
+                
+                if (tourData.logo) {
+                    titleContainer.innerHTML = `<img src="${tourData.logo}" class="tour-logo-header" alt="${tourData.name}" onerror="this.outerHTML='<h1>${tourData.name}</h1>'">`;
+                } else {
+                    titleContainer.innerHTML = `<h1 id="tour-title">${tourData.name}</h1>`;
+                }
+
                 const linkBtn = document.getElementById('leaderboard-link');
                 linkBtn.href = tourData.url;
                 linkBtn.innerText = tourData.btnText || "Current Leaderboard";
