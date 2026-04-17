@@ -123,10 +123,10 @@
         /* FIXED: Logos now stretch to fill the space */
         .tour-logo-header {
             width: 100%;
-            height: auto;
+            height: 300px; /* Force consistent height */
+            object-fit: contain; /* Prevent stretching/distortion */
             display: block;
             margin: 0 auto;
-            border-radius: 8px; /* Optional: adds a slight curve to match your cards */
         }
 
         .leaderboard-btn {
