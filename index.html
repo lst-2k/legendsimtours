@@ -5,29 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legend Sim Tours</title>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-	<a href="https://discord.gg/YOUR-CODE" target="_blank" class="discord-icon-only" title="Join our Discord">
-  <svg width="24" height="24" viewBox="0 0 127.14 96.36" fill="white">
-    <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.48,80.21a105.73,105.73,0,0,0,32.22,16.15,77.7,77.7,0,0,0,7.34-11.86,68.11,68.11,0,0,1-11.85-5.65c.99-.71,1.96-1.47,2.88-2.26a74.35,74.35,0,0,0,52.15,0c.92.79,1.89,1.55,2.88,2.26a67.85,67.85,0,0,1-11.85,5.65,76.91,76.91,0,0,0,7.34,11.86,105.55,105.55,0,0,0,32.27-16.15C129.58,52.84,124.93,28.93,107.7,8.07ZM42.45,65.69c-6.22,0-11.38-5.71-11.38-12.7s5-12.7,11.38-12.7,11.51,5.71,11.51,12.7S48.8,65.69,42.45,65.69Zm42.24,0c-6.22,0-11.38-5.71-11.38-12.7s5-12.7,11.38-12.7,11.51,5.71,11.51,12.7S91,65.69,84.69,65.69Z"/>
-  </svg>
-</a>
+    
+    <style>
+        :root {
+            --bg: #f4f4f4;
+            --header-bg: #000;
+            --sidebar-bg: #333;
+            --emerald: #2e7d32;
+            --grip: #d32f2f;
+            --links: #0288d1;
+            --match: #7b1fa2;
+            --stable: #f57c00;
+            --owgr: #455a64;
+        }
 
-<style>
-  .discord-icon-only {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #5865F2;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%; /* Makes it a circle */
-    transition: 0.3s;
-  }
-  .discord-icon-only:hover {
-    background-color: #4752C4;
-    transform: scale(1.1);
-  }
-
-        /* CHANGED: Allow body to scroll naturally */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -57,19 +48,6 @@
             object-fit: cover;
         }
 
-        .header-title-bar {
-            background: #000;
-            width: 100%;
-            padding: 12px 0;
-            color: white;
-            text-align: center;
-            font-size: 1.6rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        /* CHANGED: Removed fixed height/overflow constraints */
         .wrapper {
             display: flex;
             flex: 1;
@@ -96,6 +74,7 @@
             font-size: 1rem;
             text-align: left;
             transition: all 0.2s;
+            text-decoration: none;
         }
 
         .nav-btn:hover { transform: translateX(5px); filter: brightness(1.1); }
@@ -130,7 +109,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 25px rgba(0,0,0,0.06);
             line-height: 1.6;
-            margin-bottom: 40px; /* Space at bottom for scrolling comfort */
+            margin-bottom: 40px;
         }
 
         .crimson-style {
@@ -141,31 +120,13 @@
             margin-bottom: 30px;
         }
 
-        .settings-img, .tour-logo-header {
+        /* FIXED: Logos now stretch to fill the space */
+        .tour-logo-header {
             width: 100%;
-            max-width: 100%;
             height: auto;
             display: block;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .tour-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        #title-container { width: 100%; }
-
-        #title-container h1 {
-            margin: 0 0 15px 0;
-            font-size: 2.8rem;
+            margin: 0 auto;
+            border-radius: 8px; /* Optional: adds a slight curve to match your cards */
         }
 
         .leaderboard-btn {
@@ -176,54 +137,37 @@
             border-radius: 8px;
             font-weight: 700;
             display: inline-block;
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 25px;
         }
 
-        .leaderboard-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-
-        textarea {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            min-height: 150px;
-            font-size: 1rem;
-            margin-top: 20px;
-            box-sizing: border-box;
-            font-family: inherit;
-        }
-
-        .drop-zone {
-            width: 100%;
-            height: 120px;
-            border: 2px dashed #ccc;
-            border-radius: 10px;
+        .discord-float {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 55px;
+            height: 55px;
+            background-color: #5865F2;
+            color: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fafafa;
-            color: #999;
-            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .discord-float:hover {
+            background-color: #4752C4;
+            transform: scale(1.1) rotate(5deg);
         }
 
         @media (max-width: 768px) {
             .wrapper { flex-direction: column; }
-            nav { 
-                width: 100%; 
-                height: auto; 
-                flex-direction: row; 
-                overflow-x: auto; 
-                padding: 10px;
-                position: sticky; /* Keeps nav visible on mobile while scrolling */
-                top: 0;
-                z-index: 90;
-            }
-            .nav-btn { padding: 10px 15px; font-size: 0.8rem; white-space: nowrap; }
+            nav { width: 100%; height: auto; flex-direction: row; overflow-x: auto; position: sticky; top: 0; z-index: 90; }
+            .nav-btn { padding: 10px 15px; font-size: 0.8rem; }
             main { padding: 20px; }
+            .discord-float { bottom: 15px; left: 15px; width: 45px; height: 45px; }
         }
     </style>
 </head>
@@ -233,7 +177,6 @@
         <div class="header-content">
             <img src="logo.png" alt="Legend Sim Tours Banner" onerror="this.src='https://via.placeholder.com/1920x400?text=LEGEND+SIM+TOURS+BANNER'">
         </div>
-        <div class="header-title-bar">Legend Sim Tours</div>
     </header>
 
     <div class="wrapper">
@@ -254,33 +197,29 @@
                         Welcome to Legend Sim Tours (LST) Stock 74. We have a few different societies in here, they are all using the stock 74 golfer.
 
                         What's a stock 74 golfer I hear you ask, the greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74, no more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller!
+
                         We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love what's provided for the great community of Legend true simmers we have here.
 
                         Each society offers something different, formats, scoring, bonus points etc. On the left is a link to each, just click on the link per society to give you an overview of what each society can offer, as always just ask in the Discord channel if you need anymore help or anything explained there will always be someone about who can help out.
-                        Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em 👍
                     </div>
-                    
-                    <img src="settings.png" alt="Tour Settings" class="settings-img" onerror="this.style.display='none'">
-                    
-                    <textarea placeholder="Admin Notes (Private or for internal tour drafting)..."></textarea>
-                    <div class="drop-zone">📸 Drag imagery or infographics here</div>
                 </div>
             </div>
 
             <div id="tour-view" class="page-content">
-                <div class="tour-header">
+                <div class="tour-header" style="text-align: center; margin-bottom: 30px;">
                     <div id="title-container">
-                        <h1 id="tour-title">Tour Name</h1>
-                    </div>
+                        </div>
                     <a href="#" id="leaderboard-link" target="_blank" class="leaderboard-btn">Current Leaderboard</a>
-                </div>
-                <div class="card">
-                    <textarea placeholder="Tour-specific details..."></textarea>
-                    <div class="drop-zone">📸 Drag images for this tour here</div>
                 </div>
             </div>
         </main>
     </div>
+
+    <a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float" title="Join our Discord">
+        <svg width="28" height="28" viewBox="0 0 127.14 96.36" fill="white">
+            <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.48,80.21a105.73,105.73,0,0,0,32.22,16.15,77.7,77.7,0,0,0,7.34-11.86,68.11,68.11,0,0,1-11.85-5.65c.99-.71,1.96-1.47,2.88-2.26a74.35,74.35,0,0,0,52.15,0c.92.79,1.89,1.55,2.88,2.26a67.85,67.85,0,0,1-11.85,5.65,76.91,76.91,0,0,0,7.34,11.86,105.55,105.55,0,0,0,32.27-16.15C129.58,52.84,124.93,28.93,107.7,8.07ZM42.45,65.69c-6.22,0-11.38-5.71-11.38-12.7s5-12.7,11.38-12.7,11.51,5.71,11.51,12.7S48.8,65.69,42.45,65.69Zm42.24,0c-6.22,0-11.38-5.71-11.38-12.7s5-12.7,11.38-12.7,11.51,5.71,11.51,12.7S91,65.69,84.69,65.69Z"/>
+        </svg>
+    </a>
 
     <script>
         const tours = {
@@ -294,7 +233,6 @@
 
         function showPage(id) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            // Scroll to top when switching pages
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if (id === 'home') {
