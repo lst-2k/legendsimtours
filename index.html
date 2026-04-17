@@ -11,12 +11,21 @@
             --bg: #f4f4f4;
             --header-bg: #000;
             --sidebar-bg: #333;
+            /* Official Tour Colors */
             --emerald: #2e7d32;
             --grip: #d32f2f;
             --links: #0288d1;
             --match: #7b1fa2;
             --stable: #f57c00;
             --owgr: #455a64;
+            /* Light Background Shades */
+            --bg-home: #f4f4f4;
+            --bg-emerald: #e8f5e9;
+            --bg-grip: #ffebee;
+            --bg-links: #e1f5fe;
+            --bg-match: #f3e5f5;
+            --bg-stable: #fff3e0;
+            --bg-owgr: #eceff1;
         }
 
         body {
@@ -26,6 +35,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background-color 0.4s ease; /* Smooth color transition */
         }
 
         header.top-bar {
@@ -37,21 +47,10 @@
             z-index: 100;
         }
 
-        .header-content {
-            width: 100%;
-        }
+        .header-content { width: 100%; }
+        .header-content img { width: 100%; height: auto; display: block; object-fit: cover; }
 
-        .header-content img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
-        .wrapper {
-            display: flex;
-            flex: 1;
-        }
+        .wrapper { display: flex; flex: 1; }
 
         nav {
             width: 280px;
@@ -87,9 +86,11 @@
         .btn-stable { background-color: var(--stable); }
         .btn-owgr { background-color: var(--owgr); }
 
+        /* Main area that will change color */
         main {
             flex-grow: 1;
             padding: 40px;
+            transition: background-color 0.4s ease;
         }
 
         .page-content {
@@ -120,11 +121,19 @@
             margin-bottom: 30px;
         }
 
-        /* FIXED: Logos now stretch to fill the space */
+        /* Settings Image Styling */
+        .settings-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
         .tour-logo-header {
             width: 100%;
-            height: 300px; /* Force consistent height */
-            object-fit: contain; /* Prevent stretching/distortion */
+            height: 300px;
+            object-fit: contain;
             display: block;
             margin: 0 auto;
         }
@@ -167,11 +176,12 @@
             nav { width: 100%; height: auto; flex-direction: row; overflow-x: auto; position: sticky; top: 0; z-index: 90; }
             .nav-btn { padding: 10px 15px; font-size: 0.8rem; }
             main { padding: 20px; }
+            .tour-logo-header { height: 150px; }
             .discord-float { bottom: 15px; left: 15px; width: 45px; height: 45px; }
         }
     </style>
 </head>
-<body>
+<body id="main-body">
 
     <header class="top-bar">
         <div class="header-content">
@@ -190,25 +200,19 @@
             <button class="nav-btn btn-owgr" onclick="showPage('owgr')">LST OWGR</button>
         </nav>
 
-        <main>
+        <main id="content-area">
             <div id="home" class="page-content active">
                 <div class="card">
                     <div class="crimson-style">
-                        Welcome to Legend Sim Tours (LST) Stock 74. We have a few different societies in here, they are all using the stock 74 golfer.
-
-                        What's a stock 74 golfer I hear you ask, the greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74, no more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller!
-
-                        We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love what's provided for the great community of Legend true simmers we have here.
-
-                        Each society offers something different, formats, scoring, bonus points etc. On the left is a link to each, just click on the link per society to give you an overview of what each society can offer, as always just ask in the Discord channel if you need anymore help or anything explained there will always be someone about who can help out.
+                        Welcome to Legend Sim Tours (LST) Stock 74... (Welcome Text Content)
                     </div>
+                    <img src="settings.png" alt="Settings" class="settings-img" onerror="this.style.display='none'">
                 </div>
             </div>
 
             <div id="tour-view" class="page-content">
                 <div class="tour-header" style="text-align: center; margin-bottom: 30px;">
-                    <div id="title-container">
-                        </div>
+                    <div id="title-container"></div>
                     <a href="#" id="leaderboard-link" target="_blank" class="leaderboard-btn">Current Leaderboard</a>
                 </div>
             </div>
@@ -223,22 +227,28 @@
 
     <script>
         const tours = {
-            emerald: { name: "Emerald Tour", url: "https://lst-2k.github.io/newemeraldtourseason2/", logo: "emeraldlogo.png" },
-            grip: { name: "Grip & Rip", url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", logo: "gripnriplogo.png" },
-            links: { name: "Linksland", url: "https://lst-2k.github.io/linksland/", logo: "linkslandlogo.png" },
-            match: { name: "Matchplay", url: "https://lst-2k.github.io/matchplay/", logo: "matchplaylogo.png" },
-            stable: { name: "Stableford", url: "https://lst-2k.github.io/stableford/", logo: "stablefordlogo.png" },
-            owgr: { name: "LST OWGR", url: "https://lst-2k.github.io/lst-owgr/", btnText: "View Rankings" }
+            home: { bgColor: "var(--bg-home)" },
+            emerald: { name: "Emerald Tour", url: "https://lst-2k.github.io/newemeraldtourseason2/", logo: "emeraldlogo.png", bgColor: "var(--bg-emerald)" },
+            grip: { name: "Grip & Rip", url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", logo: "gripnriplogo.png", bgColor: "var(--bg-grip)" },
+            links: { name: "Linksland", url: "https://lst-2k.github.io/linksland/", logo: "linkslandlogo.png", bgColor: "var(--bg-links)" },
+            match: { name: "Matchplay", url: "https://lst-2k.github.io/matchplay/", logo: "matchplaylogo.png", bgColor: "var(--bg-match)" },
+            stable: { name: "Stableford", url: "https://lst-2k.github.io/stableford/", logo: "stablefordlogo.png", bgColor: "var(--bg-stable)" },
+            owgr: { name: "LST OWGR", url: "https://lst-2k.github.io/lst-owgr/", btnText: "View Rankings", bgColor: "var(--bg-owgr)" }
         };
 
         function showPage(id) {
+            const tourData = tours[id];
+            
+            // Change background color of body and main area
+            document.getElementById('content-area').style.backgroundColor = tourData.bgColor;
+            document.getElementById('main-body').style.backgroundColor = tourData.bgColor;
+
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if (id === 'home') {
                 document.getElementById('home').classList.add('active');
             } else {
-                const tourData = tours[id];
                 const view = document.getElementById('tour-view');
                 const titleContainer = document.getElementById('title-container');
                 
