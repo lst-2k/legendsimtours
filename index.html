@@ -53,28 +53,31 @@
         .wrapper { display: flex; flex: 1; }
 
         nav {
-            width: 280px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid #ddd;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            gap: 10px;
-            flex-shrink: 0;
-        }
+			width: 280px;
+			background-color: var(--sidebar-bg);
+			border-right: 1px solid #ddd;
+			display: flex;
+			flex-direction: column;
+			padding: 20px;
+			gap: 10px;
+			flex-shrink: 0;
+		}
 
-        .nav-btn {
-            border: none;
-            color: white;
-            padding: 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 1rem;
-            text-align: left;
-            transition: all 0.2s;
-            text-decoration: none;
-        }
+		.nav-btn {
+			width: 100%;           /* Added: Makes all buttons the same width */
+			box-sizing: border-box; /* Added: Ensures padding doesn't push it out of the box */
+			border: none;
+			color: white;
+			padding: 15px;
+			border-radius: 6px;
+			cursor: pointer;
+			font-weight: 700;
+			font-size: 1rem;
+			text-align: left;
+			transition: all 0.2s;
+			text-decoration: none;
+			display: block;        /* Added: Ensures it behaves like a full-width block */
+		}
 
         .nav-btn:hover { transform: translateX(5px); filter: brightness(1.1); }
         
@@ -119,12 +122,12 @@
         }
 
         .tour-logo-header {
-            width: 100%;
-            height: 300px;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto;
-        }
+			width: 100%;           /* Stretch to fill card width */
+			height: auto;          /* Maintains aspect ratio so it doesn't look squashed */
+			display: block;
+			margin: 0 auto 20px auto;
+			border-radius: 8px;
+		}
 
         .leaderboard-btn {
             background-color: var(--owgr);
@@ -173,13 +176,20 @@
         .discord-float:hover { background-color: #4752C4; transform: scale(1.1) rotate(5deg); }
 
         @media (max-width: 768px) {
-            .wrapper { flex-direction: column; }
-            nav { width: 100%; height: auto; flex-direction: row; overflow-x: auto; position: sticky; top: 0; z-index: 90; }
-            .nav-btn { padding: 10px 15px; font-size: 0.8rem; }
-            main { padding: 20px; }
-            .tour-logo-header { height: 150px; }
-            .discord-float { bottom: 15px; left: 15px; width: 45px; height: 45px; }
-        }
+			.wrapper { flex-direction: column; }
+			nav { 
+				width: 100%; 
+				height: auto; 
+				flex-direction: column; /* Changed from row to column for better portrait buttons */
+				position: relative; 
+			}
+			.nav-btn { 
+				padding: 15px; 
+				font-size: 1rem; 
+				text-align: center; /* Center text on mobile for a cleaner look */
+			}
+			main { padding: 20px; }
+		}
     </style>
 </head>
 <body id="body-main">
@@ -192,13 +202,13 @@
 
     <div class="wrapper">
         <nav>
-            <button class="nav-btn btn-home" onclick="showPage('home')">Home Area</button>
+            <button class="nav-btn btn-home" onclick="showPage('home')">Home</button>
             <button class="nav-btn btn-emerald" onclick="showPage('emerald')">Emerald Tour</button>
             <button class="nav-btn btn-grip" onclick="showPage('grip')">Grip & Rip</button>
             <button class="nav-btn btn-links" onclick="showPage('links')">Linksland</button>
             <button class="nav-btn btn-match" onclick="showPage('match')">Matchplay</button>
             <button class="nav-btn btn-stable" onclick="showPage('stable')">Stableford</button>
-            <button class="nav-btn btn-owgr" onclick="showPage('owgr')">LST OWGR</button>
+            <button class="nav-btn btn-owgr" onclick="showPage('owgr')">OWGR</button>
         </nav>
 
         <main id="main-area">
@@ -213,7 +223,7 @@
             </div>
 
             <div id="tour-view" class="page-content">
-                <div class="tour-header" style="text-align: center;">
+                <div id="tour-top" class="tour-header" style="text-align: center;">
                     <div id="title-container"></div>
                     <a href="#" id="leaderboard-link" target="_blank" class="leaderboard-btn">Current Leaderboard</a>
                 </div>
@@ -231,88 +241,112 @@
     </a>
 
     <script>
-        const tours = {
-            home: { shade: "var(--shade-home)" },
-            emerald: { 
-                name: "Emerald Tour", 
-                url: "https://lst-2k.github.io/newemeraldtourseason2/", 
-                logo: "emeraldlogo.png", 
-                shade: "var(--shade-emerald)",
-                videos: [
-                    { file: "emerald-hio1.mp4", title: "Incredible Ace at Hole 4" },
-                    { file: "emerald-hio2.mp4", title: "Tournament Winning Putt" }
-                ] 
-            },
-            grip: { 
-                name: "Grip & Rip", 
-                url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", 
-                logo: "gripnriplogo.png", 
-                shade: "var(--shade-grip)",
-                videos: [
-					{file: "longpole chip in.mp4", title: "Longpole Chips In" }
-					{file: "Keeps dart.mp4", title: "Keeps throwing darts" }
-				] // Leave empty if no videos
-            },
-            links: { name: "Linksland",
+		const tours = {
+			home: { shade: "var(--shade-home)" },
+			emerald: { 
+				name: "Emerald Tour", 
+				url: "https://lst-2k.github.io/newemeraldtourseason2/", 
+				logo: "emeraldlogo.png", 
+				shade: "var(--shade-emerald)",
+				videos: [] 
+			},
+			grip: { 
+				name: "Grip & Rip", 
+				url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", 
+				logo: "gripnriplogo.png", 
+				shade: "var(--shade-grip)",
+				videos: [
+					{file: "longpole chip in.mp4", title: "Longpole Chips In" },
+					{file: "Keeps dart.mp4", title: "Davina throwing darts" },
+					{file: "keepsputt.mp4", title: "Davina rolling rocks" }
+				] 
+			},
+			links: { 
+				name: "Linksland",
 				url: "https://lst-2k.github.io/linksland/",
 				logo: "linkslandlogo.png",
 				shade: "var(--shade-links)",
 				videos: []
 			},
-            match: { name: "Matchplay", url: "https://lst-2k.github.io/matchplay/", logo: "matchplaylogo.png", shade: "var(--shade-match)" },
-            stable: { name: "Stableford", url: "https://lst-2k.github.io/stableford/", logo: "stablefordlogo.png", shade: "var(--shade-stable)" },
-            owgr: { name: "LST OWGR", url: "https://lst-2k.github.io/lst-owgr/", btnText: "View Rankings", shade: "var(--shade-owgr)" }
-        };
+			match: { 
+				name: "Matchplay",
+				url: "https://lst-2k.github.io/matchplay/",
+				logo: "matchplaylogo.png",
+				shade: "var(--shade-match)",
+				videos: []
+			},
+			stable: { 
+				name: "Stableford",
+				url: "https://lst-2k.github.io/stableford/",
+				logo: "stablefordlogo.png",
+				shade: "var(--shade-stable)",
+				videos: []
+			},
+			owgr: { 
+				name: "OWGR",
+				url: "https://lst-2k.github.io/lst-owgr/",
+				btnText: "View Rankings",
+				shade: "var(--shade-owgr)" 
+			}
+		};
 
         function showPage(id) {
-            const data = tours[id];
-            document.getElementById('body-main').style.backgroundColor = data.shade;
-            document.getElementById('main-area').style.backgroundColor = data.shade;
+			const data = tours[id];
+			
+			// Update Page Background Color
+			document.getElementById('body-main').style.backgroundColor = data.shade;
+			document.getElementById('main-area').style.backgroundColor = data.shade;
 
-            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+			document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
 
-            if (id === 'home') {
-                document.getElementById('home').classList.add('active');
-            } else {
-                const view = document.getElementById('tour-view');
-                const titleContainer = document.getElementById('title-container');
-                const videoGalleryCard = document.getElementById('video-gallery-card');
-                const videoList = document.getElementById('video-list');
+			// NEW SCROLL LOGIC:
+			// This scrolls the view to the top of the specific tour content
+			if (id !== 'home') {
+				const view = document.getElementById('tour-view');
+				const titleContainer = document.getElementById('title-container');
+				const videoGalleryCard = document.getElementById('video-gallery-card');
+				const videoList = document.getElementById('video-list');
 
-                // Set Logo
-                titleContainer.innerHTML = data.logo ? 
-                    `<img src="${data.logo}" class="tour-logo-header" onerror="this.outerHTML='<h1>${data.name}</h1>'">` : 
-                    `<h1>${data.name}</h1>`;
+				// Set Logo/Title
+				titleContainer.innerHTML = data.logo ? 
+					`<img src="${data.logo}" class="tour-logo-header" onerror="this.outerHTML='<h1>${data.name}</h1>'">` : 
+					`<h1>${data.name}</h1>`;
 
-                // Set Leaderboard Link
-                const linkBtn = document.getElementById('leaderboard-link');
-                linkBtn.href = data.url;
-                linkBtn.innerText = data.btnText || "Current Leaderboard";
+				// Set Leaderboard Link
+				const linkBtn = document.getElementById('leaderboard-link');
+				linkBtn.href = data.url;
+				linkBtn.innerText = data.btnText || "Current Leaderboard";
 
-                // Build Video Gallery
-                videoList.innerHTML = ''; // Clear old videos
-                if (data.videos && data.videos.length > 0) {
-                    data.videos.forEach(vid => {
-                        const videoItem = document.createElement('div');
-                        videoItem.className = 'video-item';
-                        videoItem.innerHTML = `
-                            <h3 style="color: #444;">${vid.title}</h3>
-                            <video controls>
-                                <source src="${vid.file}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        `;
-                        videoList.appendChild(videoItem);
-                    });
-                    videoGalleryCard.style.display = 'block';
-                } else {
-                    videoGalleryCard.style.display = 'none';
-                }
+				// Build Video Gallery
+				videoList.innerHTML = ''; 
+				if (data.videos && data.videos.length > 0) {
+					data.videos.forEach(vid => {
+						const videoItem = document.createElement('div');
+						videoItem.className = 'video-item';
+						videoItem.innerHTML = `
+							<h3 style="color: #444;">${vid.title}</h3>
+							<video controls>
+								<source src="${vid.file}" type="video/mp4">
+							</video>
+						`;
+						videoList.appendChild(videoItem);
+					});
+					videoGalleryCard.style.display = 'block';
+				} else {
+					videoGalleryCard.style.display = 'none';
+				}
 
-                view.classList.add('active');
-            }
-        }
+				view.classList.add('active');
+				
+				// Scroll to the top of the tour header instead of the browser top
+				document.getElementById('tour-top').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+			} else {
+				document.getElementById('home').classList.add('active');
+				// If it's home, scroll to the very top
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			}
+		}
     </script>
 </body>
 </html>
