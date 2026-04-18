@@ -52,16 +52,19 @@
 
         .wrapper { display: flex; flex: 1; }
 
-        nav {
-			width: 280px;
-			background-color: var(--sidebar-bg);
-			border-right: 1px solid #ddd;
-			display: flex;
-			flex-direction: column;
-			padding: 20px;
+        nav { 
+			width: 100%; 
+			height: auto; 
+			flex-direction: row;      /* Back to horizontal row */
+			overflow-x: auto;         /* Allows scrolling left-to-right */
+			overflow-y: hidden;
+			white-space: nowrap;      /* Keeps buttons on one line */
+			position: sticky; 
+			top: 0; 
+			z-index: 90; 
+			padding: 10px;
 			gap: 10px;
-			flex-shrink: 0;
-			box-sizing: border-box; /* Ensures sidebar padding doesn't push children out */
+			-webkit-overflow-scrolling: touch; /* Smooth scrolling on iPhones */
 		}
 
 		.nav-btn {
@@ -105,7 +108,7 @@
 
         .card {
             background: white;
-            padding: 40px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 25px rgba(0,0,0,0.06);
             line-height: 1.6;
@@ -176,11 +179,10 @@
 
         .discord-float:hover { background-color: #4752C4; transform: scale(1.1) rotate(5deg); }
 
-        @media (max-width: 768px) {
-			nav {
-				width: 100%;
-				padding: 15px; /* Slightly tighter padding for mobile screens */
-			}
+		@media (max-width: 768px) {
+		.wrapper { 
+			flex-direction: column; 
+		}
 			
 			.nav-btn {
 				text-align: center; /* Looks cleaner when buttons are full-width on mobile */
@@ -295,25 +297,26 @@
 
 			document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
 
-			// NEW SCROLL LOGIC:
-			// This scrolls the view to the top of the specific tour content
-			if (id !== 'home') {
+			if (id === 'home') {
+				document.getElementById('home').classList.add('active');
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			} else {
 				const view = document.getElementById('tour-view');
 				const titleContainer = document.getElementById('title-container');
 				const videoGalleryCard = document.getElementById('video-gallery-card');
 				const videoList = document.getElementById('video-list');
 
-				// Set Logo/Title
+				// 1. Set Logo/Title
 				titleContainer.innerHTML = data.logo ? 
 					`<img src="${data.logo}" class="tour-logo-header" onerror="this.outerHTML='<h1>${data.name}</h1>'">` : 
 					`<h1>${data.name}</h1>`;
 
-				// Set Leaderboard Link
+				// 2. Set Leaderboard Link
 				const linkBtn = document.getElementById('leaderboard-link');
 				linkBtn.href = data.url;
 				linkBtn.innerText = data.btnText || "Current Leaderboard";
 
-				// Build Video Gallery
+				// 3. Build Video Gallery
 				videoList.innerHTML = ''; 
 				if (data.videos && data.videos.length > 0) {
 					data.videos.forEach(vid => {
@@ -321,7 +324,7 @@
 						videoItem.className = 'video-item';
 						videoItem.innerHTML = `
 							<h3 style="color: #444;">${vid.title}</h3>
-							<video controls>
+							<video controls preload="metadata">
 								<source src="${vid.file}" type="video/mp4">
 							</video>
 						`;
@@ -332,15 +335,17 @@
 					videoGalleryCard.style.display = 'none';
 				}
 
+				// 4. Activate View
 				view.classList.add('active');
 				
-				// Scroll to the top of the tour header instead of the browser top
-				document.getElementById('tour-top').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-			} else {
-				document.getElementById('home').classList.add('active');
-				// If it's home, scroll to the very top
-				window.scrollTo({ top: 0, behavior: 'smooth' });
+				// 5. THE FIX: Delay the scroll slightly
+				// This ensures the videos have "space" on the page before the scroll happens
+				setTimeout(() => {
+					document.getElementById('tour-top').scrollIntoView({ 
+						behavior: 'smooth', 
+						block: 'start' 
+					});
+				}, 50); // A 50ms delay is invisible to the user but fixes the jump
 			}
 		}
     </script>
