@@ -7,191 +7,242 @@
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --bg-default: #f4f4f4;
-            --header-bg: #000;
-            --sidebar-bg: #333;
-            /* Tour Colors */
-            --emerald: #2e7d32;
-            --grip: #d32f2f;
-            --links: #0288d1;
-            --match: #7b1fa2;
-            --stable: #f57c00;
-            --owgr: #455a64;
-            /* Page Background Shades */
-            --shade-home: #f4f4f4;
-            --shade-emerald: #e8f5e9;
-            --shade-grip: #ffebee;
-            --shade-links: #e1f5fe;
-            --shade-match: #f3e5f5;
-            --shade-stable: #fff3e0;
-            --shade-owgr: #eceff1;
-        }
+    :root {
+        --bg-default: #f4f4f4;
+        --header-bg: #000;
+        --sidebar-bg: #333;
+        /* Tour Branding Colors */
+        --emerald: #2e7d32;
+        --grip: #d32f2f;
+        --links: #0288d1;
+        --match: #7b1fa2;
+        --stable: #f57c00;
+        --owgr: #455a64;
+        /* Page Background Shades */
+        --shade-home: #f4f4f4;
+        --shade-emerald: #e8f5e9;
+        --shade-grip: #ffebee;
+        --shade-links: #e1f5fe;
+        --shade-match: #f3e5f5;
+        --shade-stable: #fff3e0;
+        --shade-owgr: #eceff1;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            background-color: var(--bg-default);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            transition: background-color 0.4s ease;
-        }
+    /* Reset & Base Styles */
+    body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        background-color: var(--bg-default);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        transition: background-color 0.4s ease;
+    }
 
-        header.top-bar {
-            width: 100%;
-            background-color: var(--header-bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 100;
-        }
+    header.top-bar {
+        width: 100%;
+        background-color: var(--header-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 100;
+    }
 
-        .header-content { width: 100%; }
-        .header-content img { width: 100%; height: auto; display: block; object-fit: cover; }
+    .header-content { width: 100%; }
+    .header-content img { width: 100%; height: auto; display: block; }
 
-        .wrapper { display: flex; flex: 1; }
-
-        .nav-btn:hover { transform: translateX(5px); filter: brightness(1.1); }
-        
-        .btn-home { background-color: #444; }
-        .btn-emerald { background-color: var(--emerald); }
-        .btn-grip { background-color: var(--grip); }
-        .btn-links { background-color: var(--links); }
-        .btn-match { background-color: var(--match); }
-        .btn-stable { background-color: var(--stable); }
-        .btn-owgr { background-color: var(--owgr); }
-
-        main { flex-grow: 1; padding: 40px; transition: background-color 0.4s ease; }
-
-        .page-content {
-            display: none;
-            max-width: 1000px;
-            margin: 0 auto;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .page-content.active { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.06);
-            line-height: 1.6;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .crimson-style {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.35rem;
-            color: #2c3e50;
-            white-space: pre-line;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-
-        .tour-logo-header {
-			width: 100%;           /* Stretch to fill card width */
-			height: auto;          /* Maintains aspect ratio so it doesn't look squashed */
-			display: block;
-			margin: 0 auto 20px auto;
-			border-radius: 8px;
-		}
-
-        .leaderboard-btn {
-            background-color: var(--owgr);
-            color: white;
-            padding: 14px 40px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 700;
-            display: inline-block;
-            margin-top: 25px;
-            margin-bottom: 20px;
-        }
-
-        /* Video Gallery Styling */
-        .video-item {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        .video-item:last-child { border-bottom: none; }
-        
-        video {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            background-color: #000;
-        }
-
-        .discord-float {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            width: 55px;
-            height: 55px;
-            background-color: #5865F2;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .discord-float:hover { background-color: #4752C4; transform: scale(1.1) rotate(5deg); }
-
-		@media (max-width: 768px) {
+    /* Desktop Layout: Sidebar + Content */
     .wrapper { 
-        flex-direction: column; 
+        display: flex; 
+        flex: 1; 
+        align-items: flex-start; /* Allows sidebar to float */
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
     }
 
-    nav { 
-        width: 100%; 
-        height: auto; 
-        flex-direction: row;      /* Keeps buttons side-by-side */
-        overflow-x: auto;         /* Allows swiping left/right */
-        overflow-y: hidden;
-        white-space: nowrap;      
-        position: sticky; 
-        top: 0; 
-        z-index: 100; 
-        padding: 8px;             /* Reduced padding for a slimmer look */
-        gap: 8px;                 /* Tighter gap between buttons */
-        background-color: #222;   /* Slightly darker for better contrast */
-        -webkit-overflow-scrolling: touch; 
-    }
-
-    /* Hide the scrollbar but keep the functionality for a cleaner look */
-    nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-btn { 
-        flex: 0 0 130px;
-        padding: 10px 5px;
-        font-size: 0.85rem;
-        text-align: center; 
-        border-radius: 4px;
-        display: inline-block;
+    /* Floating Desktop Sidebar */
+    nav {
+        width: 25%;
+        max-width: 280px;
+        background-color: var(--sidebar-bg);
+        border-right: 1px solid #ddd;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        gap: 12px;
+        flex-shrink: 0;
         box-sizing: border-box;
-        color: #ffffff !important; /* Ensures white text on mobile */
+        
+        /* The Float Logic */
+        position: -webkit-sticky;
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+        z-index: 10;
     }
 
-    /* Disable hover transform on mobile to prevent "sticky" taps */
-    .nav-btn:hover {
-        transform: none;
-        box-shadow: none;
+    /* Button Styling */
+    .nav-btn {
+        width: 100%;
+        border: none;
+        color: #ffffff !important; /* Always white text */
+        padding: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 1rem;
+        text-align: left;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: block;
+        box-sizing: border-box;
+        text-decoration: none;
     }
-}
-    </style>
+
+    /* Hover Effect for Desktop */
+    .nav-btn:hover {
+        transform: translateX(8px);
+        filter: brightness(1.2);
+        box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Individual Button Colors */
+    .btn-home { background-color: #444; }
+    .btn-emerald { background-color: var(--emerald); }
+    .btn-grip { background-color: var(--grip); }
+    .btn-links { background-color: var(--links); }
+    .btn-match { background-color: var(--match); }
+    .btn-stable { background-color: var(--stable); }
+    .btn-owgr { background-color: var(--owgr); }
+
+    /* Content Area */
+    main { 
+        flex-grow: 1; 
+        padding: 40px; 
+        transition: background-color 0.4s ease; 
+        width: 100%;
+    }
+
+    .page-content {
+        display: none;
+        max-width: 1000px;
+        margin: 0 auto;
+        animation: fadeIn 0.4s ease;
+    }
+
+    .page-content.active { display: block; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .card {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    /* Full Width Logo Styling */
+    .tour-logo-header {
+        width: 100%;
+        height: auto;
+        min-height: 150px; /* Reserves space for smoother scrolling */
+        display: block;
+        margin: 0 auto 20px auto;
+        border-radius: 8px;
+    }
+
+    .crimson-style {
+        font-family: 'Crimson Text', serif;
+        font-size: 1.35rem;
+        color: #2c3e50;
+        white-space: pre-line;
+        text-align: left;
+    }
+
+    .leaderboard-btn {
+        background-color: var(--owgr);
+        color: white;
+        padding: 14px 40px;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 700;
+        display: inline-block;
+        margin: 20px 0;
+    }
+
+    /* Video Player Gallery */
+    .video-item {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    video {
+        max-width: 100%;
+        border-radius: 8px;
+        background-color: #000;
+    }
+
+    /* Discord Float */
+    .discord-float {
+        position: fixed;
+        bottom: 25px;
+        left: 25px;
+        width: 55px;
+        height: 55px;
+        background-color: #5865F2;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    .discord-float:hover { transform: scale(1.1) rotate(5deg); }
+
+    /* MOBILE PORTRAIT STYLES */
+    @media (max-width: 768px) {
+        .wrapper { flex-direction: column; }
+
+        nav {
+            width: 100%;
+            max-width: none;
+            height: auto;
+            flex-direction: row; /* Side-by-side buttons */
+            overflow-x: auto;    /* Swipe-able nav */
+            white-space: nowrap;
+            position: sticky;
+            top: 0;
+            padding: 8px;
+            gap: 8px;
+            border-right: none;
+            border-bottom: 1px solid #ddd;
+            background-color: #222;
+        }
+
+        /* Hide mobile scrollbar */
+        nav::-webkit-scrollbar { display: none; }
+
+        .nav-btn {
+            flex: 0 0 140px;    /* Perfectly uniform size */
+            padding: 10px 5px;
+            font-size: 0.85rem;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover { transform: none; } /* Disable hover lift on touch */
+
+        main { padding: 15px; }
+        .card { padding: 20px; }
+        .tour-logo-header { min-height: 100px; }
+        .discord-float { bottom: 15px; left: 15px; width: 45px; height: 45px; }
+    }
+</style>
 </head>
 <body id="body-main">
 
