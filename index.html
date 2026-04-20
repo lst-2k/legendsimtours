@@ -311,6 +311,7 @@ Each society offers something different, formats, scoring, bonus points etc. Bel
 				url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", 
 				logo: "gripnriplogo.png", 
 				shade: "var(--shade-grip)",
+				settingsImage: "gripnripsettings.png",
 				videos: [
 					{file: "longpole chip in.mp4", title: "Longpole Chips In" },
 					{file: "Keeps dart.mp4", title: "Davina throwing darts" },
@@ -406,14 +407,28 @@ Each society offers something different, formats, scoring, bonus points etc. Bel
 					`<img src="${data.logo}" class="tour-logo-header" onerror="this.outerHTML='<h1>${data.name}</h1>'">` : 
 					`<h1>${data.name}</h1>`;
 
-				// 4. INJECT DESCRIPTION IF IT EXISTS
-				if (data.description) {
+				// 4. INJECT DESCRIPTION AND IMAGES IF THEY EXIST
+				if (data.description || data.settingsImage) {
 					const descCard = document.createElement('div');
 					descCard.id = 'dynamic-description';
 					descCard.className = 'card crimson-style'; 
 					descCard.style.marginTop = '20px';
-					descCard.innerText = data.description;
-					titleContainer.after(descCard); // Places it right between the title and the button
+
+					let content = "";
+					
+					// Add the image first if it exists
+					if (data.settingsImage) {
+						content += `<img src="${data.settingsImage}" style="width:100%; border-radius:8px; margin-bottom:20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">`;
+					}
+					
+					// Add the text description
+					if (data.description) {
+						// We use a div for the text to preserve the line breaks from backticks
+						content += `<div style="white-space: pre-line;">${data.description}</div>`;
+					}
+
+					descCard.innerHTML = content;
+					titleContainer.after(descCard);
 				}
 
 				// 5. Set Leaderboard Link
