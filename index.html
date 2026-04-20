@@ -267,8 +267,11 @@
             <div id="home" class="page-content active">
                 <div class="card">
                     <div class="crimson-style">
-                        Welcome to Legend Sim Tours (LST) Stock 74...
-                        (Insert full text here)
+                        Welcome to Legend Sim Tours (LST) Stock 74, we have a few different societies in here, they are all using the stock 74 golfer.
+
+Whats a stock 74 golfer I hear you ask, the greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74, no more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller, we run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love  whats provided for the great community of Legend true simmers we have here.
+
+Each society offers something different, formats, scoring, bonus points etc. Below is a link to each, just click on the link per society to give you an overview of what each society can offer, as always just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out. Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em
                     </div>
                     <img src="settings.png" alt="Settings" style="width:100%; border-radius:8px;" onerror="this.style.display='none'">
                 </div>
@@ -338,21 +341,49 @@
 				]
 			},
 			owgr: { 
-				name: "OWGR",
+				name: "LST OWGR",
 				url: "https://lst-2k.github.io/lst-owgr/",
-				btnText: "View Rankings",
-				description: "The LST OWGR tracks the performance of all players across every society.\n\nPoints are awarded based on finishing positions and the strength of the field. Rankings are updated weekly every Monday morning.",
-				shade: "var(--shade-owgr)" 
-			}
-		};
+				btnText: "View Full Rankings",
+				shade: "var(--shade-owgr)",
+				description: `LST-2k25 Official World Golf Rankings (OWGR) are LIVE! 
 
-        function showPage(id) {
+					Ladies and Gentlemen, the hunt for World Number One is officially on. 
+
+					LST-OWGR has had a major overhaul so from now on we are moving to a Rolling 50-Event Weighted Ranking System.
+
+					The 2kOWGR Formula:
+					Your rank is based on efficiency and consistency, not just showing up.
+					• The Rolling 50: We only count your last 50 events. 
+					• The Minimum Divisor (20): Total points are divided by a minimum of 20 to prevent "one-hit wonders."
+					• Note: If you've played 5 events, your total is divided by 20. Once you hit 21 events, your real average takes over.
+
+					The Points Structure:
+					• 1st: 150 pts | 2nd: 130 pts | 3rd: 110 pts
+					• 4th–12th: 90, 80, 70, 60, 50, 40, 30, 20, 10
+					• 13th–16th: 10 pts | All others: 5 pts
+
+					Multipliers:
+					• Signature Events: Points are DOUBLED.
+					• Small Fields (<10 players): Points reduced by 50%.
+
+					Movement Arrows:
+					• ▲ Green: Outpaced the field.
+					• ▼ Red: Sliding—time to hit the range.
+					• ● Grey: Position maintained.
+
+					Thanks for everyone’s continued support. Happy golfing!`,
+						videos: [] 
+					},
+				};
+
+		function showPage(id) {
 			const data = tours[id];
 			
-			// Update Page Background Color
+			// 1. Update Background Colors
 			document.getElementById('body-main').style.backgroundColor = data.shade;
 			document.getElementById('main-area').style.backgroundColor = data.shade;
 
+			// 2. Hide all pages
 			document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
 
 			if (id === 'home') {
@@ -364,24 +395,38 @@
 				const videoGalleryCard = document.getElementById('video-gallery-card');
 				const videoList = document.getElementById('video-list');
 
-				// 1. Set Logo/Title
+				// Clean up any existing description from a previous click
+				const existingDesc = document.getElementById('dynamic-description');
+				if (existingDesc) existingDesc.remove();
+
+				// 3. Set Logo/Title
 				titleContainer.innerHTML = data.logo ? 
 					`<img src="${data.logo}" class="tour-logo-header" onerror="this.outerHTML='<h1>${data.name}</h1>'">` : 
 					`<h1>${data.name}</h1>`;
 
-				// 2. Set Leaderboard Link
+				// 4. INJECT DESCRIPTION IF IT EXISTS
+				if (data.description) {
+					const descCard = document.createElement('div');
+					descCard.id = 'dynamic-description';
+					descCard.className = 'card crimson-style'; 
+					descCard.style.marginTop = '20px';
+					descCard.innerText = data.description;
+					titleContainer.after(descCard); // Places it right between the title and the button
+				}
+
+				// 5. Set Leaderboard Link
 				const linkBtn = document.getElementById('leaderboard-link');
 				linkBtn.href = data.url;
 				linkBtn.innerText = data.btnText || "Current Leaderboard";
 
-				// 3. Build Video Gallery
+				// 6. Build Video Gallery
 				videoList.innerHTML = ''; 
 				if (data.videos && data.videos.length > 0) {
 					data.videos.forEach(vid => {
 						const videoItem = document.createElement('div');
 						videoItem.className = 'video-item';
 						videoItem.innerHTML = `
-							<h3 style="color: #444;">${vid.title}</h3>
+							<h3 style="color: #444; text-align:left;">${vid.title}</h3>
 							<video controls preload="metadata">
 								<source src="${vid.file}" type="video/mp4">
 							</video>
@@ -393,17 +438,15 @@
 					videoGalleryCard.style.display = 'none';
 				}
 
-				// 4. Activate View
 				view.classList.add('active');
 				
-				// 5. THE FIX: Delay the scroll slightly
-				// This ensures the videos have "space" on the page before the scroll happens
+				// 7. Smooth Scroll
 				setTimeout(() => {
-					document.getElementById('tour-top').scrollIntoView({ 
+					document.getElementById('title-container').scrollIntoView({ 
 						behavior: 'smooth', 
 						block: 'start' 
 					});
-				}, 50); // A 50ms delay is invisible to the user but fixes the jump
+				}, 50);
 			}
 		}
     </script>
