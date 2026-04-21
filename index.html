@@ -187,21 +187,22 @@
 
     /* Discord Float */
     .discord-float {
-        position: fixed;
-        bottom: 25px;
-        left: 25px;
-        width: 55px;
-        height: 55px;
-        background-color: #5865F2;
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        z-index: 1000;
-        transition: all 0.3s ease;
-    }
+		position: fixed;
+		bottom: 25px;
+		right: 25px;      /* Changed from left to right */
+		left: auto;       /* Ensures it doesn't stretch */
+		width: 55px;
+		height: 55px;
+		background-color: #5865F2;
+		color: white;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+		z-index: 1000;
+		transition: all 0.3s ease;
+	}
     .discord-float:hover { transform: scale(1.1) rotate(5deg); }
 
     /* MOBILE PORTRAIT STYLES */
@@ -364,7 +365,7 @@ Each society offers something different, formats, scoring, bonus points etc. Bel
 
 					The Points Structure:
 					• 1st: 150 pts | 2nd: 130 pts | 3rd: 110 pts
-					• 4th–12th: 90, 80, 70, 60, 50, 40, 30, 20, 10
+					• 4th–12th: 100, 90, 80, 70, 60, 50, 40, 30, 20,
 					• 13th–16th: 10 pts | All others: 5 pts
 
 					Multipliers:
@@ -408,8 +409,13 @@ Each society offers something different, formats, scoring, bonus points etc. Bel
 				titleContainer.innerHTML = data.logo ? 
 					`<img src="${data.logo}" class="tour-logo-header" onerror="this.outerHTML='<h1>${data.name}</h1>'">` : 
 					`<h1>${data.name}</h1>`;
+					
+				// 4. Set Leaderboard Link
+					const linkBtn = document.getElementById('leaderboard-link');
+					linkBtn.href = data.url;
+					linkBtn.innerText = data.btnText || "Current Leaderboard";
 
-				// 4. INJECT DESCRIPTION AND IMAGES IF THEY EXIST
+				// 5. INJECT DESCRIPTION AND IMAGES IF THEY EXIST
 				if (data.description || data.settingsImage) {
 					const descCard = document.createElement('div');
 					descCard.id = 'dynamic-description';
@@ -432,11 +438,6 @@ Each society offers something different, formats, scoring, bonus points etc. Bel
 					descCard.innerHTML = content;
 					titleContainer.after(descCard);
 				}
-
-				// 5. Set Leaderboard Link
-				const linkBtn = document.getElementById('leaderboard-link');
-				linkBtn.href = data.url;
-				linkBtn.innerText = data.btnText || "Current Leaderboard";
 
 				// 6. Build Video Gallery
 				videoList.innerHTML = ''; 
