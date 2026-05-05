@@ -243,6 +243,13 @@
         .tour-logo-header { min-height: 100px; }
         .discord-float { bottom: 15px; left: 15px; width: 45px; height: 45px; }
     }
+	.history-content .leaderboard-btn {
+		display: block;
+		margin: 10px auto;
+		width: 80%; /* Makes them look nested and tidy */
+		background-color: #444; /* Darker grey to show they are "past" events */
+		font-size: 0.9rem;
+	}
 </style>
 </head>
 <body id="body-main">
@@ -280,7 +287,7 @@ Each society offers something different, formats, scoring, bonus points etc. Bel
 
             <div id="tour-view" class="page-content">
                 <div id="tour-top" class="tour-header" style="text-align: center;">
-                    <div id="title-container"></div>
+				<div id="title-container"></div>
                     <a href="#" id="leaderboard-link" target="_blank" class="leaderboard-btn">Current Leaderboard</a>
                 </div>
 
@@ -297,65 +304,74 @@ Each society offers something different, formats, scoring, bonus points etc. Bel
     </a>
 
     <script>
-		const tours = {
-			home: { shade: "var(--shade-home)" },
-			emerald: { 
-				name: "Emerald Tour", 
-				url: "https://lst-2k.github.io/newemeraldtourseason2/", 
-				logo: "emeraldlogo.png", 
-				shade: "var(--shade-emerald)",
-				settingsImage: "emeraldsettings.png",
-				videos: [] 
-			},
-			grip: { 
-				name: "Grip & Rip", 
-				url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", 
-				logo: "gripnriplogo.png", 
-				shade: "var(--shade-grip)",
-				settingsImage: "gripnripsettings.png",
-				videos: [
-					{file: "longpole chip in.mp4", title: "Longpole Chips In" },
-					{file: "Keeps dart.mp4", title: "Davina throwing darts" },
-				] 
-			},
-			links: { 
-				name: "Linksland",
-				url: "https://lst-2k.github.io/linksland/",
-				logo: "linkslandlogo.png",
-				shade: "var(--shade-links)",
-				settingsImage: "linkslandsettings.png",
-				videos: [
-					{file: "x3ace.mp4", title: "x3 Aces the 5th at Dunbar" }
-				]
-			},
-			match: { 
-				name: "Matchplay",
-				url: "https://lst-2k.github.io/matchplay/",
-				logo: "matchplaylogo.png",
-				shade: "var(--shade-match)",
-				settingsImage: "matchplaysettings.png",
-				videos: [
-					{file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace" }
-				]
-			},
-			stable: { 
-				name: "Stableford",
-				url: "https://lst-2k.github.io/stableford/",
-				logo: "stablefordlogo.png",
-				shade: "var(--shade-stable)",
-				settingsImage: "stablefordsettings.png",
-				videos: [
-				{file: "davslamdunk.mp4", title: "Davina holes out" },
-				{file: "x3approach.mp4", title: "x3 approach to 1st" }
-				]
-			},
-			owgr: { 
-				name: "LST OWGR",
-				url: "https://lst-2k.github.io/lst-owgr/",
-				logo: "owgr.png",
-				btnText: "View Full Rankings",
-				shade: "var(--shade-owgr)",
-				description: `LST-2k25 Official World Golf Rankings (OWGR) are LIVE! 
+// 1. DATA OBJECT - Defined first to avoid "ReferenceError"
+const tours = {
+    home: { shade: "var(--shade-home)" },
+    emerald: { 
+        name: "Emerald Tour", 
+        url: "https://lst-2k.github.io/newemeraldtourseason2/", 
+        logo: "emeraldlogo.png", 
+        shade: "var(--shade-emerald)",
+        settingsImage: "emeraldsettings.png",
+        description: `NEW EMERALD TOUR - SEASON 2
+        
+Welcome to the Emerald Tour! Join the excitement in our 12-week season featuring 3 signature events and a FedEx-style points leaderboard.`,
+        videos: [] 
+    },
+    grip: { 
+        name: "Grip & Rip", 
+        url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", 
+        logo: "gripnriplogo.png", 
+        shade: "var(--shade-grip)",
+        settingsImage: "gripnripsettings.png",
+        videos: [
+            {file: "longpole chip in.mp4", title: "Longpole Chips In" },
+            {file: "Keeps dart.mp4", title: "Davina throwing darts" }
+        ] 
+    },
+    links: { 
+        name: "Linksland",
+        url: "https://lst-2k.github.io/linksland/",
+        logo: "linkslandlogo.png",
+        shade: "var(--shade-links)",
+        settingsImage: "linkslandsettings.png",
+        videos: [
+            {file: "x3ace.mp4", title: "x3 Aces the 5th at Dunbar" }
+        ]
+    },
+    match: { 
+        name: "Matchplay",
+        url: "https://lst-2k.github.io/matchplayseason3/",
+        logo: "matchplaylogo.png",
+        shade: "var(--shade-match)",
+        description: `LST Matchplay Championship. Face off head-to-head in the ultimate test of nerves and strategy. Season 3 is now live!`,
+        archive: [
+            { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
+            { name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/" }
+        ],
+        settingsImage: "matchplaysettings.png",
+        videos: [
+            {file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace" }
+        ]
+    },
+    stable: { 
+        name: "Stableford",
+        url: "https://lst-2k.github.io/stableford/",
+        logo: "stablefordlogo.png",
+        shade: "var(--shade-stable)",
+        settingsImage: "stablefordsettings.png",
+        videos: [
+            {file: "davslamdunk.mp4", title: "Davina holes out" },
+            {file: "x3approach.mp4", title: "x3 approach to 1st" }
+        ]
+    },
+    owgr: { 
+        name: "LST OWGR",
+        url: "https://lst-2k.github.io/lst-owgr/",
+        logo: "owgr.png",
+        btnText: "View Full Rankings",
+        shade: "var(--shade-owgr)",
+        description: `LST-2k25 Official World Golf Rankings (OWGR) are LIVE! 
 
 					Ladies and Gentlemen, the hunt for World Number One is officially on. 
 
@@ -381,98 +397,131 @@ Each society offers something different, formats, scoring, bonus points etc. Bel
 					• ▼ Red: Sliding—time to hit the range.
 					• ● Grey: Position maintained.
 
-					Thanks for everyone’s continued support. Happy golfing!`,
-						videos: [] 
-					},
-				};
+					Thanks for everyone’s continued support. Happy golfing!,
+        videos: [] 
+    }
+};
 
-		function showPage(id) {
-			const data = tours[id];
-			
-			// 1. Update Background Colors
-			document.getElementById('body-main').style.backgroundColor = data.shade;
-			document.getElementById('main-area').style.backgroundColor = data.shade;
+// 2. CACHE CONTROL VERSION
+const APP_VERSION = '1.0.6'; 
 
-			// 2. Hide all pages
-			document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+// 3. CORE NAVIGATION LOGIC
+function showPage(id) {
+    const data = tours[id];
+    const bodyMain = document.getElementById('body-main');
+    const mainArea = document.getElementById('main-area');
+    const linkBtn = document.getElementById('leaderboard-link');
+    
+    // Set Theme Colors
+    bodyMain.style.backgroundColor = data.shade;
+    mainArea.style.backgroundColor = data.shade;
 
-			if (id === 'home') {
-				document.getElementById('home').classList.add('active');
-				window.scrollTo({ top: 0, behavior: 'smooth' });
-			} else {
-				const view = document.getElementById('tour-view');
-				const titleContainer = document.getElementById('title-container');
-				const videoGalleryCard = document.getElementById('video-gallery-card');
-				const videoList = document.getElementById('video-list');
+    // Reset visibility
+    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
 
-				// Clean up any existing description from a previous click
-				const existingDesc = document.getElementById('dynamic-description');
-				if (existingDesc) existingDesc.remove();
+    if (id === 'home') {
+        document.getElementById('home').classList.add('active');
+        if (linkBtn) linkBtn.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        const view = document.getElementById('tour-view');
+        const titleContainer = document.getElementById('title-container');
+        
+        // --- Leaderboard Button Position (Menu Offset) ---
+        const navBtn = document.querySelector(`.btn-${id}`);
+        if (linkBtn) {
+            linkBtn.href = data.url;
+            linkBtn.innerText = "🏆 " + (data.btnText || "Current Leaderboard");
+            linkBtn.style.display = 'block';
+            if (navBtn) navBtn.after(linkBtn); 
+        }
 
-				// 3. Set Logo/Title
-				titleContainer.innerHTML = data.logo ? 
-					`<img src="${data.logo}" class="tour-logo-header" onerror="this.outerHTML='<h1>${data.name}</h1>'">` : 
-					`<h1>${data.name}</h1>`;
-					
-				// 4. Set Leaderboard Link
-					const linkBtn = document.getElementById('leaderboard-link');
-					linkBtn.href = data.url;
-					linkBtn.innerText = data.btnText || "Current Leaderboard";
+        // --- Clean/Inject Content ---
+        const existingDesc = document.getElementById('dynamic-description');
+        if (existingDesc) existingDesc.remove();
 
-				// 5. INJECT DESCRIPTION AND IMAGES IF THEY EXIST
-				if (data.description || data.settingsImage) {
-					const descCard = document.createElement('div');
-					descCard.id = 'dynamic-description';
-					descCard.className = 'card crimson-style'; 
-					descCard.style.marginTop = '20px';
+        titleContainer.innerHTML = data.logo ? 
+            `<img src="${data.logo}?v=${APP_VERSION}" class="tour-logo-header" onerror="this.outerHTML='<h1>${data.name}</h1>'">` : 
+            `<h1>${data.name}</h1>`;
 
-					let content = "";
-					
-					// Add the image first if it exists
-					if (data.settingsImage) {
-						content += `<img src="${data.settingsImage}" style="width:100%; border-radius:8px; margin-bottom:20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">`;
-					}
-					
-					// Add the text description
-					if (data.description) {
-						// We use a div for the text to preserve the line breaks from backticks
-						content += `<div style="white-space: pre-line;">${data.description}</div>`;
-					}
+        if (data.description || data.settingsImage) {
+            const descCard = document.createElement('div');
+            descCard.id = 'dynamic-description';
+            descCard.className = 'card crimson-style'; 
+            descCard.style.marginTop = '15px';
 
-					descCard.innerHTML = content;
-					titleContainer.after(descCard);
-				}
+            let content = "";
+            if (data.settingsImage) {
+                content += `<img src="${data.settingsImage}?v=${APP_VERSION}" style="width:100%; border-radius:8px; margin-bottom:15px;">`;
+            }
+            if (data.description) {
+                content += `<div style="white-space: pre-line;">${data.description}</div>`;
+            }
+            descCard.innerHTML = content;
+            titleContainer.after(descCard);
+        }
 
-				// 6. Build Video Gallery
-				videoList.innerHTML = ''; 
-				if (data.videos && data.videos.length > 0) {
-					data.videos.forEach(vid => {
-						const videoItem = document.createElement('div');
-						videoItem.className = 'video-item';
-						videoItem.innerHTML = `
-							<h3 style="color: #444; text-align:left;">${vid.title}</h3>
-							<video controls preload="metadata">
-								<source src="${vid.file}" type="video/mp4">
-							</video>
-						`;
-						videoList.appendChild(videoItem);
-					});
-					videoGalleryCard.style.display = 'block';
-				} else {
-					videoGalleryCard.style.display = 'none';
-				}
+        // --- Archive Logic ---
+        let arcCont = document.getElementById('archive-container');
+        if (!arcCont) {
+            arcCont = document.createElement('div');
+            arcCont.id = 'archive-container';
+            view.appendChild(arcCont);
+        }
+        arcCont.innerHTML = '';
 
-				view.classList.add('active');
-				
-				// 7. Smooth Scroll
-				setTimeout(() => {
-					document.getElementById('title-container').scrollIntoView({ 
-						behavior: 'smooth', 
-						block: 'start' 
-					});
-				}, 50);
-			}
-		}
-    </script>
+        if (data.archive) {
+            const header = document.createElement('div');
+            header.className = 'history-header';
+            header.innerHTML = '<h3>Tournament Archives</h3>';
+            header.onclick = function() { toggleHistory(this); };
+
+            const body = document.createElement('div');
+            body.className = 'history-content';
+            data.archive.forEach(item => {
+                body.innerHTML += `<a href="${item.url}" target="_blank" class="leaderboard-btn" style="display:block; margin:10px; background:#444; color:white; text-decoration:none; padding:10px; border-radius:5px;">${item.name}</a>`;
+            });
+            arcCont.appendChild(header);
+            arcCont.appendChild(body);
+        }
+
+        // --- Video Gallery ---
+        const videoGalleryCard = document.getElementById('video-gallery-card');
+        const videoList = document.getElementById('video-list');
+        if (videoList) {
+            videoList.innerHTML = '';
+            if (data.videos && data.videos.length > 0) {
+                data.videos.forEach(vid => {
+                    videoList.innerHTML += `<div class="video-item"><h3>${vid.title}</h3><video controls preload="metadata"><source src="${vid.file}" type="video/mp4"></video></div>`;
+                });
+                videoGalleryCard.style.display = 'block';
+            } else {
+                videoGalleryCard.style.display = 'none';
+            }
+        }
+
+        view.classList.add('active');
+        setTimeout(() => { titleContainer.scrollIntoView({ behavior: 'smooth' }); }, 50);
+    }
+}
+
+// 4. ACCORDION TOGGLE
+function toggleHistory(header) {
+    const content = header.nextElementSibling;
+    header.classList.toggle('active');
+    if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        content.style.padding = "0 20px";
+    } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        content.style.padding = "20px";
+    }
+}
+
+// 5. INITIALIZE
+document.addEventListener('DOMContentLoaded', () => {
+    showPage('home');
+});
+</script>
 </body>
 </html>
