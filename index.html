@@ -250,6 +250,39 @@
 		background-color: #444; /* Darker grey to show they are "past" events */
 		font-size: 0.9rem;
 	}
+	/* Keep the nav buttons a consistent size */
+.nav-menu button, 
+.nav-menu .btn-emerald, 
+.nav-menu .btn-grip, 
+.nav-menu .btn-links, 
+.nav-menu .btn-match, 
+.nav-menu .btn-stable, 
+.nav-menu .btn-owgr {
+    width: 100%;             /* Fills the grid cell */
+    max-width: 200px;        /* Adjust this to match your design */
+    height: 50px;            /* Fixed height prevents jumping */
+    margin: 5px auto;
+    display: block;
+    box-sizing: border-box;  /* Ensures padding doesn't add to width */
+}
+
+/* Style the offset leaderboard button */
+#leaderboard-link {
+    display: none;           /* Hidden until a tour is clicked */
+    width: 90%;              /* Slightly narrower than main buttons */
+    margin: -2px auto 10px auto; /* Pulls it up close to the tour button */
+    padding: 8px 5px;
+    font-size: 0.8rem;
+    background-color: #ffffff;
+    color: #333 !important;
+    border: 2px solid rgba(0,0,0,0.1);
+    border-radius: 0 0 8px 8px; /* Rounded bottom to look like an extension */
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 10;
+}
 </style>
 </head>
 <body id="body-main">
@@ -410,13 +443,15 @@ function showPage(id) {
         const view = document.getElementById('tour-view');
         const titleContainer = document.getElementById('title-container');
         
-        // Button Logic
+        // --- Leaderboard Button Position Logic ---
         const navBtn = document.querySelector(`.btn-${id}`);
-        if (linkBtn) {
+        if (linkBtn && navBtn) {
             linkBtn.href = data.url;
             linkBtn.innerText = "🏆 " + (data.btnText || "Current Leaderboard");
             linkBtn.style.display = 'block';
-            if (navBtn) navBtn.after(linkBtn); 
+            
+            // This moves the button directly under the one you just tapped
+            navBtn.after(linkBtn); 
         }
 
         // Clean Description
