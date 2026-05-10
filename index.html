@@ -6,7 +6,7 @@
     <title>LST Legends Sim Tours</title>
     
     <script>
-        const APP_VERSION = '1.1.2'; 
+        const APP_VERSION = '1.1.3'; 
 
         const tours = {
             home: { shade: "#f4f4f4" },
@@ -25,7 +25,8 @@
                 logo: "gripnriplogo.png", 
                 shade: "#b30000",
                 settingsImage: "gripnripsettings.png",
-                videos: [] 
+                videos: [
+				{file: "davina230.mp4", title: "Davina stone dead from 230yds" }] 
             },
             links: { 
                 name: "Linksland",
@@ -33,7 +34,9 @@
                 logo: "linkslandlogo.png",
                 shade: "#003366",
                 settingsImage: "linkslandsettings.png",
-                videos: []
+                videos: [
+				{file: "x3ace.mp4", title: "x3 Aces the 5th at Dunbar" }
+				]
             },
             match: { 
                 name: "Matchplay",
@@ -54,7 +57,9 @@
                 logo: "stablefordlogo.png",
                 shade: "#ff8c00",
                 settingsImage: "stablefordsettings.png",
-                videos: []
+                videos: [
+				{file: "tenbobace.mp4", title: "Tenbob ace at The |West Australian" }
+				]
             },
             owgr: { 
                 name: "LST OWGR",
@@ -68,11 +73,13 @@
 
 LST -OWGR has had a major overhaul so from now on we are moving to a Rolling 50-Event Weighted Ranking System.
 Here is how you earn your spot at the top:
+
 📊 The 2kOWGR Formula
 Your rank is based on efficiency and consistency, not just showing up.
 • The Rolling 50: We only count your last 50 events. Old baggage eventually falls off the map—staying at the top requires current form.
 • The Minimum Divisor (20): To prevent "one-hit wonders" from sitting at #1, your total points are divided by a minimum of 20.
 • Commissioner's Note: If you've played 5 events, your total is divided by 20. Once you hit 21 events, your real average takes over. The more you play, the easier it is to climb.
+
 🏆 The Points Structure
 Every standard event pays out as follows:
 • 1st: 150 pts | 2nd: 130 pts | 3rd: 110 pts
@@ -82,6 +89,7 @@ Every standard event pays out as follows:
 ⚡ Field & Event Multipliers
 • 💎 Signature Events: Points are DOUBLED (1st place = 300 pts).
 • 👥 Small Fields: If the field is less than 10 players, points are reduced by 50% (1st place = 75 pts).
+
 🟢 The Movement Arrows
 Every week, I will "Finalize the Standings" and update the ‘live link’
 • ▲ Green: You outpaced the field this week.
@@ -141,8 +149,8 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
                     descCard.id = 'dynamic-description';
                     descCard.className = 'card crimson-style'; 
                     let html = "";
-                    if (data.settingsImage) html += `<img src="${data.settingsImage}?v=${APP_VERSION}" style="width:100%; border-radius:8px; margin-bottom:15px;">`;
-                    if (data.description) html += `<div style="white-space: pre-line;">${data.description}</div>`;
+                    if (data.settingsImage) html += `<img src="${data.settingsImage}?v=${APP_VERSION}" class="settings-image">`;
+                    if (data.description) html += `<div class="description-text">${data.description}</div>`;
                     descCard.innerHTML = html;
                     titleContainer.after(descCard);
                 }
@@ -178,7 +186,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
 
     <style>
         body { font-family: sans-serif; transition: background-color 0.5s ease; margin: 0; padding: 0; overflow-x: hidden; }
-        .container { max-width: 1000px; margin: auto; padding: 15px; }
+        .container { max-width: 1000px; margin: auto; padding: 15px; box-sizing: border-box; }
         
         /* SCROLLING NAV */
         .nav-wrapper { margin-bottom: 20px; }
@@ -199,25 +207,28 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
             border: 2px solid rgba(0,0,0,0.1); box-sizing: border-box;
         }
 
-        /* LOGO ON HOME PAGE */
-        .main-logo { width: 100%; max-width: 350px; display: block; margin: 0 auto 20px; border-radius: 15px; }
+        /* FULL WIDTH LOGOS */
+        .main-logo { width: 100%; height: auto; display: block; margin: 0 0 20px 0; border-radius: 12px; }
+        .tour-logo-header { width: 100%; height: auto; display: block; margin: 0 0 20px 0; }
+        .settings-image { width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; }
 
         .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; color: #333; }
         .crimson-style { border-left: 8px solid #800000; }
-        .tour-logo-header { width: 100%; max-width: 400px; display: block; margin: 0 auto 20px; }
+        .description-text { white-space: pre-line; }
         
         .page-content { display: none; }
         .page-content.active { display: block; }
         
         /* DISCORD FLOATING BUTTON */
         .discord-float {
-            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
+            position: fixed; bottom: 20px; right: 20px; width: 65px; height: 65px;
             background: #5865F2; border-radius: 50%; display: flex; align-items: center;
             justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1000;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
         }
+        .discord-float:hover { background-color: #4752c4; }
         .discord-float:active { transform: scale(0.9); }
-        .discord-float img { width: 35px; height: 35px; }
+        .discord-float img { width: 40px; height: auto; }
 
         /* Accordion */
         .history-header { background: #333; color: white; padding: 10px 20px; cursor: pointer; border-radius: 8px; margin-top: 10px; }
@@ -244,8 +255,16 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
     <div id="home" class="page-content active">
         <img src="logo.png" class="main-logo" alt="LST Logo">
         <div class="card">
-            <h1>LST Legend Sim Tours</h1>
-            <p>Welcome to Legend Sim Tours (LST) Stock 74, we have a few different societies in here, they are all using the stock 74 golfer. Whats a stock 74 golfer I hear you ask, the greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74, no more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller, we run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love whats provided for the great community of Legend true simmers we have here. Each society offers something different, formats, scoring, bonus points etc. Below is a link to each, just click on the link per society to give you an overview of what each society can offer, as always just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out. Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
+            <h1>LST Legends Sim Tours</h1>
+            <p>Welcome to Legend Sim Tours (LST) Stock 74, we have a few different societies in here, they are all using the stock 74 golfer.
+
+			Whats a stock 74 golfer I hear you ask, the greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74, no more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller,
+
+			We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love whats provided for the great community of Legend true simmers we have here.
+
+			Each society offers something different, formats, scoring, bonus points etc. Above is a link to each, just click on the link per society to give you an overview of what each society can offer, as always just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out.
+
+			Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
         </div>
     </div>
 
@@ -255,8 +274,8 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
     </div>
 </div>
 
-<a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float">
-    <img src="discord-logo.png" alt="Discord">
+<a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float" title="Join our Discord">
+    <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6918e517502162f40c_icon_clyde_white_RGB.svg" alt="Discord">
 </a>
 
 </body>
