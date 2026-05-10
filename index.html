@@ -6,7 +6,7 @@
     <title>LST Legends Sim Tours</title>
     
     <script>
-        const APP_VERSION = '1.1.3'; 
+        const APP_VERSION = '1.1.4'; 
 
         const tours = {
             home: { shade: "#f4f4f4" },
@@ -26,7 +26,8 @@
                 shade: "#b30000",
                 settingsImage: "gripnripsettings.png",
                 videos: [
-				{file: "davina230.mp4", title: "Davina stone dead from 230yds" }] 
+                    {file: "davina230.mp4", title: "Davina stone dead from 230" },
+                ] 
             },
             links: { 
                 name: "Linksland",
@@ -35,8 +36,8 @@
                 shade: "#003366",
                 settingsImage: "linkslandsettings.png",
                 videos: [
-				{file: "x3ace.mp4", title: "x3 Aces the 5th at Dunbar" }
-				]
+                    {file: "x3ace.mp4", title: "x3 Aces the 5th at Dunbar" }
+                ]
             },
             match: { 
                 name: "Matchplay",
@@ -49,7 +50,9 @@
                     { name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/" }
                 ],
                 settingsImage: "matchplaysettings.png",
-                videos: []
+                videos: [
+                    {file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace" }
+                ]
             },
             stable: { 
                 name: "Stableford",
@@ -58,8 +61,8 @@
                 shade: "#ff8c00",
                 settingsImage: "stablefordsettings.png",
                 videos: [
-				{file: "tenbobace.mp4", title: "Tenbob ace at The |West Australian" }
-				]
+                    {file: "tenbobace.mp4", title: "Tenbobnote ace in West Australia" },
+                ]
             },
             owgr: { 
                 name: "LST OWGR",
@@ -73,13 +76,11 @@
 
 LST -OWGR has had a major overhaul so from now on we are moving to a Rolling 50-Event Weighted Ranking System.
 Here is how you earn your spot at the top:
-
 📊 The 2kOWGR Formula
 Your rank is based on efficiency and consistency, not just showing up.
 • The Rolling 50: We only count your last 50 events. Old baggage eventually falls off the map—staying at the top requires current form.
 • The Minimum Divisor (20): To prevent "one-hit wonders" from sitting at #1, your total points are divided by a minimum of 20.
 • Commissioner's Note: If you've played 5 events, your total is divided by 20. Once you hit 21 events, your real average takes over. The more you play, the easier it is to climb.
-
 🏆 The Points Structure
 Every standard event pays out as follows:
 • 1st: 150 pts | 2nd: 130 pts | 3rd: 110 pts
@@ -89,7 +90,6 @@ Every standard event pays out as follows:
 ⚡ Field & Event Multipliers
 • 💎 Signature Events: Points are DOUBLED (1st place = 300 pts).
 • 👥 Small Fields: If the field is less than 10 players, points are reduced by 50% (1st place = 75 pts).
-
 🟢 The Movement Arrows
 Every week, I will "Finalize the Standings" and update the ‘live link’
 • ▲ Green: You outpaced the field this week.
@@ -130,6 +130,8 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
             } else {
                 const view = document.getElementById('tour-view');
                 const titleContainer = document.getElementById('title-container');
+                const videoGalleryCard = document.getElementById('video-gallery-card');
+                const videoList = document.getElementById('video-list');
                 
                 if (linkBtn) {
                     linkBtn.href = data.url;
@@ -137,6 +139,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
                     linkBtn.style.display = 'block';
                 }
 
+                // Description/Image Cleaning
                 const oldDesc = document.getElementById('dynamic-description');
                 if (oldDesc) oldDesc.remove();
 
@@ -155,6 +158,27 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
                     titleContainer.after(descCard);
                 }
 
+                // VIDEO HIGHLIGHTS LOGIC (Restored)
+                if (videoList) {
+                    videoList.innerHTML = ''; // Clear old ones
+                    if (data.videos && data.videos.length > 0) {
+                        data.videos.forEach(vid => {
+                            videoList.innerHTML += `
+                                <div class="video-item">
+                                    <h3>${vid.title}</h3>
+                                    <video controls preload="metadata">
+                                        <source src="${vid.file}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>`;
+                        });
+                        videoGalleryCard.style.display = 'block';
+                    } else {
+                        videoGalleryCard.style.display = 'none';
+                    }
+                }
+
+                // Archive Logic
                 let arcCont = document.getElementById('archive-container');
                 if (!arcCont) {
                     arcCont = document.createElement('div');
@@ -207,7 +231,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
             border: 2px solid rgba(0,0,0,0.1); box-sizing: border-box;
         }
 
-        /* FULL WIDTH LOGOS */
+        /* LOGO STRETCH */
         .main-logo { width: 100%; height: auto; display: block; margin: 0 0 20px 0; border-radius: 12px; }
         .tour-logo-header { width: 100%; height: auto; display: block; margin: 0 0 20px 0; }
         .settings-image { width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; }
@@ -216,18 +240,20 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
         .crimson-style { border-left: 8px solid #800000; }
         .description-text { white-space: pre-line; }
         
+        /* VIDEO STYLES */
+        .video-item { margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .video-item h3 { margin-top: 0; font-size: 1.1rem; }
+        .video-item video { width: 100%; border-radius: 8px; background: #000; }
+
         .page-content { display: none; }
         .page-content.active { display: block; }
         
-        /* DISCORD FLOATING BUTTON */
+        /* DISCORD */
         .discord-float {
             position: fixed; bottom: 20px; right: 20px; width: 65px; height: 65px;
             background: #5865F2; border-radius: 50%; display: flex; align-items: center;
             justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1000;
-            transition: transform 0.2s, background-color 0.2s;
         }
-        .discord-float:hover { background-color: #4752c4; }
-        .discord-float:active { transform: scale(0.9); }
         .discord-float img { width: 40px; height: auto; }
 
         /* Accordion */
@@ -256,26 +282,24 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
         <img src="logo.png" class="main-logo" alt="LST Logo">
         <div class="card">
             <h1>LST Legends Sim Tours</h1>
-            <p>Welcome to Legend Sim Tours (LST) Stock 74, we have a few different societies in here, they are all using the stock 74 golfer.
-
-			Whats a stock 74 golfer I hear you ask, the greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74, no more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller,
-
-			We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love whats provided for the great community of Legend true simmers we have here.
-
-			Each society offers something different, formats, scoring, bonus points etc. Above is a link to each, just click on the link per society to give you an overview of what each society can offer, as always just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out.
-
-			Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
+            <p>Welcome to Legend Sim Tours (LST) Stock 74, we have a few different societies in here, they are all using the stock 74 golfer. Whats a stock 74 golfer I hear you ask, the greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74, no more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller, We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love whats provided for the great community of Legend true simmers we have here. Each society offers something different, formats, scoring, bonus points etc. Above is a link to each, just click on the link per society to give you an overview of what each society can offer, as always just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out. Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
         </div>
     </div>
 
     <div id="tour-view" class="page-content">
         <div id="title-container"></div>
+        
+        <div id="video-gallery-card" class="card" style="display:none;">
+            <h2>Tournament Highlights</h2>
+            <div id="video-list"></div>
+        </div>
+
         <div id="archive-container"></div>
     </div>
 </div>
 
-<a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float" title="Join our Discord">
-    <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6918e517502162f40c_icon_clyde_white_RGB.svg" alt="Discord">
+<a href="YOUR_DISCORD_INVITE_LINK_HERE" target="_blank" class="discord-float" title="Join our Discord">
+    <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6918e517502162f40c_icon_clyde_white_RGB.svg" alt="Discord Logo">
 </a>
 
 </body>
