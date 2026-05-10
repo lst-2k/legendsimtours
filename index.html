@@ -126,7 +126,6 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
             if (id === 'home') {
                 document.getElementById('home').classList.add('active');
                 if (linkBtn) linkBtn.style.display = 'none';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 const view = document.getElementById('tour-view');
                 const titleContainer = document.getElementById('title-container');
@@ -201,7 +200,6 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
                 }
 
                 view.classList.add('active');
-                setTimeout(() => { titleContainer.scrollIntoView({ behavior: 'smooth' }); }, 50);
             }
         }
 
