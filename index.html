@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LST Legends Sim Tours</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <script>
         const APP_VERSION = '1.1.4'; 
@@ -249,24 +250,30 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
         /* DISCORD */
         .discord-float {
 			position: fixed; 
-			bottom: 20px; 
-			right: 20px; 
+			bottom: 25px; 
+			right: 25px; 
 			width: 60px; 
 			height: 60px;
 			background-color: #5865F2; /* Official Discord Blurple */
+			color: white;              /* Icon color */
 			border-radius: 50%; 
 			display: flex; 
 			align-items: center; 
 			justify-content: center; 
 			box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
 			z-index: 1000;
+			text-decoration: none;
 			transition: transform 0.2s ease;
 		}
 
 		.discord-float:hover {
 			transform: scale(1.1);
 		}
-        .discord-float img { width: 35px; height: auto; }
+
+		/* Style the icon itself */
+		.discord-float i { 
+			font-size: 32px; 
+		}
 
         /* Accordion */
         .history-header { background: #333; color: white; padding: 10px 20px; cursor: pointer; border-radius: 8px; margin-top: 10px; }
@@ -311,7 +318,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
 </div>
 
 <a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float" title="Join our Discord">
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjcuMTQgOTYuMzYiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0xMDcuNyA4LjA3Yy03LjktMy42NC0xNi42OS02LjMtMjUuODItNy43MmwtMS4xNCAyLjMzYy0xMC4xMy0xLjUxLTIwLjI3LTEuNTEtMzAuNCAwbC0xLjE0LTIuMzNjLTkuMTMgMS40Mi0xNy45MiA0LjA4LTI1LjgyIDcuNzJDLTYuMzYgMjUuMDEtMS43MSA0OS4xNCA0LjUxIDcyLjA4YzEwLjEyIDcuNDQgMTkuODYgMTEuOTcgMjkuNDQgMTUuMDJsNS45Mi04LjA5Yy02LjYxLTIuNDktMTIuOTYtNS43NS0xOC43OS05LjY4bDEuMDQtLjgzYzE4LjAzIDguMzMgMzcuNTEgOC4zMyA1NS43IDBsMS4wNC44M2MtNS44NCAzLjkzLTEyLjE4IDcuMTktMTguNzkgOS42OGw1LjkyIDguMDljOS41Ny0zLjA1IDE5LjMxLTcuNTggMjkuNDQtMTUuMDJDMTI5LjE3IDQ4LjQxIDEyMy44IDI0LjI0IDEwNy43IDguMDdNMzkuNiA2NS4zMWMtNS45MiAwLTEwLjgxLTUuNDMtMTAuODEtMTIuMDlzNC44OS0xMi4wOSAxMC44MS0xMi4wOXMxMC44MSA1LjQzIDEwLjgxIDEyLjA5UzQ1LjUyIDY1LjMxIDM5LjYgNjUuMzFtNDguMTcgMGMtNS45MiAwLTEwLjgxLTUuNDMtMTAuODEtMTIuMDlzNC44OS0xMi4wOSAxMC44MS0xMi4wOXMxMC44MSA1LjQzIDEwLjgxIDEyLjA5UzkyLjczIDY1LjMxIDg3Ljc3IDY1LjMxWiIvPjwvc3ZnPg==" alt="Discord Logo">
+    <i class="fab fa-discord"></i>
 </a>
 
 </body>
