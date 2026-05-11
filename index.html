@@ -10,7 +10,7 @@
         const APP_VERSION = '1.1.5'; 
 
         const tours = {
-            home: { shade: "#f4f4f4" },
+            home: { shade: "#e0e0e0" },
             emerald: { 
                 name: "Emerald Tour", 
                 url: "https://lst-2k.github.io/newemeraldtourseason2/", 
@@ -238,7 +238,18 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
         .tour-logo-header { width: 100%; height: auto; display: block; margin: 0 0 20px 0; }
         .settings-image { width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; }
 
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; color: #333; }
+        .card { 
+			background: white; 
+			padding: 20px; 
+			border-radius: 12px; 
+			box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+			margin-bottom: 20px; 
+			color: #333; 
+		}
+		#home .card {
+			box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+			border: 1px solid rgba(255,255,255,0.8); /* Optional: adds a crisp edge */
+		}
         .crimson-style { border-left: 8px solid #800000; }
         .description-text { white-space: pre-line; }
         
