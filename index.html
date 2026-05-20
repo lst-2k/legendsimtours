@@ -4,33 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LST Legends Sim Tours</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script>
-        const APP_VERSION = '1.1.6'; 
+        const APP_VERSION = '1.1.7'; 
 
         const tours = {
-            home: { shade: "#A9A9A9" },
-			
+            home: { shade: "#e0e0e0" }, 
             emerald: { 
                 name: "Emerald Tour", 
                 url: "https://lst-2k.github.io/newemeraldtourseason2/", 
                 logo: "emeraldlogo.png", 
-                shade: "#38761d",
+                shade: "#004d00",
                 settingsImage: "emeraldsettings.png",
-                description: `NEW EMERALD TOUR - SEASON 2\n\nJoin the excitement in our 12-week season featuring signature events and leaderboards.`,
-                videos: [
-				{file: "wingcharge.mp4", title: "Wing on the charge at Hickory Creek" }
-				] 
+                description: `NEW EMERALD TOUR - SEASON 2\n\nJoin the excitement in our 12-week season featuring signature events.`,
+                videos: [] 
             },
             grip: { 
                 name: "Grip & Rip", 
                 url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", 
                 logo: "gripnriplogo.png", 
-                shade: "#990000",
+                shade: "#b30000",
                 settingsImage: "gripnripsettings.png",
                 videos: [
-					{file: "Rendalliodart.mp4", title: "Rendallio dart at Kincruan" },
+					{file: "Rendalliodart.mp4", title: "Rendallio dart at Kiricun" },
 					{file: "rendeagle.mp4", title: "Rendallio Eagle at Chubby Pines" },
 					{file: "collysand.mp4", title: "Colly from the sand" },
 					{file: "tuggacelebration.mp4", title: "Tugga's Big Fish moment 🎣" },
@@ -41,17 +39,15 @@
                 name: "Linksland",
                 url: "https://lst-2k.github.io/linksland/",
                 logo: "linkslandlogo.png",
-                shade: "#0b5394",
+                shade: "#003366",
                 settingsImage: "linkslandsettings.png",
-                videos: [
-                    {file: "x3ace.mp4", title: "x3 Aces the 5th at Dunbar" }
-                ]
+                videos: [{file: "x3ace.mp4", title: "x3 Aces the 5th" }]
             },
             match: { 
                 name: "Matchplay",
                 url: "https://lst-2k.github.io/matchplayseason3/",
                 logo: "matchplaylogo.png",
-                shade: "#674ea7",
+                shade: "#4b0082",
                 description: `LST Matchplay Championship. Season 3 is now live!`,
                 archive: [
                     { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
@@ -66,7 +62,7 @@
                 name: "Stableford",
                 url: "https://lst-2k.github.io/stableford/",
                 logo: "stablefordlogo.png",
-                shade: "#e69138",
+                shade: "#ff8c00",
                 settingsImage: "stablefordsettings.png",
                 videos: [
 					{file: "Geordieboyclose1.mp4", title: "Geordieboy close but......" },
@@ -78,7 +74,7 @@
                 url: "https://lst-2k.github.io/lst-owgr/",
                 logo: "owgr.png",
                 btnText: "View Full Rankings",
-                shade: "#5b5b5b",
+                shade: "#222222",
                 description: `LST-2k25 Official World Golf Rankings are LIVE!
 				
 				Ladies and Gentlemen, the hunt for World Number One is officially on. 
@@ -105,7 +101,7 @@ Every week, I will "Finalize the Standings" and update the ‘live link’
 • ▼ Red: You're sliding—time to hit the range.
 • ● Grey: Position maintained.
 
-Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌️‍♂️`,
+Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added backtick and comma
                 videos: [] 
             }
         };
@@ -127,7 +123,6 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
             if (!data) return;
 
             document.getElementById('body-main').style.backgroundColor = data.shade;
-            document.getElementById('main-area').style.backgroundColor = data.shade;
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             
             const linkBtn = document.getElementById('leaderboard-link');
@@ -147,7 +142,6 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
                     linkBtn.style.display = 'block';
                 }
 
-                // Description/Image Cleaning
                 const oldDesc = document.getElementById('dynamic-description');
                 if (oldDesc) oldDesc.remove();
 
@@ -166,27 +160,40 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
                     titleContainer.after(descCard);
                 }
 
-                // VIDEO HIGHLIGHTS LOGIC (Restored)
+                // Video Carousel Logic
                 if (videoList) {
-                    videoList.innerHTML = ''; // Clear old ones
+                    videoList.innerHTML = ''; 
+                    const oldDots = videoGalleryCard.querySelector('.video-dots');
+                    if (oldDots) oldDots.remove();
+
                     if (data.videos && data.videos.length > 0) {
-                        data.videos.forEach(vid => {
+                        const dotsContainer = document.createElement('div');
+                        dotsContainer.className = 'video-dots';
+
+                        data.videos.forEach((vid, index) => {
                             videoList.innerHTML += `
                                 <div class="video-item">
-                                    <h3>${vid.title}</h3>
-                                    <video controls preload="metadata">
-                                        <source src="${vid.file}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
+                                    <video controls preload="metadata"><source src="${vid.file}" type="video/mp4"></video>
+                                    <h3 style="text-align:center; font-size:0.9rem; margin-top:8px;">${vid.title}</h3>
                                 </div>`;
+                            const dot = document.createElement('div');
+                            dot.className = `dot ${index === 0 ? 'active' : ''}`;
+                            dotsContainer.appendChild(dot);
                         });
+
+                        videoGalleryCard.appendChild(dotsContainer);
                         videoGalleryCard.style.display = 'block';
+
+                        videoList.onscroll = () => {
+                            const index = Math.round(videoList.scrollLeft / videoList.offsetWidth);
+                            const allDots = dotsContainer.querySelectorAll('.dot');
+                            allDots.forEach((d, i) => d.classList.toggle('active', i === index));
+                        };
                     } else {
                         videoGalleryCard.style.display = 'none';
                     }
                 }
 
-                // Archive Logic
                 let arcCont = document.getElementById('archive-container');
                 if (!arcCont) {
                     arcCont = document.createElement('div');
@@ -207,12 +214,48 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
                     arcCont.appendChild(h);
                     arcCont.appendChild(b);
                 }
-
                 view.classList.add('active');
             }
         }
+		
+		function scrollCarousel(direction) {
+    const slider = document.getElementById('video-list');
+    if (!slider) return;
+    
+    // Calculate how much to scroll (the width of one video item)
+    const scrollAmount = slider.offsetWidth * 0.85; 
+    slider.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+    });
+}
 
         window.onload = () => showPage('home');
+		// ENABLE DRAG-TO-SCROLL FOR DESKTOP
+		const slider = document.getElementById('video-list');
+		let isDown = false;
+		let startX;
+		let scrollLeft;
+
+		slider.addEventListener('mousedown', (e) => {
+			isDown = true;
+			slider.classList.add('active');
+			startX = e.pageX - slider.offsetLeft;
+			scrollLeft = slider.scrollLeft;
+		});
+		slider.addEventListener('mouseleave', () => {
+			isDown = false;
+		});
+		slider.addEventListener('mouseup', () => {
+			isDown = false;
+		});
+		slider.addEventListener('mousemove', (e) => {
+			if (!isDown) return;
+			e.preventDefault();
+			const x = e.pageX - slider.offsetLeft;
+			const walk = (x - startX) * 2; // The number 2 determines scroll speed
+			slider.scrollLeft = scrollLeft - walk;
+		});
     </script>
 
     <style>
@@ -238,66 +281,124 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
             border: 2px solid rgba(0,0,0,0.1); box-sizing: border-box;
         }
 
-        /* LOGO STRETCH */
-        .main-logo { width: 100%; height: auto; display: block; margin: 0 0 20px 0; border-radius: 12px; }
-        .tour-logo-header { width: 100%; height: auto; display: block; margin: 0 0 20px 0; }
-        .settings-image { width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; }
-
-        .card { 
-			background: white; 
-			padding: 20px; 
-			border-radius: 12px; 
-			box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-			margin-bottom: 20px; 
-			color: #333; 
-		}
-		#home .card {
-			box-shadow: 0 8px 25px rgba(0,0,0,0.18);
-			border: 1px solid rgba(255,255,255,0.8); /* Optional: adds a crisp edge */
-		}
+        /* CARD STYLES */
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; color: #333; }
+        #home .card { box-shadow: 0 8px 25px rgba(0,0,0,0.18); border: 1px solid rgba(255,255,255,0.8); }
         .crimson-style { border-left: 8px solid #800000; }
         .description-text { white-space: pre-line; }
-        
-        /* VIDEO STYLES */
-        .video-item { margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .video-item h3 { margin-top: 0; font-size: 1.1rem; }
-        .video-item video { width: 100%; border-radius: 8px; background: #000; }
+
+        /* IMAGES */
+        .main-logo, .tour-logo-header, .settings-image { width: 100%; height: auto; display: block; border-radius: 8px; margin-bottom: 15px; }
+
+        /* VIDEO CAROUSEL */
+        #video-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+    cursor: grab; /* Shows the grab hand on desktop */
+    user-select: none; /* Prevents highlighting text while dragging */
+}
+
+		#video-list:active {
+			cursor: grabbing; /* Shows the closed fist when clicking */
+		}
+
+		.video-item {
+			flex: 0 0 85%; /* Keep showing 85% of the width */
+			scroll-snap-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.video-item video {
+			width: 100%;
+			/* This forces all videos to be the same shape (Widescreen) */
+			aspect-ratio: 16 / 9; 
+			background: #000;
+			border-radius: 8px;
+			box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+			/* This ensures the video fills the 16:9 box without distorting */
+			object-fit: cover; 
+		}
+		.video-item h3 {
+			text-align: center;
+			font-size: 0.9rem;
+			margin-top: 10px;
+			height: 1.2rem; /* Limits title to one line height */
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 90%;
+		}
+        .video-dots { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+        .dot { width: 8px; height: 8px; background: #ccc; border-radius: 50%; transition: all 0.3s; }
+        .dot.active { background: #5865F2; transform: scale(1.2); }
 
         .page-content { display: none; }
         .page-content.active { display: block; }
         
-        /* DISCORD */
+        /* DISCORD FLOAT */
         .discord-float {
-			position: fixed; 
-			bottom: 25px; 
-			right: 25px; 
-			width: 60px; 
-			height: 60px;
-			background-color: #5865F2; /* Official Discord Blurple */
-			color: white;              /* Icon color */
-			border-radius: 50%; 
-			display: flex; 
-			align-items: center; 
-			justify-content: center; 
-			box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
-			z-index: 1000;
-			text-decoration: none;
-			transition: transform 0.2s ease;
-		}
+            position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
+            background-color: #5865F2; color: white; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+            z-index: 1000; text-decoration: none; transition: transform 0.2s;
+        }
+        .discord-float:hover { transform: scale(1.1); }
+        .discord-float i { font-size: 30px; }
 
-		.discord-float:hover {
-			transform: scale(1.1);
-		}
-
-		/* Style the icon itself */
-		.discord-float i { 
-			font-size: 32px; 
-		}
-
-        /* Accordion */
         .history-header { background: #333; color: white; padding: 10px 20px; cursor: pointer; border-radius: 8px; margin-top: 10px; }
         .history-content { max-height: 0; overflow: hidden; transition: all 0.3s ease-out; background: #eee; border-radius: 0 0 8px 8px; }
         .archive-sub-btn { display: block; padding: 12px; margin: 10px; background: #666; color: white; text-decoration: none; border-radius: 5px; text-align: center; font-weight: bold; }
+		
+		/* ARROW NAVIGATION */
+.video-carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3); /* Faded background */
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s, opacity 0.3s;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-arrow:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.nav-arrow.left { left: 5px; }
+.nav-arrow.right { right: 5px; }
+
+/* Ensure video-list stays clean */
+#video-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding: 10px 0;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth; /* Smooth sliding animation */
+}
     </style>
 </head>
 <body id="body-main">
@@ -321,23 +422,26 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️‍♂️🏌�
         <div class="card">
             <h1>LST Legends Sim Tours</h1>
             <p>Welcome to Legend Sim Tours (LST) Stock 74, we have a few different societies in here, they are all using the stock 74 golfer.</p><p> Whats a stock 74 golfer I hear you ask,</p><p> The greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74,</p><p> No more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller,</p><p> We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love whats provided for the great community of Legend true simmers we have here.</p><p> Each society offers something different, formats, scoring, bonus points etc.</p><p> Above is a link to each, just click on the link per society to give you an overview of what each society can offer, links to current tournaments and past seasons. Just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out.</p><p> Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
-			<img src="settings.png" class="settings-image" alt="Global Settings">
-		</div>
+            <img src="settings.png" class="settings-image" alt="Master Settings">
+        </div>
     </div>
 
     <div id="tour-view" class="page-content">
         <div id="title-container"></div>
-        
-        <div id="video-gallery-card" class="card" style="display:none;">
-            <h2>Tournament Highlights</h2>
-            <div id="video-list"></div>
-        </div>
-
+        <div id="video-gallery-card" class="card" style="display:none; padding: 15px 10px;">
+    <h2 style="margin-left: 10px;">Tournament Highlights</h2>
+    
+    <div class="video-carousel-container">
+        <button class="nav-arrow left" onclick="scrollCarousel(-1)">&#10094;</button>
+        <div id="video-list"></div>
+        <button class="nav-arrow right" onclick="scrollCarousel(1)">&#10095;</button>
+    </div>
+</div>
         <div id="archive-container"></div>
     </div>
 </div>
 
-<a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float" title="Join our Discord">
+<a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float">
     <i class="fab fa-discord"></i>
 </a>
 
