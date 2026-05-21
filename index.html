@@ -1,75 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LST Legends Sim Tours</title>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script>
-        const APP_VERSION = '1.1.7'; 
+        const APP_VERSION = '1.1.7';
 
         const tours = {
-            home: { shade: "#e0e0e0" }, 
-            emerald: { 
-                name: "Emerald Tour", 
-                url: "https://lst-2k.github.io/newemeraldtourseason2/", 
-                logo: "emeraldlogo.png", 
+            home: {
+                shade: "#e0e0e0"
+            },
+            emerald: {
+                name: "Emerald Tour",
+                url: "https://lst-2k.github.io/newemeraldtourseason2/",
+                logo: "emeraldlogo.png",
                 shade: "#004d00",
                 settingsImage: "emeraldsettings.png",
                 description: `NEW EMERALD TOUR - SEASON 2\n\nJoin the excitement in our 12-week season featuring signature events.`,
-                videos: [] 
+                videos: []
             },
-            grip: { 
-                name: "Grip & Rip", 
-                url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/", 
-                logo: "gripnriplogo.png", 
+            grip: {
+                name: "Grip & Rip",
+                url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/",
+                logo: "gripnriplogo.png",
                 shade: "#b30000",
                 settingsImage: "gripnripsettings.png",
-                videos: [
-					{file: "Rendalliodart.mp4", title: "Rendallio dart at Kiricun" },
-					{file: "rendeagle.mp4", title: "Rendallio Eagle at Chubby Pines" },
-					{file: "collysand.mp4", title: "Colly from the sand" },
-					{file: "tuggacelebration.mp4", title: "Tugga's Big Fish moment 🎣" },
-                    {file: "davina230.mp4", title: "Davina stone dead from 230" }
-                ] 
+                videos: [{
+                        file: "Rendalliodart.mp4",
+                        title: "Rendallio dart at Kiricun"
+                    },
+                    {
+                        file: "rendeagle.mp4",
+                        title: "Rendallio Eagle at Chubby Pines"
+                    },
+                    {
+                        file: "collysand.mp4",
+                        title: "Colly from the sand"
+                    },
+                    {
+                        file: "tuggacelebration.mp4",
+                        title: "Tugga's Big Fish moment 🎣"
+                    },
+                    {
+                        file: "davina230.mp4",
+                        title: "Davina stone dead from 230"
+                    }
+                ]
             },
-            links: { 
+            links: {
                 name: "Linksland",
                 url: "https://lst-2k.github.io/linksland/",
                 logo: "linkslandlogo.png",
                 shade: "#003366",
                 settingsImage: "linkslandsettings.png",
-                videos: [{file: "x3ace.mp4", title: "x3 Aces the 5th" }]
+                videos: [{
+                    file: "x3ace.mp4",
+                    title: "x3 Aces the 5th at Dunbar"
+                }]
             },
-            match: { 
+            match: {
                 name: "Matchplay",
                 url: "https://lst-2k.github.io/matchplayseason3/",
                 logo: "matchplaylogo.png",
                 shade: "#4b0082",
                 description: `LST Matchplay Championship. Season 3 is now live!`,
-                archive: [
-                    { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
-                    { name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/" }
+                archive: [{
+                        name: "Season 2",
+                        url: "https://lst-2k.github.io/matchplayseason2/"
+                    },
+                    {
+                        name: "Season 1",
+                        url: "https://lst-2k.github.io/matchplayseason1/"
+                    }
                 ],
                 settingsImage: "matchplaysettings.png",
-                videos: [
-                    {file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace" }
-                ]
+                videos: [{
+                    file: "daveagle.mp4",
+					title: "Davina eagles 15 at Indian Trace"
+                }]
             },
-            stable: { 
+            stable: {
                 name: "Stableford",
                 url: "https://lst-2k.github.io/stableford/",
                 logo: "stablefordlogo.png",
                 shade: "#ff8c00",
                 settingsImage: "stablefordsettings.png",
                 videos: [
-					{file: "Geordieboyclose1.mp4", title: "Geordieboy close but......" },
-                    {file: "tenbobace.mp4", title: "Tenbobnote ace in West Australia" }
+					{
+						file: "collyeagle.mp4",
+						title: "Colly eagles 18 at Duna de Costa Sul"
+					},
+					{
+                        file: "Geordieboyclose1.mp4",
+                        title: "Geordieboy close but.....😬"
+                    },
+                    {
+                        file: "tenbobace.mp4",
+                        title: "Tenbobnote ace in West Australia"
+                    }
+					
                 ]
             },
-            owgr: { 
+            owgr: {
                 name: "LST OWGR",
                 url: "https://lst-2k.github.io/lst-owgr/",
                 logo: "owgr.png",
@@ -102,7 +139,7 @@ Every week, I will "Finalize the Standings" and update the ‘live link’
 • ● Grey: Position maintained.
 
 Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added backtick and comma
-                videos: [] 
+                videos: []
             }
         };
 
@@ -124,7 +161,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
 
             document.getElementById('body-main').style.backgroundColor = data.shade;
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            
+
             const linkBtn = document.getElementById('leaderboard-link');
 
             if (id === 'home') {
@@ -135,7 +172,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                 const titleContainer = document.getElementById('title-container');
                 const videoGalleryCard = document.getElementById('video-gallery-card');
                 const videoList = document.getElementById('video-list');
-                
+
                 if (linkBtn) {
                     linkBtn.href = data.url;
                     linkBtn.innerText = "🏆 " + (data.btnText || "Current Leaderboard");
@@ -145,14 +182,14 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                 const oldDesc = document.getElementById('dynamic-description');
                 if (oldDesc) oldDesc.remove();
 
-                titleContainer.innerHTML = data.logo ? 
-                    `<img src="${data.logo}?v=${APP_VERSION}" class="tour-logo-header">` : 
+                titleContainer.innerHTML = data.logo ?
+                    `<img src="${data.logo}?v=${APP_VERSION}" class="tour-logo-header">` :
                     `<h1>${data.name}</h1>`;
 
                 if (data.description || data.settingsImage) {
                     const descCard = document.createElement('div');
                     descCard.id = 'dynamic-description';
-                    descCard.className = 'card crimson-style'; 
+                    descCard.className = 'card crimson-style';
                     let html = "";
                     if (data.settingsImage) html += `<img src="${data.settingsImage}?v=${APP_VERSION}" class="settings-image">`;
                     if (data.description) html += `<div class="description-text">${data.description}</div>`;
@@ -162,7 +199,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
 
                 // Video Carousel Logic
                 if (videoList) {
-                    videoList.innerHTML = ''; 
+                    videoList.innerHTML = '';
                     const oldDots = videoGalleryCard.querySelector('.video-dots');
                     if (oldDots) oldDots.remove();
 
@@ -205,7 +242,9 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                     const h = document.createElement('div');
                     h.className = 'history-header';
                     h.innerHTML = '<h3>Tournament Archives</h3>';
-                    h.onclick = function() { toggleHistory(this); };
+                    h.onclick = function() {
+                        toggleHistory(this);
+                    };
                     const b = document.createElement('div');
                     b.className = 'history-content';
                     data.archive.forEach(item => {
@@ -217,233 +256,384 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                 view.classList.add('active');
             }
         }
-		
-		function scrollCarousel(direction) {
-    const slider = document.getElementById('video-list');
-    if (!slider) return;
-    
-    // Calculate how much to scroll (the width of one video item)
-    const scrollAmount = slider.offsetWidth * 0.85; 
-    slider.scrollBy({
-        left: direction * scrollAmount,
-        behavior: 'smooth'
-    });
-}
+
+        function scrollCarousel(direction) {
+            const slider = document.getElementById('video-list');
+            if (!slider) return;
+
+            // Calculate how much to scroll (the width of one video item)
+            const scrollAmount = slider.offsetWidth * 0.85;
+            slider.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
 
         window.onload = () => showPage('home');
-		// ENABLE DRAG-TO-SCROLL FOR DESKTOP
-		const slider = document.getElementById('video-list');
-		let isDown = false;
-		let startX;
-		let scrollLeft;
+        // ENABLE DRAG-TO-SCROLL FOR DESKTOP
+        const slider = document.getElementById('video-list');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
 
-		slider.addEventListener('mousedown', (e) => {
-			isDown = true;
-			slider.classList.add('active');
-			startX = e.pageX - slider.offsetLeft;
-			scrollLeft = slider.scrollLeft;
-		});
-		slider.addEventListener('mouseleave', () => {
-			isDown = false;
-		});
-		slider.addEventListener('mouseup', () => {
-			isDown = false;
-		});
-		slider.addEventListener('mousemove', (e) => {
-			if (!isDown) return;
-			e.preventDefault();
-			const x = e.pageX - slider.offsetLeft;
-			const walk = (x - startX) * 2; // The number 2 determines scroll speed
-			slider.scrollLeft = scrollLeft - walk;
-		});
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // The number 2 determines scroll speed
+            slider.scrollLeft = scrollLeft - walk;
+        });
     </script>
 
     <style>
-        body { font-family: sans-serif; transition: background-color 0.5s ease; margin: 0; padding: 0; overflow-x: hidden; }
-        .container { max-width: 1000px; margin: auto; padding: 15px; box-sizing: border-box; }
-        
-        /* SCROLLING NAV */
-        .nav-wrapper { margin-bottom: 20px; }
-        .nav-menu { 
-            display: flex; overflow-x: auto; white-space: nowrap; gap: 10px; 
-            padding: 10px 5px 20px 5px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+        body {
+            font-family: sans-serif;
+            transition: background-color 0.5s ease;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
-        .nav-menu::-webkit-scrollbar { display: none; }
-        .nav-menu button { 
-            flex: 0 0 auto; min-width: 130px; padding: 15px 10px; cursor: pointer; 
-            border: none; border-radius: 8px; font-weight: bold; color: white; background: #333;
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        /* SCROLLING NAV */
+        .nav-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            gap: 10px;
+            padding: 10px 5px 20px 5px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-menu::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-menu button {
+            flex: 0 0 auto;
+            min-width: 130px;
+            padding: 15px 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            color: white;
+            background: #333;
         }
 
         #leaderboard-link {
-            display: none; width: 100%; background: white; color: #333 !important; 
-            padding: 15px; margin-bottom: 20px; border-radius: 8px; text-decoration: none;
-            text-align: center; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            border: 2px solid rgba(0,0,0,0.1); box-sizing: border-box;
+            display: none;
+            width: 100%;
+            background: white;
+            color: #333 !important;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
         }
 
         /* CARD STYLES */
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; color: #333; }
-        #home .card { box-shadow: 0 8px 25px rgba(0,0,0,0.18); border: 1px solid rgba(255,255,255,0.8); }
-        .crimson-style { border-left: 8px solid #800000; }
-        .description-text { white-space: pre-line; }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #home .card {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .crimson-style {
+            border-left: 8px solid #800000;
+        }
+
+        .description-text {
+            white-space: pre-line;
+        }
 
         /* IMAGES */
-        .main-logo, .tour-logo-header, .settings-image { width: 100%; height: auto; display: block; border-radius: 8px; margin-bottom: 15px; }
+        .main-logo,
+        .tour-logo-header,
+        .settings-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
 
         /* VIDEO CAROUSEL */
         #video-list {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 15px;
-    padding-bottom: 10px;
-    scrollbar-width: none;
-    cursor: grab; /* Shows the grab hand on desktop */
-    user-select: none; /* Prevents highlighting text while dragging */
-}
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+            cursor: grab;
+            /* Shows the grab hand on desktop */
+            user-select: none;
+            /* Prevents highlighting text while dragging */
+        }
 
-		#video-list:active {
-			cursor: grabbing; /* Shows the closed fist when clicking */
-		}
+        #video-list:active {
+            cursor: grabbing;
+            /* Shows the closed fist when clicking */
+        }
 
-		.video-item {
-			flex: 0 0 85%; /* Keep showing 85% of the width */
-			scroll-snap-align: center;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
+        .video-item {
+            flex: 0 0 85%;
+            /* Keep showing 85% of the width */
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-		.video-item video {
-			width: 100%;
-			/* This forces all videos to be the same shape (Widescreen) */
-			aspect-ratio: 16 / 9; 
-			background: #000;
-			border-radius: 8px;
-			box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-			/* This ensures the video fills the 16:9 box without distorting */
-			object-fit: cover; 
-		}
-		.video-item h3 {
-			text-align: center;
-			font-size: 0.9rem;
-			margin-top: 10px;
-			height: 1.2rem; /* Limits title to one line height */
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			width: 90%;
-		}
-        .video-dots { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
-        .dot { width: 8px; height: 8px; background: #ccc; border-radius: 50%; transition: all 0.3s; }
-        .dot.active { background: #5865F2; transform: scale(1.2); }
+        .video-item video {
+            width: 100%;
+            /* This forces all videos to be the same shape (Widescreen) */
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            /* This ensures the video fills the 16:9 box without distorting */
+            object-fit: cover;
+        }
 
-        .page-content { display: none; }
-        .page-content.active { display: block; }
-        
+        .video-item h3 {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            height: 1.2rem;
+            /* Limits title to one line height */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 90%;
+        }
+
+        .video-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #ccc;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #5865F2;
+            transform: scale(1.2);
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
         /* DISCORD FLOAT */
         .discord-float {
-            position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
-            background-color: #5865F2; color: white; border-radius: 50%; display: flex; 
-            align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
-            z-index: 1000; text-decoration: none; transition: transform 0.2s;
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: #5865F2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.2s;
         }
-        .discord-float:hover { transform: scale(1.1); }
-        .discord-float i { font-size: 30px; }
 
-        .history-header { background: #333; color: white; padding: 10px 20px; cursor: pointer; border-radius: 8px; margin-top: 10px; }
-        .history-content { max-height: 0; overflow: hidden; transition: all 0.3s ease-out; background: #eee; border-radius: 0 0 8px 8px; }
-        .archive-sub-btn { display: block; padding: 12px; margin: 10px; background: #666; color: white; text-decoration: none; border-radius: 5px; text-align: center; font-weight: bold; }
-		
-		/* ARROW NAVIGATION */
-.video-carousel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
+        .discord-float:hover {
+            transform: scale(1.1);
+        }
 
-.nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.3); /* Faded background */
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-    transition: background 0.3s, opacity 0.3s;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .discord-float i {
+            font-size: 30px;
+        }
 
-.nav-arrow:hover {
-    background: rgba(0, 0, 0, 0.6);
-}
+        .history-header {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
 
-.nav-arrow.left { left: 5px; }
-.nav-arrow.right { right: 5px; }
+        .history-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            background: #eee;
+            border-radius: 0 0 8px 8px;
+        }
 
-/* Ensure video-list stays clean */
-#video-list {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 15px;
-    padding: 10px 0;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth; /* Smooth sliding animation */
-}
+        .archive-sub-btn {
+            display: block;
+            padding: 12px;
+            margin: 10px;
+            background: #666;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* ARROW NAVIGATION */
+        .video-carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            /* Faded background */
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s, opacity 0.3s;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-arrow.left {
+            left: 5px;
+        }
+
+        .nav-arrow.right {
+            right: 5px;
+        }
+
+        /* Ensure video-list stays clean */
+        #video-list {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            padding: 10px 0;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            /* Smooth sliding animation */
+        }
     </style>
 </head>
+
 <body id="body-main">
 
-<div class="container" id="main-area">
-    <div class="nav-wrapper">
-        <div class="nav-menu">
-            <button onclick="showPage('home')" style="background:#555;">Home</button>
-            <button onclick="showPage('emerald')" style="background:#004d00;">Emerald Tour</button>
-            <button onclick="showPage('grip')" style="background:#b30000;">Grip & Rip</button>
-            <button onclick="showPage('links')" style="background:#003366;">Linksland</button>
-            <button onclick="showPage('match')" style="background:#4b0082;">Matchplay</button>
-            <button onclick="showPage('stable')" style="background:#ff8c00;">Stableford</button>
-            <button onclick="showPage('owgr')" style="background:#222222;">LST OWGR</button>
+    <div class="container" id="main-area">
+        <div class="nav-wrapper">
+            <div class="nav-menu">
+                <button onclick="showPage('home')" style="background:#555;">Home</button>
+                <button onclick="showPage('emerald')" style="background:#004d00;">Emerald Tour</button>
+                <button onclick="showPage('grip')" style="background:#b30000;">Grip & Rip</button>
+                <button onclick="showPage('links')" style="background:#003366;">Linksland</button>
+                <button onclick="showPage('match')" style="background:#4b0082;">Matchplay</button>
+                <button onclick="showPage('stable')" style="background:#ff8c00;">Stableford</button>
+                <button onclick="showPage('owgr')" style="background:#222222;">LST OWGR</button>
+            </div>
+            <a id="leaderboard-link" target="_blank"></a>
         </div>
-        <a id="leaderboard-link" target="_blank"></a>
-    </div>
 
-    <div id="home" class="page-content active">
-        <img src="logo.png" class="main-logo" alt="LST Logo">
-        <div class="card">
-            <h1>LST Legends Sim Tours</h1>
-            <p>Welcome to Legend Sim Tours (LST) Stock 74, we have a few different societies in here, they are all using the stock 74 golfer.</p><p> Whats a stock 74 golfer I hear you ask,</p><p> The greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74,</p><p> No more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller,</p><p> We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love whats provided for the great community of Legend true simmers we have here.</p><p> Each society offers something different, formats, scoring, bonus points etc.</p><p> Above is a link to each, just click on the link per society to give you an overview of what each society can offer, links to current tournaments and past seasons. Just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out.</p><p> Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
-            <img src="settings.png" class="settings-image" alt="Master Settings">
+        <div id="home" class="page-content active">
+            <img src="logo.png" class="main-logo" alt="LST Logo">
+            <div class="card">
+                <h1>LST Legends Sim Tours</h1>
+                <p>Welcome to Legend Sim Tours (LST) Stock 74, we have a few different societies in here, they are all using the stock 74 golfer.</p>
+                <p> Whats a stock 74 golfer I hear you ask,</p>
+                <p> The greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74,</p>
+                <p> No more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller,</p>
+                <p> We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love whats provided for the great community of Legend true simmers we have here.</p>
+                <p> Each society offers something different, formats, scoring, bonus points etc.</p>
+                <p> Above is a link to each, just click on the link per society to give you an overview of what each society can offer, links to current tournaments and past seasons. Just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out.</p>
+                <p> Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
+                <img src="settings.png" class="settings-image" alt="Master Settings">
+            </div>
+        </div>
+
+        <div id="tour-view" class="page-content">
+            <div id="title-container"></div>
+            <div id="video-gallery-card" class="card" style="display:none; padding: 15px 10px;">
+                <h2 style="margin-left: 10px;">Tournament Highlights</h2>
+
+                <div class="video-carousel-container">
+                    <button class="nav-arrow left" onclick="scrollCarousel(-1)">&#10094;</button>
+                    <div id="video-list"></div>
+                    <button class="nav-arrow right" onclick="scrollCarousel(1)">&#10095;</button>
+                </div>
+            </div>
+            <div id="archive-container"></div>
         </div>
     </div>
 
-    <div id="tour-view" class="page-content">
-        <div id="title-container"></div>
-        <div id="video-gallery-card" class="card" style="display:none; padding: 15px 10px;">
-    <h2 style="margin-left: 10px;">Tournament Highlights</h2>
-    
-    <div class="video-carousel-container">
-        <button class="nav-arrow left" onclick="scrollCarousel(-1)">&#10094;</button>
-        <div id="video-list"></div>
-        <button class="nav-arrow right" onclick="scrollCarousel(1)">&#10095;</button>
-    </div>
-</div>
-        <div id="archive-container"></div>
-    </div>
-</div>
-
-<a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float">
-    <i class="fab fa-discord"></i>
-</a>
+    <a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float">
+        <i class="fab fa-discord"></i>
+    </a>
 
 </body>
+
 </html>
