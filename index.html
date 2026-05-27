@@ -477,32 +477,35 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
             display: block;
         }
 
-        /* DISCORD FLOAT */
-        .discord-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background-color: #5865F2;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            z-index: 1000;
-            text-decoration: none;
-            transition: transform 0.2s;
-        }
+        .social-group {
+			position: fixed;
+			bottom: 25px;
+			right: 25px;
+			display: flex;
+			flex-direction: column;
+			gap: 15px; /* Space between Twitch and Discord */
+			z-index: 1000;
+		}
 
-        .discord-float:hover {
-            transform: scale(1.1);
-        }
+		.social-float {
+			width: 60px;
+			height: 60px;
+			color: white;
+			border-radius: 50%;
+			display: flex; 
+			align-items: center; 
+			justify-content: center; 
+			box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+			text-decoration: none; 
+			transition: transform 0.2s;
+		}
 
-        .discord-float i {
-            font-size: 30px;
-        }
+		.social-float:hover { transform: scale(1.1); }
+		.social-float i { font-size: 30px; }
+
+		/* BRAND COLORS */
+		.twitch { background-color: #9146FF; }
+		.discord { background-color: #5865F2; }
 
         .history-header {
             background: #333;
@@ -615,6 +618,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                 <p> Each society offers something different, formats, scoring, bonus points etc.</p>
                 <p> Above is a link to each, just click on the link per society to give you an overview of what each society can offer, links to current tournaments and past seasons. Just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out.</p>
                 <p> Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
+				<p> Click the Social links to join our Discord and watch Mr Longpole aka 'Tugga Myshaft' and his faithful caddy Leroy on Twitch.
                 <img src="settings.png" class="settings-image" alt="Master Settings">
             </div>
         </div>
@@ -634,9 +638,14 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
         </div>
     </div>
 
-    <a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="discord-float">
+    <div class="social-group">
+    <a href="https://www.twitch.tv/longp0le" target="_blank" class="social-float twitch">
+        <i class="fab fa-twitch"></i>
+    </a>
+    <a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="social-float discord">
         <i class="fab fa-discord"></i>
     </a>
+</div>
 
 </body>
 
