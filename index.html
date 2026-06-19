@@ -38,6 +38,10 @@
                 logo: "gripnriplogo.png",
                 shade: "#ba1919",
                 settingsImage: "gripnripsettings.png",
+				archive: [
+					{ name: "Season 6", url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/" },
+					{ name: "Season 5", url: "https://geordieboy85.github.io/GripRipRebirth74Leaderboards/" },
+				],
                 videos: [
 					{file: "x3noluck.mp4", title: "x3 no luck Friday 😢😢"},
 					{file: "Rendalliodart.mp4", title: "Rendallio dart at Kincruan"},
@@ -72,13 +76,12 @@
                 description: `LST Matchplay Championship. Season 3 is now live!`,
                 archive: [
 						{name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/"},
-						{name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/"
-                    }
+						{name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/"}
                 ],
                 settingsImage: "matchplaysettings.png",
                 videos: [
-				{file: "bartbirdie.mp4", title: "Bart's birdie from 50ft at Devils's Pulpit"},
-				{file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace"}
+					{file: "bartbirdie.mp4", title: "Bart's birdie from 50ft at Devils's Pulpit"},
+					{file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace"}
 				]
             },
             stable: {
@@ -92,6 +95,7 @@
 					{ name: "Season 1", url: "https://lst-2k.github.io/stableford/" }
 				],
                 videos: [
+					{file: "x3pinstrike.mp4", title: "x3 pin strike at Shinnecock Hills"},
 					{file: "Davinahio.mp4", title: "Davina Hole in One at Charli's Park"},
 					{file: "collyeagle.mp4", title: "Colly eagles 18 at Duna de Costa Sul"},
 					{file: "Geordieboyclose1.mp4", title: "Geordieboy close but.....😬"},
@@ -260,6 +264,19 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                 behavior: 'smooth'
             });
         }
+		
+		function toggleTwitchMenu(event) {
+			// Prevents page jump or unintended interactions
+			event.stopPropagation(); 
+			const container = document.querySelector('.twitch-menu-container');
+			container.classList.toggle('active');
+		}
+
+		// Close the menu automatically if the user clicks anywhere else on the screen
+		document.addEventListener('click', () => {
+			const container = document.querySelector('.twitch-menu-container');
+			if (container) container.classList.remove('active');
+		});
 
         window.onload = () => showPage('home');
         // ENABLE DRAG-TO-SCROLL FOR DESKTOP
@@ -464,6 +481,53 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
         .page-content.active {
             display: block;
         }
+		
+		/* TWITCH DROPDOWN MENU */
+		.twitch-menu-container {
+			position: relative;
+			display: flex;
+			align-items: center;
+		}
+
+		.twitch-dropdown {
+			position: absolute;
+			right: 75px; /* Pushes the menu to the left of the floating button */
+			background: #1f1f23; /* Dark Twitch-style background */
+			border-radius: 8px;
+			padding: 6px;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateX(10px);
+			transition: all 0.3s ease;
+			min-width: 130px;
+		}
+
+		/* Show menu on Desktop Hover OR when Active class is toggled */
+		.twitch-menu-container:hover .twitch-dropdown,
+		.twitch-menu-container.active .twitch-dropdown {
+			opacity: 1;
+			visibility: visible;
+			transform: translateX(0);
+		}
+
+		.twitch-dropdown a {
+			color: white;
+			text-decoration: none;
+			padding: 10px 14px;
+			font-size: 0.9rem;
+			font-weight: bold;
+			border-radius: 4px;
+			transition: background 0.2s;
+			white-space: nowrap;
+		}
+
+		.twitch-dropdown a:hover {
+			background: #9146FF; /* Turns purple when highlighted */
+		}
 
         .social-group {
 			position: fixed;
@@ -626,10 +690,22 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
         </div>
     </div>
 
-    <div class="social-group">
-    <a href="https://www.twitch.tv/longp0le" target="_blank" class="social-float twitch">
-        <i class="fab fa-twitch"></i>
-    </a>
+ <!-- SOCIAL FLOATING BUTTONS -->
+<div class="social-group">
+    <!-- MULTI-ACCOUNT TWITCH MENU -->
+    <div class="twitch-menu-container">
+        <div class="twitch-dropdown">
+            <a href="https://www.twitch.tv/longp0le" target="_blank">longp0le 🎥</a>
+            <a href="https://www.twitch.tv/horusphoenix97" target="_blank">horusphoenix97 ⛳</a>
+            <a href="https://www.twitch.tv/jackmac21ttv" target="_blank">jackmac21ttv 🎮</a>
+			<a href="https://www.twitch.tv/arfabubble" target="_blank">arfabubble 🏌🏻</a>
+        </div>
+        <button class="social-float twitch" onclick="toggleTwitchMenu(event)">
+            <i class="fab fa-twitch"></i>
+        </button>
+    </div>
+
+    <!-- DISCORD BUTTON -->
     <a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="social-float discord">
         <i class="fab fa-discord"></i>
     </a>
