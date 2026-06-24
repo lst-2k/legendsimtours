@@ -67,22 +67,23 @@
 						{file: "x3ace.mp4", title: "x3 Aces the 5th" }
 				]
 			},
-            match: {
+            match: { 
                 name: "Matchplay",
                 url: "https://lst-2k.github.io/matchplayseason3/",
                 logo: "matchplaylogo.png",
-				btnText: "Current Tournament",
-                shade: "#5d198e",
+                shade: "#4b0082",
                 description: `LST Matchplay Championship. Season 3 is now live!`,
+                btnText: "Current Singles Tournament", // Clarified the first button text
+                url2: "https://lst-2k.github.io/matchplaypairs/",     // NEW LINK
+                btnText2: "Current Pairs Tournament",                  // NEW BUTTON TEXT
                 archive: [
-						{name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/"},
-						{name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/"}
+                    { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
+                    { name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/" }
                 ],
                 settingsImage: "matchplaysettings.png",
                 videos: [
-					{file: "bartbirdie.mp4", title: "Bart's birdie from 50ft at Devils's Pulpit"},
-					{file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace"}
-				]
+                    {file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace" }
+                ]
             },
             stable: {
                 name: "Stableford",
@@ -157,22 +158,36 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
 
             document.getElementById('body-main').style.backgroundColor = data.shade;
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-
+            
             const linkBtn = document.getElementById('leaderboard-link');
+            const linkBtn2 = document.getElementById('leaderboard-link-2'); // Fetch second button
 
             if (id === 'home') {
                 document.getElementById('home').classList.add('active');
                 if (linkBtn) linkBtn.style.display = 'none';
+                if (linkBtn2) linkBtn2.style.display = 'none'; // Hide on home page
             } else {
                 const view = document.getElementById('tour-view');
                 const titleContainer = document.getElementById('title-container');
                 const videoGalleryCard = document.getElementById('video-gallery-card');
                 const videoList = document.getElementById('video-list');
-
+                
+                // Handle Main Button
                 if (linkBtn) {
                     linkBtn.href = data.url;
                     linkBtn.innerText = "🏆 " + (data.btnText || "Current Leaderboard");
                     linkBtn.style.display = 'block';
+                }
+
+                // Handle Optional Second Button (Like Matchplay Pairs)
+                if (linkBtn2) {
+                    if (data.url2) {
+                        linkBtn2.href = data.url2;
+                        linkBtn2.innerText = "🏆 " + (data.btnText2 || "Alternative Standings");
+                        linkBtn2.style.display = 'block';
+                    } else {
+                        linkBtn2.style.display = 'none'; // Hide on pages that don't need it
+                    }
                 }
 
                 const oldDesc = document.getElementById('dynamic-description');
@@ -353,20 +368,19 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
             background: #333;
         }
 
-        #leaderboard-link {
-            display: none;
-            width: 100%;
-            background: white;
-            color: #333 !important;
-            padding: 15px;
+        /* BUTTON CONTAINER & STYLES */
+        .leaderboard-btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Space between the two buttons */
             margin-bottom: 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
+        }
+
+        #leaderboard-link, #leaderboard-link-2 {
+            display: none; width: 100%; background: white; color: #333 !important; 
+            padding: 15px; border-radius: 8px; text-decoration: none;
+            text-align: center; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 2px solid rgba(0,0,0,0.1); box-sizing: border-box;
         }
 
         /* CARD STYLES */
@@ -655,7 +669,12 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                 <button onclick="showPage('stable')" style="background:#ff8c00;">Stableford</button>
                 <button onclick="showPage('owgr')" style="background:#222222;">LST OWGR</button>
             </div>
-            <a id="leaderboard-link" target="_blank"></a>
+            </div>
+				<div class="leaderboard-btn-container">
+					<a id="leaderboard-link" target="_blank"></a>
+					<a id="leaderboard-link-2" target="_blank" style="display: none;"></a>
+				</div>
+			</div>
         </div>
 
         <div id="home" class="page-content active">
@@ -670,7 +689,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                 <p> Each society offers something different, formats, scoring, bonus points etc.</p>
                 <p> Above is a link to each, just click on the link per society to give you an overview of what each society can offer, links to current tournaments and past seasons. Just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out.</p>
                 <p> Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
-				<p> Click the Social links to join our Discord and watch Mr Longpole aka 'Tugga Myshaft' and his faithful caddy Leroy on Twitch.
+				<p> Click the Social links to join our Discord or watch our regular streamers, including Mr Longpole aka 'Tugga Myshaft' and his faithful caddy Leroy on Twitch.
                 <img src="settings.png" class="settings-image" alt="Master Settings">
             </div>
         </div>
