@@ -654,6 +654,14 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
             scroll-behavior: smooth;
             /* Smooth sliding animation */
         }
+		
+		/* TEMPORARILY HIDE STABLEFORD & OWGR NAV BUTTONS */
+		button[onclick*="stable" i],
+		button[onclick*="owgr" i],
+		.nav-item[onclick*="stable" i],
+		.nav-item[onclick*="owgr" i] {
+			display: none !important;
+		}
     </style>
 </head>
 
