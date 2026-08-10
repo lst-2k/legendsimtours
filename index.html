@@ -34,7 +34,7 @@
             },
             grip: {
                 name: "Grip & Rip",
-                url: "https://geordieboy85.github.io/GripRipRebirth74Leaderboards/",
+                url: "https://geordieboy85.github.io/GripRipSupermanLeaderboards/",
                 logo: "gripnriplogo.png",
                 shade: "#ba1919",
                 settingsImage: "gripnripsettings.png",
@@ -142,17 +142,21 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
             }
         };
 
-        function toggleHistory(header) {
-            const content = header.nextElementSibling;
-            header.classList.toggle('active');
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-                content.style.padding = "0 20px";
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-                content.style.padding = "20px";
-            }
-        }
+        function toggleHistory() {
+			// Looks for .history-content inside the current active card
+			const archiveBox = document.querySelector('.page-content.active .history-content');
+			
+			if (!archiveBox) return;
+
+			archiveBox.classList.toggle('active');
+
+			// Auto-scrolls screen slightly if opened so buttons aren't hidden off-screen
+			if (archiveBox.classList.contains('active')) {
+				setTimeout(() => {
+					archiveBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+				}, 150);
+			}
+		}
 
         function showPage(id) {
             const data = tours[id];
@@ -393,6 +397,8 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
             color: #333;
+            height: auto !important; /* Allows card to expand when archive opens */
+            overflow: visible !important;
         }
 
         #home .card {
@@ -587,9 +593,15 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
         .history-content {
             max-height: 0;
             overflow: hidden;
-            transition: all 0.3s ease-out;
+            transition: max-height 0.4s ease-in-out;
             background: #eee;
             border-radius: 0 0 8px 8px;
+        }
+
+        /* EXPANDS THE ACCORDION SMOOTHLY */
+        .history-content.active {
+            max-height: 300px !important; /* Expands box to fit seasons */
+            padding-bottom: 10px;
         }
 
         .archive-sub-btn {
@@ -741,7 +753,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
     </div>
 
     <!-- DISCORD BUTTON -->
-    <a href="https://discord.gg/HxGJk9HRC3" target="_blank" class="social-float discord">
+    <a href="https://discord.gg/6KNf6xt3v" target="_blank" class="social-float discord">
         <i class="fab fa-discord"></i>
     </a>
 </div>
