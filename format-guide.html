@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LST Challenge Trophy — Format Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:     #0B1F0E;
+  --mid:     #1A3D1E;
+  --fairway: #2E6B3E;
+  --gold:    #C9A227;
+  --gold2:   #E8C35A;
+  --cream:   #F7F4EC;
+  --muted:   #9A8C70;
+  --blue:    #3B6EA5;
+  --blue2:   #5A96D4;
+  --card1:   #122818;
+  --card2:   #0F2035;
+}
+
+body {
+  background: var(--ink);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: var(--cream);
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND ── */
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(46,107,62,0.35) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201,162,39,0.08) 0%, transparent 60%),
+    #0B1F0E;
+  pointer-events: none;
+}
+
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(46,107,62,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,107,62,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+/* ── GRASS SVG ── */
+.grass-wrap {
+  position: relative; width: 100%; height: 80px; overflow: hidden; z-index: 1;
+}
+
+.grass-wrap svg { width: 100%; height: 100%; }
+
+/* ── POSTER WRAPPER ── */
+.poster {
+  position: relative; z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 48px 20px 24px;
+}
+
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 14px;
+  opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 7vw, 64px);
+  font-weight: 900; line-height: 1.05;
+  color: var(--cream);
+  text-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  opacity: 0; animation: fadeUp 0.7s ease forwards 0.25s;
+}
+
+.hero-title em {
+  font-style: italic; color: var(--gold);
+  display: block;
+}
+
+.hero-sub {
+  margin-top: 16px; font-size: 15px; color: var(--muted);
+  max-width: 480px; margin-inline: auto; line-height: 1.6;
+  opacity: 0; animation: fadeUp 0.6s ease forwards 0.5s;
+}
+
+.hero-divider {
+  display: flex; align-items: center; gap: 12px;
+  max-width: 400px; margin: 28px auto 0;
+  opacity: 0; animation: fadeUp 0.6s ease forwards 0.7s;
+}
+.hero-divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+.hero-divider-gem {
+  width: 10px; height: 10px; background: var(--gold);
+  transform: rotate(45deg); flex-shrink: 0;
+  animation: gemPulse 2s ease-in-out infinite;
+}
+@keyframes gemPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(201,162,39,0); }
+}
+
+/* ── MATCHPLAY PILL ── */
+.matchplay-strip {
+  display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+  margin: 24px 0 40px;
+  opacity: 0; animation: fadeUp 0.6s ease forwards 0.85s;
+}
+.mp-pill {
+  padding: 5px 14px; border-radius: 999px; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid;
+}
+.mp-pill-gold { background: rgba(201,162,39,0.15); border-color: var(--gold); color: var(--gold2); }
+.mp-pill-green { background: rgba(46,107,62,0.25); border-color: var(--fairway); color: #7ECB8F; }
+.mp-pill-blue  { background: rgba(59,110,165,0.2); border-color: var(--blue); color: var(--blue2); }
+
+/* ── FORMAT CARDS ── */
+.cards { display: flex; flex-direction: column; gap: 28px; }
+
+.format-card {
+  position: relative; overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 32px 32px 28px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.format-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+}
+.format-card.visible {
+  animation: cardIn 0.7s ease forwards;
+}
+
+.card-alt     { background: linear-gradient(135deg, #122818 0%, #0F2820 100%); }
+.card-bb      { background: linear-gradient(135deg, #1C2810 0%, #1A2808 100%); }
+.card-singles { background: linear-gradient(135deg, #0F1D2E 0%, #0D1826 100%); }
+
+/* Ghost number */
+.card-ghost {
+  position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(100px, 18vw, 160px); font-weight: 900;
+  line-height: 1; pointer-events: none;
+  opacity: 0.04; color: #fff;
+  user-select: none;
+}
+
+/* Hole grid */
+.hole-grid {
+  display: flex; gap: 4px; flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.hole-dot {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+  color: rgba(255,255,255,0.25);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.hole-dot.lit-gold  { background: rgba(201,162,39,0.3); border-color: var(--gold); color: var(--gold2); }
+.hole-dot.lit-green { background: rgba(46,107,62,0.4);  border-color: #5DBF78; color: #8EE0A2; }
+.hole-dot.lit-blue  { background: rgba(59,110,165,0.3); border-color: var(--blue2); color: #9DC8F0; }
+.hole-dot.lit-half  { background: rgba(154,140,112,0.3); border-color: var(--muted); color: #C8BFA9; }
+
+/* Card content */
+.card-inner { position: relative; z-index: 1; }
+
+.card-header {
+  display: flex; align-items: flex-start; gap: 16px;
+  margin-bottom: 20px;
+}
+
+.card-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; flex-shrink: 0;
+}
+.icon-alt     { background: rgba(201,162,39,0.15); }
+.icon-bb      { background: rgba(46,107,62,0.25); }
+.icon-singles { background: rgba(59,110,165,0.2); }
+
+.card-title-wrap { flex: 1; }
+.card-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 4vw, 32px); font-weight: 700; line-height: 1.1;
+}
+.card-alt .card-title     { color: var(--gold2); }
+.card-bb .card-title      { color: #8EE0A2; }
+.card-singles .card-title { color: var(--blue2); }
+
+.card-hook {
+  font-size: 15px; font-style: italic; color: var(--muted);
+  margin-bottom: 20px; line-height: 1.5;
+  border-left: 2px solid rgba(255,255,255,0.1);
+  padding-left: 14px;
+}
+
+.rules { display: flex; flex-direction: column; gap: 10px; }
+.rule {
+  display: flex; gap: 12px; align-items: flex-start;
+  font-size: 14px; line-height: 1.5;
+}
+.rule-icon {
+  width: 26px; height: 26px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0; margin-top: 1px;
+}
+.rule-alt     .rule-icon { background: rgba(201,162,39,0.15); }
+.rule-bb      .rule-icon { background: rgba(46,107,62,0.2); }
+.rule-singles .rule-icon { background: rgba(59,110,165,0.15); }
+.rule-text strong { display: block; font-weight: 600; color: var(--cream); font-size: 13px; }
+.rule-text span   { color: var(--muted); font-size: 13px; }
+
+.card-footer {
+  margin-top: 22px; padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px;
+}
+.footer-badge {
+  padding: 4px 12px; border-radius: 999px; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.badge-alt     { background: rgba(201,162,39,0.2); color: var(--gold2); }
+.badge-bb      { background: rgba(46,107,62,0.3);  color: #8EE0A2; }
+.badge-singles { background: rgba(59,110,165,0.25); color: var(--blue2); }
+.footer-text   { color: var(--muted); }
+
+/* ── SCORING NOTE ── */
+.scoring-note {
+  margin-top: 40px; text-align: center;
+  background: rgba(201,162,39,0.07);
+  border: 1px solid rgba(201,162,39,0.2);
+  border-radius: 16px; padding: 28px 32px;
+  opacity: 0; animation: fadeUp 0.7s ease forwards 1.4s;
+}
+.scoring-note h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: var(--gold); margin-bottom: 12px;
+}
+.scoring-note p { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 560px; margin: 0 auto; }
+.points-row { display: flex; justify-content: center; gap: 32px; margin-top: 18px; flex-wrap: wrap; }
+.point-item { text-align: center; }
+.point-val  {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 32px; font-weight: 700; color: var(--gold); line-height: 1;
+}
+.point-label { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* ── FOOTER ── */
+.poster-footer {
+  text-align: center; margin-top: 48px;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(154,140,112,0.5);
+  opacity: 0; animation: fadeUp 0.6s ease forwards 1.6s;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── GRASS ANIMATION ── */
+.grass-blade {
+  animation: sway var(--sw, 2.5s) ease-in-out infinite var(--sd, 0s);
+  transform-origin: bottom center;
+}
+@keyframes sway {
+  0%,100% { transform: rotate(var(--r1, -3deg)); }
+  50%      { transform: rotate(var(--r2, 3deg)); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .format-card { padding: 22px 18px 20px; }
+  .card-ghost  { font-size: 100px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="bg-grid"></div>
+
+<div class="poster">
+
+  <!-- Hero -->
+  <div class="hero">
+    <p class="hero-eyebrow">Legend Sim Tours Challenge Trophy</p>
+    <h1 class="hero-title">
+      Know the<br><em>Formats</em>
+    </h1>
+    <p class="hero-sub">Three distinct matchplay formats. One trophy. Every hole counts — understand the game before you tee it up.</p>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <div class="hero-divider-gem"></div>
+      <div class="hero-divider-line"></div>
+    </div>
+  </div>
+
+  <div class="matchplay-strip">
+    <span class="mp-pill mp-pill-gold">⛳ Alternate Hole</span>
+    <span class="mp-pill mp-pill-green">🏌️ 4 Ball Better Ball</span>
+    <span class="mp-pill mp-pill-blue">🎯 Singles</span>
+  </div>
+
+  <!-- Animated grass strip -->
+  <div class="grass-wrap">
+    <svg viewBox="0 0 860 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="860" height="80" fill="#122818"/>
+      <!-- Mowing stripes -->
+      <rect x="0"   y="0" width="86" height="80" fill="#142E1A" opacity="0.6"/>
+      <rect x="86"  y="0" width="86" height="80" fill="#112416" opacity="0.6"/>
+      <rect x="172" y="0" width="86" height="80" fill="#142E1A" opacity="0.6"/>
+      <rect x="258" y="0" width="86" height="80" fill="#112416" opacity="0.6"/>
+      <rect x="344" y="0" width="86" height="80" fill="#142E1A" opacity="0.6"/>
+      <rect x="430" y="0" width="86" height="80" fill="#112416" opacity="0.6"/>
+      <rect x="516" y="0" width="86" height="80" fill="#142E1A" opacity="0.6"/>
+      <rect x="602" y="0" width="86" height="80" fill="#112416" opacity="0.6"/>
+      <rect x="688" y="0" width="86" height="80" fill="#142E1A" opacity="0.6"/>
+      <rect x="774" y="0" width="86" height="80" fill="#112416" opacity="0.6"/>
+      <!-- Grass blades -->
+      <g id="grass-blades"></g>
+      <!-- Flagsticks -->
+      <line x1="180" y1="0" x2="180" y2="75" stroke="#5A4E38" stroke-width="1.5" opacity="0.8"/>
+      <path class="grass-blade" style="--sw:3s;--sd:0s;--r1:-5deg;--r2:5deg" d="M180 18 L192 4 L182 18" fill="#C9A227" opacity="0.9"/>
+      <line x1="520" y1="0" x2="520" y2="75" stroke="#5A4E38" stroke-width="1.5" opacity="0.8"/>
+      <path class="grass-blade" style="--sw:2.8s;--sd:0.4s;--r1:-4deg;--r2:6deg" d="M520 20 L508 6 L518 20" fill="#2E6B3E" opacity="0.9"/>
+      <line x1="760" y1="0" x2="760" y2="75" stroke="#5A4E38" stroke-width="1.5" opacity="0.8"/>
+      <path class="grass-blade" style="--sw:3.2s;--sd:0.8s;--r1:-6deg;--r2:4deg" d="M760 16 L772 3 L762 16" fill="#3B6EA5" opacity="0.9"/>
+      <!-- Grass tuft shapes -->
+      <path class="grass-blade" style="--sw:2.2s;--sd:0.1s;--r1:-4deg;--r2:5deg" d="M40 80 Q44 55 48 80" stroke="#1F5C2A" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2.5s;--sd:0.3s;--r1:-5deg;--r2:3deg" d="M46 80 Q51 48 56 80" stroke="#1A5224" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2s;--sd:0.6s;--r1:-3deg;--r2:6deg" d="M52 80 Q56 60 60 80" stroke="#1F5C2A" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2.7s;--sd:0.2s;--r1:-4deg;--r2:4deg" d="M200 80 Q204 52 208 80" stroke="#1F5C2A" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2.3s;--sd:0.5s;--r1:-5deg;--r2:3deg" d="M206 80 Q211 44 216 80" stroke="#1A5224" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2.6s;--sd:0.7s;--r1:-3deg;--r2:5deg" d="M390 80 Q394 58 398 80" stroke="#1F5C2A" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2.1s;--sd:0.9s;--r1:-4deg;--r2:4deg" d="M396 80 Q400 46 404 80" stroke="#1A5224" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2.4s;--sd:0.15s;--r1:-5deg;--r2:6deg" d="M600 80 Q604 54 608 80" stroke="#1F5C2A" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2.8s;--sd:0.45s;--r1:-3deg;--r2:5deg" d="M606 80 Q610 50 614 80" stroke="#1A5224" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2.2s;--sd:0.65s;--r1:-4deg;--r2:3deg" d="M800 80 Q804 56 808 80" stroke="#1F5C2A" stroke-width="2" fill="none"/>
+      <path class="grass-blade" style="--sw:2.6s;--sd:0.85s;--r1:-5deg;--r2:4deg" d="M806 80 Q810 48 814 80" stroke="#1A5224" stroke-width="2" fill="none"/>
+      <!-- Horizon fade -->
+      <rect width="860" height="12" fill="url(#fadeTop)"/>
+      <defs>
+        <linearGradient id="fadeTop" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0B1F0E"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Format Cards -->
+  <div class="cards">
+
+    <!-- ALTERNATE HOLE -->
+    <div class="format-card card-alt" data-delay="0">
+      <div class="card-ghost">1</div>
+      <div class="card-inner">
+        <div class="hole-grid" id="grid-alt"></div>
+        <div class="card-header">
+          <div class="card-icon icon-alt">⛳</div>
+          <div class="card-title-wrap">
+            <div class="card-tag">Format 01 · Pairs</div>
+            <div class="card-title">Alternate Hole</div>
+          </div>
+        </div>
+        <p class="card-hook">"Two players, one mission — you cover the odds, I'll take the evens."</p>
+        <div class="rules">
+          <div class="rule rule-alt">
+            <div class="rule-icon">🔄</div>
+            <div class="rule-text">
+              <strong>Split the course</strong>
+              <span>Player 1 plays all odd holes (1, 3, 5 … 17). Player 2 plays all even holes (2, 4, 6 … 18). Each plays exactly 9 holes. Players are then reversed evens become odds, odds become evens, 1 week, 1 card, 2 results.</span>
+            </div>
+          </div>
+          <div class="rule rule-alt">
+            <div class="rule-icon">🏆</div>
+            <div class="rule-text">
+              <strong>One ball, one result</strong>
+              <span>Only the designated player's score counts on their holes. Lower gross score wins the hole for the team.</span>
+            </div>
+          </div>
+          <div class="rule rule-alt">
+            <div class="rule-icon">🤝</div>
+            <div class="rule-text">
+              <strong>Team identity</strong>
+              <span>The pair's combined performance determines the match result — communication and course management are everything.</span>
+            </div>
+          </div>
+          <div class="rule rule-alt">
+            <div class="rule-icon">⚡</div>
+            <div class="rule-text">
+              <strong>Captains pick pairings</strong>
+              <span>Each week, captains choose who pairs with whom. Strong on odds + strong on evens = a formidable combination.</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="footer-badge badge-alt">Matchplay scoring</span>
+          <span class="footer-text">Win a hole: +1 · Halve: 0 · Lose: -1 · Most holes wins the match</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 BALL BETTER BALL -->
+    <div class="format-card card-bb" data-delay="200">
+      <div class="card-ghost">2</div>
+      <div class="card-inner">
+        <div class="hole-grid" id="grid-bb"></div>
+        <div class="card-header">
+          <div class="card-icon icon-bb">🏌️</div>
+          <div class="card-title-wrap">
+            <div class="card-tag">Format 02 · Pairs</div>
+            <div class="card-title">4 Ball Better Ball</div>
+          </div>
+        </div>
+        <p class="card-hook">"All four of us tee off — but only the best score on each side counts."</p>
+        <div class="rules">
+          <div class="rule rule-bb">
+            <div class="rule-icon">🎯</div>
+            <div class="rule-text">
+              <strong>Everyone plays every hole</strong>
+              <span>All four players (two per team) play their own ball on every hole across all 18. No splitting — full rounds for everyone.</span>
+            </div>
+          </div>
+          <div class="rule rule-bb">
+            <div class="rule-icon">⭐</div>
+            <div class="rule-text">
+              <strong>Best ball wins the hole</strong>
+              <span>Each team takes their lower score on the hole. Team A's best vs Team B's best — lowest gross wins it.</span>
+            </div>
+          </div>
+          <div class="rule rule-bb">
+            <div class="rule-icon">🛡️</div>
+            <div class="rule-text">
+              <strong>Safety net format</strong>
+              <span>One bad hole doesn't sink the ship — your partner can bail you out. Encourages bold play since you have backup.</span>
+            </div>
+          </div>
+          <div class="rule rule-bb">
+            <div class="rule-icon">🔥</div>
+            <div class="rule-text">
+              <strong>Hot streaks win matches</strong>
+              <span>If either player in a pair catches fire, the team benefits. One exceptional round can carry a match single-handedly.</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="footer-badge badge-bb">Matchplay scoring</span>
+          <span class="footer-text">Win a hole: +1 · Halve: 0 · Lose: -1 · Most holes wins the match</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SINGLES -->
+    <div class="format-card card-singles" data-delay="400">
+      <div class="card-ghost">3</div>
+      <div class="card-inner">
+        <div class="hole-grid" id="grid-singles"></div>
+        <div class="card-header">
+          <div class="card-icon icon-singles">🎯</div>
+          <div class="card-title-wrap">
+            <div class="card-tag">Format 03 · 1v1</div>
+            <div class="card-title">Singles</div>
+          </div>
+        </div>
+        <p class="card-hook">"No partner to lean on. Just you, your opponent, and 18 holes."</p>
+        <div class="rules">
+          <div class="rule rule-singles">
+            <div class="rule-icon">👤</div>
+            <div class="rule-text">
+              <strong>One vs one, pure and simple</strong>
+              <span>Individual players go head to head. Each player plays their own ball for all 18 holes — no pairs, no backup.</span>
+            </div>
+          </div>
+          <div class="rule rule-singles">
+            <div class="rule-icon">🕳️</div>
+            <div class="rule-text">
+              <strong>Hole by hole battle</strong>
+              <span>Lower gross score on each hole wins it. Tie the hole, it's halved. The player who wins more holes wins the match.</span>
+            </div>
+          </div>
+          <div class="rule rule-singles">
+            <div class="rule-icon">📊</div>
+            <div class="rule-text">
+              <strong>Double the matches</strong>
+              <span>In a singles week, each team fields one player per slot — so an 8-person squad produces 8 individual matches that week.</span>
+            </div>
+          </div>
+          <div class="rule rule-singles">
+            <div class="rule-icon">🧠</div>
+            <div class="rule-text">
+              <strong>Mental strength tested</strong>
+              <span>There is nowhere to hide. Course management, composure under pressure, and consistency over 18 holes define who wins.</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="footer-badge badge-singles">Matchplay scoring</span>
+          <span class="footer-text">Win a hole: +1 · Halve: 0 · Lose: -1 · Most holes wins the match</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cards -->
+
+  <!-- Scoring summary -->
+  <div class="scoring-note">
+    <h3>🏆 How points are awarded</h3>
+    <p>Every match result earns tournament points for the winning team. Matches are decided by holes won — not by total strokes.</p>
+    <div class="points-row">
+      <div class="point-item">
+        <div class="point-val">2</div>
+        <div class="point-label">Points · Win</div>
+      </div>
+      <div class="point-item">
+        <div class="point-val" style="color:var(--muted)">1</div>
+        <div class="point-label">Point · Halved</div>
+      </div>
+      <div class="point-item">
+        <div class="point-val" style="color:#444;font-size:28px">0</div>
+        <div class="point-label">Points · Loss</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="poster-footer">Legend Sim Tours Challenge Trophy &nbsp;·&nbsp; Official Format Guide</p>
+
+</div><!-- /poster -->
+
+<script>
+// ── HOLE GRIDS ──
+// Build miniature 18-hole grids for each card
+function buildGrid(containerId) {
+  const el = document.getElementById(containerId);
+  for (let h = 1; h <= 18; h++) {
+    const d = document.createElement('div');
+    d.className = 'hole-dot';
+    d.textContent = h;
+    d.id = `${containerId}-h${h}`;
+    el.appendChild(d);
+  }
+}
+buildGrid('grid-alt');
+buildGrid('grid-bb');
+buildGrid('grid-singles');
+
+// ── ANIMATE HOLE GRIDS ──
+// Alternate hole: odd=gold, even=green, animates sequentially
+function animateAlt() {
+  let h = 1;
+  function step() {
+    if (h > 18) { setTimeout(resetAlt, 1800); return; }
+    const dot = document.getElementById(`grid-alt-h${h}`);
+    if (dot) dot.classList.add(h % 2 === 1 ? 'lit-gold' : 'lit-green');
+    h++;
+    setTimeout(step, 160);
+  }
+  step();
+}
+function resetAlt() {
+  for (let h = 1; h <= 18; h++) {
+    const d = document.getElementById(`grid-alt-h${h}`);
+    if (d) d.className = 'hole-dot';
+  }
+  setTimeout(animateAlt, 600);
+}
+
+// Better ball: both light up on each hole (winner picks team colour), sequentially
+const bbSeq = ['lit-gold','lit-green','lit-green','lit-gold','lit-half','lit-green','lit-gold','lit-gold','lit-green','lit-green','lit-gold','lit-green','lit-half','lit-gold','lit-green','lit-gold','lit-green','lit-gold'];
+function animateBB() {
+  let h = 1;
+  function step() {
+    if (h > 18) { setTimeout(resetBB, 1800); return; }
+    const dot = document.getElementById(`grid-bb-h${h}`);
+    if (dot) dot.classList.add(bbSeq[h-1]);
+    h++;
+    setTimeout(step, 160);
+  }
+  step();
+}
+function resetBB() {
+  for (let h = 1; h <= 18; h++) {
+    const d = document.getElementById(`grid-bb-h${h}`);
+    if (d) d.className = 'hole-dot';
+  }
+  setTimeout(animateBB, 600);
+}
+
+// Singles: blue vs gold alternating winner
+const singlesSeq = ['lit-blue','lit-gold','lit-blue','lit-blue','lit-gold','lit-half','lit-blue','lit-gold','lit-gold','lit-blue','lit-gold','lit-blue','lit-half','lit-gold','lit-blue','lit-gold','lit-blue','lit-gold'];
+function animateSingles() {
+  let h = 1;
+  function step() {
+    if (h > 18) { setTimeout(resetSingles, 1800); return; }
+    const dot = document.getElementById(`grid-singles-h${h}`);
+    if (dot) dot.classList.add(singlesSeq[h-1]);
+    h++;
+    setTimeout(step, 160);
+  }
+  step();
+}
+function resetSingles() {
+  for (let h = 1; h <= 18; h++) {
+    const d = document.getElementById(`grid-singles-h${h}`);
+    if (d) d.className = 'hole-dot';
+  }
+  setTimeout(animateSingles, 600);
+}
+
+// ── SCROLL-TRIGGERED CARD REVEAL ──
+const cards = document.querySelectorAll('.format-card');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseInt(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+cards.forEach(c => observer.observe(c));
+
+// ── STAGGER GRID ANIMATIONS ──
+// Start each card's hole animation with a delay
+setTimeout(animateAlt, 800);
+setTimeout(animateBB, 1200);
+setTimeout(animateSingles, 1600);
+</script>
+</body>
+</html>
