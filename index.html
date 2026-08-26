@@ -69,38 +69,24 @@
 				]
 			},
             match: { 
-                name: "Matchplay",
-                url: "https://lst-2k.github.io/matchplayseason3/",
-                logo: "matchplaylogo.png",
-                shade: "#4b0082",
-                description: `LST Matchplay Championship. Season 3 is now live!`,
-                btnText: "Current Singles Tournament", // Clarified the first button text
-                url2: "https://lst-2k.github.io/matchplaypairs/",     // NEW LINK
-                btnText2: "The LST74 Challenge Trophy..coming soon...", // NEW BUTTON TEXT
-                archive: [
-					{ name: "Season 3", url: "https://lst-2k.github.io/matchplayseason3/" },
-                    { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
-                    { name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/" }
-                ],
-				<!-- MATCHPLAY PAGE SECTION -->
-<div id="match" class="page-content">
-    <div class="card">
-        <h1>Matchplay Championship</h1>
-        
-        <!-- EMBEDDED FORMAT GUIDE -->
-        <div style="width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-            <iframe src="format-guide.html" style="width: 100%; height: 750px; border: none; display: block;"></iframe>
-        </div>
-
-        <!-- YOUR MATCHPLAY SETTINGS IMAGE -->
-        <img src="matchplaysettings.png" class="settings-image" alt="Master Settings">
-    </div>
-</div>
-                settingsImage: "matchplaysettings.png",
-                videos: [
-                    {file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace" }
-                ]
-            },
+            name: "Matchplay",
+            url: "https://lst-2k.github.io/matchplayseason3/",
+            logo: "matchplaylogo.png",
+            shade: "#4b0082",
+            description: `LST Matchplay Championship. Season 3 is now live!`,
+            btnText: "Current Singles Tournament",
+            url2: "https://lst-2k.github.io/matchplaypairs/",
+            btnText2: "The LST74 Challenge Trophy..coming soon...",
+            archive: [
+                { name: "Season 3", url: "https://lst-2k.github.io/matchplayseason3/" },
+                { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
+                { name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/" }
+            ],
+            settingsImage: "matchplaysettings.png",
+            videos: [
+                {file: "daveagle.mp4", title: "Davina eagles 15 at Indian Trace" }
+            ]
+        },
             stable: {
                 name: "Stableford",
                 url: "https://lst-2k.github.io/stablefordseason2/",
@@ -737,6 +723,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
 
         <div id="tour-view" class="page-content">
             <div id="title-container"></div>
+            
             <div id="video-gallery-card" class="card" style="display:none; padding: 15px 10px;">
                 <h2 style="margin-left: 10px;">Tournament Highlights</h2>
 
@@ -746,9 +733,14 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                     <button class="nav-arrow right" onclick="scrollCarousel(1)">&#10095;</button>
                 </div>
             </div>
+
+            <!-- MATCHPLAY FORMAT GUIDE IFRAME (Controlled by JS) -->
+            <div id="format-guide-wrapper" style="display: none; width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                <iframe src="format-guide.html" style="width: 100%; height: 750px; border: none; display: block;"></iframe>
+            </div>
+
             <div id="archive-container"></div>
         </div>
-    </div>
 
  <!-- SOCIAL FLOATING BUTTONS -->
 <div class="social-group">
