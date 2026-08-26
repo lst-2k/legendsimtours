@@ -159,120 +159,105 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
 		}
 
         function showPage(id) {
-            const data = tours[id];
-            if (!data) return;
+    const data = tours[id];
+    
+    // Hide all pages
+    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+    
+    // Fetch dynamic UI elements
+    const body = document.getElementById('body-main');
+    const linkBtn = document.getElementById('leaderboard-link');
+    const linkBtn2 = document.getElementById('leaderboard-link-2');
+    const formatGuide = document.getElementById('format-guide-wrapper');
+    const videoGalleryCard = document.getElementById('video-gallery-card');
+    const archiveContainer = document.getElementById('archive-container');
 
-            document.getElementById('body-main').style.backgroundColor = data.shade;
-            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            
-            const linkBtn = document.getElementById('leaderboard-link');
-            const linkBtn2 = document.getElementById('leaderboard-link-2'); // Fetch second button
+    if (id === 'home') {
+        // HOME PAGE LOGIC
+        document.getElementById('home').classList.add('active');
+        body.style.backgroundColor = '#1e1e1e'; // Default dark neutral background
+        
+        // Hide tour-specific elements
+        if (linkBtn) linkBtn.style.display = 'none';
+        if (linkBtn2) linkBtn2.style.display = 'none';
+        if (formatGuide) formatGuide.style.display = 'none';
+    } else if (data) {
+        // TOUR VIEW LOGIC
+        const tourView = document.getElementById('tour-view');
+        tourView.classList.add('active');
+        body.style.backgroundColor = data.shade;
 
-            if (id === 'home') {
-                document.getElementById('home').classList.add('active');
-                if (linkBtn) linkBtn.style.display = 'none';
-                if (linkBtn2) linkBtn2.style.display = 'none'; // Hide on home page
+        // 1. Render Title, Logo, & Description Card
+        const titleContainer = document.getElementById('title-container');
+        titleContainer.innerHTML = `
+            <div class="card">
+                <img class="tour-logo-header" src="${data.logo}" alt="${data.name} Logo">
+                <h1>${data.name}</h1>
+                <p class="description-text">${data.description}</p>
+            </div>
+        `;
+
+        // 2. Handle Primary Leaderboard Button
+        if (linkBtn) {
+            linkBtn.href = data.url;
+            linkBtn.innerText = "🏆 " + (data.btnText || "Current Leaderboard");
+            linkBtn.style.display = 'block';
+        }
+
+        // 3. Handle Secondary Button (Matchplay Pairs / Alternative Standings)
+        if (linkBtn2) {
+            if (data.url2) {
+                linkBtn2.href = data.url2;
+                linkBtn2.innerText = "🏆 " + (data.btnText2 || "Alternative Standings");
+                linkBtn2.style.display = 'block';
             } else {
-                const view = document.getElementById('tour-view');
-                const titleContainer = document.getElementById('title-container');
-                const videoGalleryCard = document.getElementById('video-gallery-card');
-                const videoList = document.getElementById('video-list');
-                
-                // Handle Main Button
-                if (linkBtn) {
-                    linkBtn.href = data.url;
-                    linkBtn.innerText = "🏆 " + (data.btnText || "Current Leaderboard");
-                    linkBtn.style.display = 'block';
-                }
-
-                // Handle Optional Second Button (Like Matchplay Pairs)
-                if (linkBtn2) {
-                    if (data.url2) {
-                        linkBtn2.href = data.url2;
-                        linkBtn2.innerText = "🏆 " + (data.btnText2 || "Alternative Standings");
-                        linkBtn2.style.display = 'block';
-                    } else {
-                        linkBtn2.style.display = 'none'; // Hide on pages that don't need it
-                    }
-                }
-
-                const oldDesc = document.getElementById('dynamic-description');
-                if (oldDesc) oldDesc.remove();
-
-                titleContainer.innerHTML = data.logo ?
-                    `<img src="${data.logo}?v=${APP_VERSION}" class="tour-logo-header">` :
-                    `<h1>${data.name}</h1>`;
-
-                if (data.description || data.settingsImage) {
-                    const descCard = document.createElement('div');
-                    descCard.id = 'dynamic-description';
-                    descCard.className = 'card crimson-style';
-                    let html = "";
-                    if (data.settingsImage) html += `<img src="${data.settingsImage}?v=${APP_VERSION}" class="settings-image">`;
-                    if (data.description) html += `<div class="description-text">${data.description}</div>`;
-                    descCard.innerHTML = html;
-                    titleContainer.after(descCard);
-                }
-
-                // Video Carousel Logic
-                if (videoList) {
-                    videoList.innerHTML = '';
-                    const oldDots = videoGalleryCard.querySelector('.video-dots');
-                    if (oldDots) oldDots.remove();
-
-                    if (data.videos && data.videos.length > 0) {
-                        const dotsContainer = document.createElement('div');
-                        dotsContainer.className = 'video-dots';
-
-                        data.videos.forEach((vid, index) => {
-                            videoList.innerHTML += `
-                                <div class="video-item">
-                                    <video controls preload="metadata"><source src="${vid.file}" type="video/mp4"></video>
-                                    <h3 style="text-align:center; font-size:0.9rem; margin-top:8px;">${vid.title}</h3>
-                                </div>`;
-                            const dot = document.createElement('div');
-                            dot.className = `dot ${index === 0 ? 'active' : ''}`;
-                            dotsContainer.appendChild(dot);
-                        });
-
-                        videoGalleryCard.appendChild(dotsContainer);
-                        videoGalleryCard.style.display = 'block';
-
-                        videoList.onscroll = () => {
-                            const index = Math.round(videoList.scrollLeft / videoList.offsetWidth);
-                            const allDots = dotsContainer.querySelectorAll('.dot');
-                            allDots.forEach((d, i) => d.classList.toggle('active', i === index));
-                        };
-                    } else {
-                        videoGalleryCard.style.display = 'none';
-                    }
-                }
-
-                let arcCont = document.getElementById('archive-container');
-                if (!arcCont) {
-                    arcCont = document.createElement('div');
-                    arcCont.id = 'archive-container';
-                    view.appendChild(arcCont);
-                }
-                arcCont.innerHTML = '';
-                if (data.archive) {
-                    const h = document.createElement('div');
-                    h.className = 'history-header';
-                    h.innerHTML = '<h3>Tournament Archives</h3>';
-                    h.onclick = function() {
-                        toggleHistory(this);
-                    };
-                    const b = document.createElement('div');
-                    b.className = 'history-content';
-                    data.archive.forEach(item => {
-                        b.innerHTML += `<a href="${item.url}" target="_blank" class="archive-sub-btn">${item.name}</a>`;
-                    });
-                    arcCont.appendChild(h);
-                    arcCont.appendChild(b);
-                }
-                view.classList.add('active');
+                linkBtn2.style.display = 'none';
             }
         }
+
+        // 4. Toggle Matchplay Format Guide
+        if (formatGuide) {
+            formatGuide.style.display = (id === 'match') ? 'block' : 'none';
+        }
+
+        // 5. Render Video Highlights Gallery (if available)
+        if (data.videos && data.videos.length > 0) {
+            const videoList = document.getElementById('video-list');
+            videoList.innerHTML = data.videos.map(v => `
+                <div class="video-item">
+                    <video controls preload="metadata">
+                        <source src="${v.file}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <h3>${v.title}</h3>
+                </div>
+            `).join('');
+            videoGalleryCard.style.display = 'block';
+        } else {
+            videoGalleryCard.style.display = 'none';
+        }
+
+        // 6. Render Tournament Archive Accordion (if available)
+        if (data.archive && data.archive.length > 0) {
+            archiveContainer.innerHTML = `
+                <div class="card">
+                    <div class="history-header" onclick="toggleHistory()">
+                        📅 Tournament Archive (Click to Expand)
+                    </div>
+                    <div class="history-content">
+                        ${data.archive.map(season => `
+                            <a class="archive-sub-btn" href="${season.url}" target="_blank">
+                                🏆 ${season.name}
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        } else {
+            archiveContainer.innerHTML = '';
+        }
+    }
+}
 
         function scrollCarousel(direction) {
             const slider = document.getElementById('video-list');
