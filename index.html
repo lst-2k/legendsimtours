@@ -186,18 +186,16 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
         tourView.classList.add('active');
         body.style.backgroundColor = data.shade;
 
-        // 1. Render Title, Logo, Description Card, & Settings HTML Embed
+        // 1. Render Title, Logo, Description Card, & Tour Settings Image
         const titleContainer = document.getElementById('title-container');
         titleContainer.innerHTML = `
             <div class="card">
                 <img class="tour-logo-header" src="${data.logo}" alt="${data.name} Logo">
                 <h1>${data.name}</h1>
                 <p class="description-text">${data.description}</p>
-            </div>
-
-            <!-- DYNAMIC SETTINGS HTML POSTER EMBED -->
-            <div style="width: 100%; border-radius: 20px; overflow: hidden; margin-top: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
-                <iframe src="settings.html" style="width: 100%; height: 950px; border: none; display: block; background: #0B1A0D;"></iframe>
+                
+                <!-- MOUNT TOUR-SPECIFIC SETTINGS PNG -->
+                ${data.settingsImage ? `<img src="${data.settingsImage}" class="settings-image" alt="${data.name} Settings">` : ''}
             </div>
         `;
 
@@ -701,9 +699,10 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                 <p> Above is a link to each, just click on the link per society to give you an overview of what each society can offer, links to current tournaments and past seasons. Just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out.</p>
                 <p> Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
 				<p> Click the Social links to join our Discord or watch our regular streamers, including Mr Longpole aka 'Tugga Myshaft' and his faithful caddy Leroy on Twitch.
+                <!-- ANIMATED SETTINGS HTML (HOME PAGE ONLY) -->
                 <div style="width: 100%; border-radius: 20px; overflow: hidden; margin-top: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
-					<iframe src="settings.html" style="width: 100%; height: 950px; border: none; display: block; background: #0B1A0D;"></iframe>
-				</div>
+                    <iframe src="settings.html" style="width: 100%; height: 950px; border: none; display: block; background: #0B1A0D;"></iframe>
+                </div>
             </div>
         </div>
 				<div style="text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee;">
