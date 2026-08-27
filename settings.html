@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LST Settings — PGA 2K25</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:   #C9A227;
+  --gold2:  #E8C35A;
+  --cream:  #F2EDD8;
+  --green:  #2E6B3E;
+  --dark:   #0B1A0D;
+  --mid:    #142A18;
+  --on:     #7ECB8F;
+  --off:    #E07070;
+  --sim:    #E8C35A;
+  --other:  #8BBFE8;
+  --muted:  #8A9E8C;
+}
+
+body {
+  background: var(--dark);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 48px;
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND ── */
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(46,107,62,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 40% at 20% 100%, rgba(201,162,39,0.1) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 80% 80%, rgba(11,26,13,0.8) 0%, transparent 60%),
+    #0B1A0D;
+}
+
+/* Subtle grid */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(46,107,62,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,107,62,0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Noise texture overlay */
+.bg-noise {
+  position: fixed; inset: 0; z-index: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ── POSTER ── */
+.poster {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 560px;
+}
+
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  padding: 0 0 32px;
+}
+
+.header-eyebrow {
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 16px;
+  opacity: 0; animation: fadeIn 0.6s ease forwards 0.1s;
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+}
+.eyebrow-line { flex: 1; max-width: 60px; height: 1px; background: rgba(201,162,39,0.4); }
+
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 10vw, 58px);
+  font-weight: 900; line-height: 1.05;
+  color: var(--cream);
+  text-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 60px rgba(46,107,62,0.3);
+  opacity: 0; animation: slideDown 0.7s ease forwards 0.3s;
+}
+.header-title span { color: var(--gold); }
+
+.header-sub {
+  margin-top: 10px; font-size: 13px; letter-spacing: 0.08em;
+  color: var(--muted); text-transform: uppercase; font-weight: 600;
+  opacity: 0; animation: fadeIn 0.6s ease forwards 0.6s;
+}
+
+/* Animated divider */
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 22px auto 0; max-width: 320px;
+  opacity: 0; animation: fadeIn 0.6s ease forwards 0.8s;
+}
+.div-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201,162,39,0.5), transparent); }
+.div-gem {
+  width: 8px; height: 8px; background: var(--gold);
+  transform: rotate(45deg);
+  animation: pulse 2.5s ease-in-out infinite 1s;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.5); }
+  50%      { box-shadow: 0 0 0 10px rgba(201,162,39,0); }
+}
+
+/* ── SETTINGS TABLE ── */
+.settings-card {
+  background: rgba(20,42,24,0.7);
+  border: 1px solid rgba(201,162,39,0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 32px 80px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.settings-header-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 22px 12px;
+  background: rgba(201,162,39,0.08);
+  border-bottom: 1px solid rgba(201,162,39,0.15);
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 700; color: rgba(201,162,39,0.6);
+  opacity: 0; animation: fadeIn 0.5s ease forwards 1s;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: background 0.2s ease;
+}
+.setting-row:last-child { border-bottom: none; }
+.setting-row:hover { background: rgba(255,255,255,0.03); }
+
+.setting-row.revealed {
+  animation: slideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.setting-name {
+  font-size: 14px; font-weight: 500; color: var(--cream);
+  letter-spacing: 0.01em;
+  flex: 1;
+}
+
+.setting-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 700;
+  padding: 4px 12px; border-radius: 999px;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.val-on      { color: var(--on);    background: rgba(126,203,143,0.12); }
+.val-off     { color: var(--off);   background: rgba(224,112,112,0.12); }
+.val-gold    { color: var(--gold2); background: rgba(201,162,39,0.12); }
+.val-other   { color: var(--other); background: rgba(139,191,232,0.12); }
+.val-sim     { color: var(--sim);   background: rgba(232,195,90,0.12); }
+.val-num     { color: #fff;         background: rgba(255,255,255,0.08); }
+
+/* Row separator every 6 rows */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,162,39,0.2), transparent);
+  opacity: 0; animation: fadeIn 0.5s ease forwards;
+}
+
+/* ── FOOTER ── */
+.footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px 16px;
+  background: rgba(0,0,0,0.25);
+  border-top: 1px solid rgba(201,162,39,0.12);
+  opacity: 0;
+}
+.footer-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); font-weight: 600;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 900;
+  color: var(--gold2); letter-spacing: 0.04em;
+}
+.footer-logo span { color: #E03030; }
+
+/* Golf ball */
+.ball {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, #fff 0%, #d8d8d8 60%, #b0b0b0 100%);
+  box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.4);
+  position: relative;
+  animation: ballSpin 6s linear infinite;
+}
+.ball::before {
+  content: '';
+  position: absolute; inset: 3px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+@keyframes ballSpin {
+  0%   { box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.4), 0 0 0 0 rgba(255,255,255,0.1); }
+  50%  { box-shadow: inset 3px 3px 6px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.4), 0 0 12px 2px rgba(255,255,255,0.08); }
+  100% { box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.4), 0 0 0 0 rgba(255,255,255,0.1); }
+}
+
+/* ── POSTER FOOTER ── */
+.poster-foot {
+  text-align: center; margin-top: 20px;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(138,158,140,0.4);
+  opacity: 0; animation: fadeIn 0.6s ease forwards;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .setting-row, .header-title, .header-eyebrow, .header-sub { animation: none; opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="bg-grid"></div>
+<div class="bg-noise"></div>
+
+<div class="poster">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-eyebrow">
+      <div class="eyebrow-line"></div>
+      PGA Tour 2K25
+      <div class="eyebrow-line"></div>
+    </div>
+    <h1 class="header-title">Legend Sim Tour<br><span>(LST) Settings</span></h1>
+    <p class="header-sub">Official competition settings for all matches</p>
+    <div class="divider">
+      <div class="div-line"></div>
+      <div class="div-gem"></div>
+      <div class="div-line"></div>
+    </div>
+  </div>
+
+  <!-- Settings card -->
+  <div class="settings-card">
+
+    <div class="settings-header-row">
+      <span>Setting</span>
+      <span>Value</span>
+    </div>
+
+    <div id="settings-list"></div>
+
+    <div class="footer" id="card-footer">
+      <div class="footer-badge">LST74 Inaugural<br>Challenge Trophy</div>
+      <div class="footer-logo">2K<span>25</span></div>
+      <div class="ball"></div>
+    </div>
+
+  </div>
+
+  <p class="poster-foot" id="poster-foot">Legend Sim Tours &nbsp;·&nbsp; Competition Settings Reference</p>
+
+</div>
+
+<script>
+const settings = [
+  { name: 'Difficulty',                value: '1.72',       cls: 'val-num' },
+  { name: 'Swing',                     value: 'Legend',     cls: 'val-gold' },
+  { name: 'Rhythm Preference',         value: 'On',         cls: 'val-on' },
+  { name: 'Swing Bias Input Offset',   value: 'On',         cls: 'val-on' },
+  { name: 'Swing Context Input Offset', value: 'On',        cls: 'val-on' },
+  { name: 'Vibration',                 value: 'Off',        cls: 'val-off' },
+  { name: 'Lie Range',                 value: 'Simulation', cls: 'val-sim' },
+  { name: 'Distance Control Assist',   value: 'Off',        cls: 'val-off' },
+  { name: 'Putt Preview',              value: '0',          cls: 'val-num' },
+  { name: 'Course Yardage',            value: 'Book Only',  cls: 'val-other' },
+  { name: 'Pro Vision',                value: 'All Off',    cls: 'val-off' },
+  { name: 'Scout Camera',              value: 'Off',        cls: 'val-off' },
+  { name: 'Shot Feedback',             value: 'Off',        cls: 'val-off' },
+  { name: 'Lie & Green Grid',          value: 'Off',        cls: 'val-off' },
+  { name: 'Pin Preference',            value: 'Open',       cls: 'val-other' },
+  { name: 'Aim Marker',                value: 'Off',        cls: 'val-off' },
+  { name: 'Wind Display',              value: 'Meter Only', cls: 'val-other' },
+  { name: 'Swing',                     value: 'Stick Only', cls: 'val-other' },
+];
+
+// Build rows
+const list = document.getElementById('settings-list');
+settings.forEach((s, i) => {
+  // Section divider every 6 rows
+  if (i === 6 || i === 12) {
+    const div = document.createElement('div');
+    div.className = 'section-divider';
+    list.appendChild(div);
+  }
+  const row = document.createElement('div');
+  row.className = 'setting-row';
+  row.innerHTML = `
+    <span class="setting-name">${s.name}</span>
+    <span class="setting-value ${s.cls}">${s.value}</span>
+  `;
+  list.appendChild(row);
+});
+
+// Staggered reveal — one row at a time sliding up from below
+const rows = document.querySelectorAll('.setting-row');
+const footer = document.getElementById('card-footer');
+const posterFoot = document.getElementById('poster-foot');
+
+// Base delay after page load
+const BASE_DELAY = 1100; // ms before first row
+const ROW_INTERVAL = 100; // ms between each row
+
+rows.forEach((row, i) => {
+  setTimeout(() => {
+    row.classList.add('revealed');
+  }, BASE_DELAY + i * ROW_INTERVAL);
+});
+
+// Footer appears after all rows
+const footerDelay = BASE_DELAY + rows.length * ROW_INTERVAL + 200;
+setTimeout(() => {
+  footer.style.animation = 'fadeIn 0.6s ease forwards';
+  footer.style.opacity = '0';
+  footer.style.animationFillMode = 'forwards';
+  footer.offsetHeight; // trigger reflow
+  footer.style.animation = 'fadeIn 0.6s ease forwards';
+}, footerDelay);
+
+setTimeout(() => {
+  posterFoot.style.animationDelay = '0s';
+  posterFoot.style.animation = 'fadeIn 0.6s ease forwards';
+}, footerDelay + 300);
+
+// Auto-replay the animation on click
+document.querySelector('.poster').addEventListener('click', () => {
+  rows.forEach(row => {
+    row.classList.remove('revealed');
+    row.style.opacity = '0';
+    row.style.transform = 'translateY(28px)';
+  });
+  footer.style.opacity = '0';
+  posterFoot.style.opacity = '0';
+
+  rows.forEach((row, i) => {
+    setTimeout(() => {
+      row.style.transform = '';
+      row.classList.add('revealed');
+    }, 200 + i * ROW_INTERVAL);
+  });
+  setTimeout(() => { footer.style.animation = 'none'; footer.offsetHeight; footer.style.animation = 'fadeIn 0.6s ease forwards'; }, 200 + rows.length * ROW_INTERVAL + 200);
+  setTimeout(() => { posterFoot.style.animation = 'none'; posterFoot.offsetHeight; posterFoot.style.animation = 'fadeIn 0.6s ease forwards'; }, 200 + rows.length * ROW_INTERVAL + 500);
+});
+</script>
+</body>
+</html>
