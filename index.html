@@ -186,13 +186,16 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
         tourView.classList.add('active');
         body.style.backgroundColor = data.shade;
 
-        // 1. Render Title, Logo, & Description Card
+        // 1. Render Title, Logo, Description Card, & Settings Image
         const titleContainer = document.getElementById('title-container');
         titleContainer.innerHTML = `
             <div class="card">
                 <img class="tour-logo-header" src="${data.logo}" alt="${data.name} Logo">
                 <h1>${data.name}</h1>
                 <p class="description-text">${data.description}</p>
+                
+                <!-- DISPLAYS THE TOUR SETTINGS IMAGE DYNAMICALLY -->
+                ${data.settingsImage ? `<img src="${data.settingsImage}" class="settings-image" alt="${data.name} Settings">` : ''}
             </div>
         `;
 
