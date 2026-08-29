@@ -76,7 +76,7 @@
             description: `LST Matchplay Championship. Season 3 has now concluded, Congratulations to WingisBack, overcoming a resiliant Rendallio 1Up at Merion East !`,
             btnText: "Current Singles Tournament",
             url2: "https://lst-2k.github.io/matchplaypairs/",
-            btnText2: "The LST74 Challenge Trophy..coming soon...",
+            btnText2: "The LST74 Challenge Trophy..is here!!...",
             archive: [
                 { name: "Season 3", url: "https://lst-2k.github.io/matchplayseason3/" },
                 { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
@@ -180,6 +180,11 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
         if (linkBtn) linkBtn.style.display = 'none';
         if (linkBtn2) linkBtn2.style.display = 'none';
         if (formatGuide) formatGuide.style.display = 'none';
+		const homeIframe = document.getElementById('home-settings-iframe');
+        if (homeIframe) {
+            // Appending a timestamp forces the browser to reload and rerun the JS animation sequence
+            homeIframe.src = "settings.html?t=" + new Date().getTime();
+        }
     } else if (data) {
         // TOUR VIEW LOGIC
         const tourView = document.getElementById('tour-view');
@@ -701,8 +706,8 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
 				<p> Click the Social links to join our Discord or watch our regular streamers, including Mr Longpole aka 'Tugga Myshaft' and his faithful caddy Leroy on Twitch.
                 <!-- ANIMATED SETTINGS HTML (HOME PAGE ONLY) -->
                 <div style="width: 100%; border-radius: 20px; overflow: hidden; margin-top: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
-                    <iframe src="settings.html" style="width: 100%; height: 950px; border: none; display: block; background: #0B1A0D;"></iframe>
-                </div>
+					<iframe id="home-settings-iframe" src="settings.html" style="width: 100%; height: 950px; border: none; display: block; background: #0B1A0D;"></iframe>
+				</div>
             </div>
         </div>
 				<div style="text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee;">
