@@ -33,7 +33,7 @@
 				]
             },
             grip: {
-                name: "Grip & Rip",
+                name: "LST Grip & Rip Superman",
                 url: "https://geordieboy85.github.io/GripRipSupermanLeaderboards/",
                 logo: "gripnriplogo.png",
                 shade: "#ba1919",
@@ -52,7 +52,7 @@
                 ]
             },
             links: { 
-				name: "Linksland",
+				name: "LST 74 Linksland",
 				url: "https://lst-2k.github.io/linkslandseason5/",
 				logo: "linkslandlogo.png",
 				shade: "#194775",
@@ -71,14 +71,14 @@
 				]
 			},
             match: { 
-            name: "Matchplay",
+            name: "LST 74 Matchplay",
             url: "https://lst-2k.github.io/matchplayseason3/",
             logo: "matchplaylogo.png",
             shade: "#4b0082",
             description: `LST Matchplay Championship. Season 3 has now concluded, Congratulations to WingisBack, overcoming a resiliant Rendallio 1Up at Merion East !`,
             btnText: "Current Singles Tournament",
             url2: "https://lst-2k.github.io/matchplaypairs/",
-            btnText2: "The LST74 Challenge Trophy..is here!!...",
+            btnText2: "The LST74 Challenge Cup..is here!!...",
             archive: [
                 { name: "Season 3", url: "https://lst-2k.github.io/matchplayseason3/" },
                 { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
@@ -196,13 +196,15 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
         // 1. Render Title, Logo, Description Card, & Tour Settings Image
         const titleContainer = document.getElementById('title-container');
         titleContainer.innerHTML = `
-            <div class="card">
-                <img class="tour-logo-header" src="${data.logo}" alt="${data.name} Logo">
+            <div class="card" style="text-align: center;">
+                <img class="tour-logo-header" src="${data.logo || ''}" alt="${data.name} Logo" style="margin: 0 auto 15px; display: block;">
                 <h1>${data.name}</h1>
-                <p class="description-text">${data.description}</p>
                 
-                <!-- MOUNT TOUR-SPECIFIC SETTINGS PNG -->
-                ${data.settingsImage ? `<img src="${data.settingsImage}" class="settings-image" alt="${data.name} Settings">` : ''}
+                <!-- Center description text -->
+                ${data.description ? `<p class="description-text" style="text-align: center; max-width: 700px; margin: 0 auto 20px;">${data.description}</p>` : ''}
+                
+                <!-- Tour Settings Image -->
+                ${data.settingsImage ? `<img src="${data.settingsImage}" class="settings-image" alt="${data.name} Settings" style="margin: 20px auto 0; display: block;">` : ''}
             </div>
         `;
 
