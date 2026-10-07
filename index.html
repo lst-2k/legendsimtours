@@ -1,768 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LST Legends Sim Tours</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <script>
-        const APP_VERSION = '1.2.01';
-
-        const tours = {
-            home: {
-                shade: "#8F8F8F"
-            },
-            emerald: {
-                name: "Emerald Tour",
-                url: "https://lst-2k.github.io/newemeraldtourseason3/",
-                logo: "emeraldlogo.png",
-                shade: "#195e19",
-                settingsImage: "emeraldsettings.png",
-                description: `NEW EMERALD TOUR - SEASON 3\n\nJoin the excitement in our 12-week season featuring 3 signature events\n\nand\n\nEnd of Season Tour Championship.`,
-				archive: [
-					{ name: "Season 2", url: "https://lst-2k.github.io/newemeraldtourseason2/" },
-					{ name: "Season 1", url: "https://lst-2k.github.io/new-emerald-tour/" }
-				],
-                videos: [
-                        {file: "geordieboypar4.mp4", title: "Geordieboy drives the par 4 at Olympic"},
-						{file: "tuggadart.mp4", title: "Tugga dart at Olympic"},
-						{file: "rendallio2.mp4", title: "Rendallio opens with an Eagle at North Beach" }
-				]
-            },
-            grip: {
-                name: "LST Grip & Rip Superman",
-                url: "https://geordieboy85.github.io/GripRipSupermanLeaderboards/",
-                logo: "gripnriplogo.png",
-                shade: "#ba1919",
-				description: "Official Grip & Rip Tour settings and info.",
-                settingsImage: "gripnripsettings.png",
-				archive: [
-					{ name: "Season 6", url: "https://geordieboy85.github.io/GripRipRebirth74LeaderboardS6/" },
-				],
-                videos: [
-					{file: "wackerholeout.mp4", title: "WaCkErGuY holes out at Wallara Heath"},
-					{file: "x3noluck.mp4", title: "x3 no luck Friday 😢😢"},
-					{file: "Rendalliodart.mp4", title: "Rendallio dart at Kincruan"},
-                    {file: "rendeagle.mp4", title: "Rendallio Eagle at Chubby Pines"},
-                    {file: "collysand.mp4", title: "Colly from the sand"},
-                    {file: "tuggacelebration.mp4", title: "Tugga's Big Fish moment 🎣"}
-                ]
-            },
-            links: { 
-				name: "LST 74 Linksland",
-				url: "https://lst-2k.github.io/linkslandseason5/",
-				logo: "linkslandlogo.png",
-				shade: "#194775",
-				description: "Welcome to the Linksland Championship.",
-				settingsImage: "linkslandsettings.png",
-				archive: [
-					{ name: "Season 4", url: "https://lst-2k.github.io/linkslandseason4/" },
-					{ name: "Season 3", url: "https://lst-2k.github.io/linkslandseason3/" },
-					{ name: "Season 2", url: "https://lst-2k.github.io/linkslandseason2/" },
-					{ name: "Season 1", url: "https://lst-2k.github.io/linkslandseason1/" }
-				],
-				videos: [
-						{file: "davinayips.mp4", title: "Touch of the 'yips' for Davina..😬" },
-						{file: "geordieclose.mp4", title: "Geordie Close ...again" },
-						{file: "x3ace.mp4", title: "x3 Aces the 5th" }
-				]
-			},
-            match: { 
-            name: "LST 74 Matchplay",
-            url: "https://lst-2k.github.io/matchplayseason3/",
-            logo: "matchplaylogo.png",
-            shade: "#4b0082",
-            description: `LST Matchplay Championship. Season 3 has now concluded, Congratulations to WingisBack, overcoming a resiliant Rendallio 1Up at Merion East !`,
-            btnText: "Singles Tournament Season 3",
-            url2: "https://lst-2k.github.io/matchplaypairs/",
-            btnText2: "The LST74 Challenge Cup..is here!!...",
-            archive: [
-                { name: "Season 3", url: "https://lst-2k.github.io/matchplayseason3/" },
-                { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
-                { name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/" }
-            ],
-            settingsImage: "matchplaysettings.png",
-            videos: [
-            ]
-        },
-            stable: {
-                name: "Stableford",
-                url: "https://lst-2k.github.io/stablefordseason2/",
-                logo: "stablefordlogo.png",
-				btnText: "Current Tournament",
-                shade: "#ff9719",
-                settingsImage: "stablefordsettings.png",
-				archive: [
-					{ name: "Season 1", url: "https://lst-2k.github.io/stableford/" }
-				],
-                videos: [
-					{file: "x3pinstrike.mp4", title: "x3 pin strike at Shinnecock Hills"},
-					{file: "Davinahio.mp4", title: "Davina Hole in One at Charli's Park"},
-					{file: "collyeagle.mp4", title: "Colly eagles 18 at Duna de Costa Sul"},
-					{file: "Geordieboyclose1.mp4", title: "Geordieboy close but.....😬"},
-                    {file: "tenbobace.mp4", title: "Tenbobnote ace in West Australia"}
-				]
-            },
-            owgr: {
-                name: "LST OWGR",
-                url: "https://lst-2k.github.io/lst-owgr/",
-                logo: "owgr.png",
-                btnText: "View Full Rankings",
-                shade: "#383838 ",
-                description: `LST-2k25 Official World Golf Rankings are LIVE!
-				
-				Ladies and Gentlemen, the hunt for World Number One is officially on. 
-
-LST -OWGR has had a major overhaul so from now on we are moving to a Rolling 50-Event Weighted Ranking System.
-Here is how you earn your spot at the top:
-📊 The 2kOWGR Formula
-Your rank is based on efficiency and consistency, not just showing up.
-• The Rolling 50: We only count your last 50 events. Old baggage eventually falls off the map—staying at the top requires current form.
-• The Minimum Divisor (20): To prevent "one-hit wonders" from sitting at #1, your total points are divided by a minimum of 20.
-• Commissioner's Note: If you've played 5 events, your total is divided by 20. Once you hit 21 events, your real average takes over. The more you play, the easier it is to climb.
-🏆 The Points Structure
-Every standard event pays out as follows:
-• 1st: 150 pts | 2nd: 130 pts | 3rd: 110 pts
-• 4th–12th: 90, 80, 70, 60, 50, 40, 30, 20, 10
-• 13th–16th: 10 pts
-• All other finishers: 5 pts
-⚡ Field & Event Multipliers
-• 💎 Signature Events: Points are DOUBLED (1st place = 300 pts).
-• 👥 Small Fields: If the field is less than 10 players, points are reduced by 50% (1st place = 75 pts).
-🟢 The Movement Arrows
-Every week, I will "Finalize the Standings" and update the ‘live link’
-• ▲ Green: You outpaced the field this week.
-• ▼ Red: You're sliding—time to hit the range.
-• ● Grey: Position maintained.
-
-Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added backtick and comma
-                videos: []
-            }
-        };
-
-        function toggleHistory() {
-			// Looks for .history-content inside the current active card
-			const archiveBox = document.querySelector('.page-content.active .history-content');
-			
-			if (!archiveBox) return;
-
-			archiveBox.classList.toggle('active');
-
-			// Auto-scrolls screen slightly if opened so buttons aren't hidden off-screen
-			if (archiveBox.classList.contains('active')) {
-				setTimeout(() => {
-					archiveBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-				}, 150);
-			}
-		}
-
-        function showPage(id) {
-    const data = tours[id];
-    
-    // Hide all pages
-    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-    
-    // Fetch dynamic UI elements
-    const body = document.getElementById('body-main');
-    const linkBtn = document.getElementById('leaderboard-link');
-    const linkBtn2 = document.getElementById('leaderboard-link-2');
-    const formatGuide = document.getElementById('format-guide-wrapper');
-    const videoGalleryCard = document.getElementById('video-gallery-card');
-    const archiveContainer = document.getElementById('archive-container');
-
-    if (id === 'home') {
-        // HOME PAGE LOGIC
-        document.getElementById('home').classList.add('active');
-        body.style.backgroundColor = '#1e1e1e'; // Default dark neutral background
-        
-        // Hide tour-specific elements
-        if (linkBtn) linkBtn.style.display = 'none';
-        if (linkBtn2) linkBtn2.style.display = 'none';
-        if (formatGuide) formatGuide.style.display = 'none';
-		const homeIframe = document.getElementById('home-settings-iframe');
-        if (homeIframe) {
-            // Appending a timestamp forces the browser to reload and rerun the JS animation sequence
-            homeIframe.src = "settings.html?t=" + new Date().getTime();
-        }
-    } else if (data) {
-        // TOUR VIEW LOGIC
-        const tourView = document.getElementById('tour-view');
-        tourView.classList.add('active');
-        body.style.backgroundColor = data.shade;
-
-        // 1. Render Title, Logo, Description Card, & Tour Settings Image
-        const titleContainer = document.getElementById('title-container');
-        titleContainer.innerHTML = `
-            <div class="card" style="text-align: center;">
-                <img class="tour-logo-header" src="${data.logo || ''}" alt="${data.name} Logo" style="margin: 0 auto 15px; display: block;">
-                <h1>${data.name}</h1>
-                
-                <!-- Center description text -->
-                ${data.description ? `<p class="description-text" style="text-align: center; max-width: 700px; margin: 0 auto 20px;">${data.description}</p>` : ''}
-                
-                <!-- Tour Settings Image -->
-                ${data.settingsImage ? `<img src="${data.settingsImage}" class="settings-image" alt="${data.name} Settings" style="margin: 20px auto 0; display: block;">` : ''}
-            </div>
-        `;
-
-        // 2. Handle Primary Leaderboard Button
-        if (linkBtn) {
-            linkBtn.href = data.url;
-            linkBtn.innerText = "🏆 " + (data.btnText || "Current Leaderboard");
-            linkBtn.style.display = 'block';
-        }
-
-        // 3. Handle Secondary Button (Matchplay Pairs / Alternative Standings)
-        if (linkBtn2) {
-            if (data.url2) {
-                linkBtn2.href = data.url2;
-                linkBtn2.innerText = "🏆 " + (data.btnText2 || "Alternative Standings");
-                linkBtn2.style.display = 'block';
-            } else {
-                linkBtn2.style.display = 'none';
-            }
-        }
-
-        // 4. Toggle Matchplay Format Guide
-        if (formatGuide) {
-            formatGuide.style.display = (id === 'match') ? 'block' : 'none';
-        }
-
-        // 5. Render Video Highlights Gallery (if available)
-        if (data.videos && data.videos.length > 0) {
-            const videoList = document.getElementById('video-list');
-            videoList.innerHTML = data.videos.map(v => `
-                <div class="video-item">
-                    <video controls preload="metadata">
-                        <source src="${v.file}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <h3>${v.title}</h3>
-                </div>
-            `).join('');
-            videoGalleryCard.style.display = 'block';
-        } else {
-            videoGalleryCard.style.display = 'none';
-        }
-
-        // 6. Render Tournament Archive Accordion (if available)
-        if (data.archive && data.archive.length > 0) {
-            archiveContainer.innerHTML = `
-                <div class="card">
-                    <div class="history-header" onclick="toggleHistory()">
-                        📅 Tournament Archive (Click to Expand)
-                    </div>
-                    <div class="history-content">
-                        ${data.archive.map(season => `
-                            <a class="archive-sub-btn" href="${season.url}" target="_blank">
-                                🏆 ${season.name}
-                            </a>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        } else {
-            archiveContainer.innerHTML = '';
-        }
-    }
-}
-
-        function scrollCarousel(direction) {
-            const slider = document.getElementById('video-list');
-            if (!slider) return;
-
-            // Calculate how much to scroll (the width of one video item)
-            const scrollAmount = slider.offsetWidth * 0.85;
-            slider.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
-        }
-		
-		function toggleTwitchMenu(event) {
-			// Prevents page jump or unintended interactions
-			event.stopPropagation(); 
-			const container = document.querySelector('.twitch-menu-container');
-			container.classList.toggle('active');
-		}
-
-		// Close the menu automatically if the user clicks anywhere else on the screen
-		document.addEventListener('click', () => {
-			const container = document.querySelector('.twitch-menu-container');
-			if (container) container.classList.remove('active');
-		});
-
-        window.onload = () => showPage('home');
-        // ENABLE DRAG-TO-SCROLL FOR DESKTOP
-        const slider = document.getElementById('video-list');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.add('active');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-        });
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; // The number 2 determines scroll speed
-            slider.scrollLeft = scrollLeft - walk;
-        });
-    </script>
-
+    <title>Live Leaderboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body {
-            font-family: sans-serif;
-            transition: background-color 0.5s ease;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
+        :root { 
+            --emerald-primary: #00a86b; 
+            --emerald-dark: #007a4d;
+            --emerald-light: #20c997;
+            --emerald-bg: #e6f7f0;
+            --gold-accent: #ffd700; 
+            --silver-accent: #c0c0c0;
+            --bronze-accent: #cd7f32;
+            --ps-blue: #00439c; 
+            --xbox-green: #107c10; 
+            --steam-blue: #171d25; 
+            --under-red: #d9534f; 
         }
 
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 15px;
-            box-sizing: border-box;
-        }
-
-        /* SCROLLING NAV */
-        .nav-wrapper {
-            margin-bottom: 20px;
-        }
-
-        .nav-menu {
-            display: flex;
-            overflow-x: auto;
-            white-space: nowrap;
-            gap: 10px;
-            padding: 10px 5px 20px 5px;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .nav-menu::-webkit-scrollbar {
-            display: none;
-        }
-
-        .nav-menu button {
-            flex: 0 0 auto;
-            min-width: 130px;
-            padding: 15px 10px;
-            cursor: pointer;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            color: white;
-            background: #333;
-        }
-
-        /* BUTTON CONTAINER & STYLES */
-        .leaderboard-btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px; /* Space between the two buttons */
-            margin-bottom: 20px;
-        }
-
-        #leaderboard-link, #leaderboard-link-2 {
-            display: none; width: 100%; background: white; color: #333 !important; 
-            padding: 15px; border-radius: 8px; text-decoration: none;
-            text-align: center; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            border: 2px solid rgba(0,0,0,0.1); box-sizing: border-box;
-        }
-
-        /* CARD STYLES */
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            color: #333;
-            height: auto !important; /* Allows card to expand when archive opens */
-            overflow: visible !important;
-        }
-
-        #home .card {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .crimson-style {
-            border-left: 8px solid #800000;
-        }
-
-        .description-text {
-            white-space: pre-line;
-        }
-
-        /* IMAGES */
-        .main-logo,
-        .tour-logo-header,
-        .settings-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        /* VIDEO CAROUSEL */
-        #video-list {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 15px;
-            padding-bottom: 10px;
-            scrollbar-width: none;
-            cursor: grab;
-            /* Shows the grab hand on desktop */
-            user-select: none;
-            /* Prevents highlighting text while dragging */
-        }
-
-        #video-list:active {
-            cursor: grabbing;
-            /* Shows the closed fist when clicking */
-        }
-
-        .video-item {
-            flex: 0 0 85%;
-            /* Keep showing 85% of the width */
-            scroll-snap-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .video-item video {
-            width: 100%;
-            /* This forces all videos to be the same shape (Widescreen) */
-            aspect-ratio: 16 / 9;
-            background: #000;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            /* This ensures the video fills the 16:9 box without distorting */
-            object-fit: cover;
-        }
-
-        .video-item h3 {
-            text-align: center;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            height: 1.2rem;
-            /* Limits title to one line height */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 90%;
-        }
-
-        .video-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: #ccc;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .dot.active {
-            background: #5865F2;
-            transform: scale(1.2);
-        }
-
-        .page-content {
-            display: none;
-        }
-
-        .page-content.active {
-            display: block;
-        }
-		
-		/* TWITCH DROPDOWN MENU */
-		.twitch-menu-container {
+        body { 
+			font-family: 'Segoe UI', sans-serif; 
+			background-color: var(--emerald-bg); 
+			margin: 0; 
+			font-size: 14px; 
+			color: #1a3326; 
 			position: relative;
-			display: flex;
-			align-items: center;
+			min-height: 100vh;
 		}
 
-		.twitch-dropdown {
-			position: absolute;
-			right: 75px; /* Pushes the menu to the left of the floating button */
-			background: #1f1f23; /* Dark Twitch-style background */
-			border-radius: 8px;
-			padding: 6px;
-			box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-			display: flex;
-			flex-direction: column;
-			gap: 4px;
-			opacity: 0;
-			visibility: hidden;
-			transform: translateX(10px);
-			transition: all 0.3s ease;
-			min-width: 130px;
-		}
-
-		/* Show menu on Desktop Hover OR when Active class is toggled */
-		.twitch-menu-container:hover .twitch-dropdown,
-		.twitch-menu-container.active .twitch-dropdown {
-			opacity: 1;
-			visibility: visible;
-			transform: translateX(0);
-		}
-
-		.twitch-dropdown a {
-			color: white;
-			text-decoration: none;
-			padding: 10px 14px;
-			font-size: 0.9rem;
-			font-weight: bold;
-			border-radius: 4px;
-			transition: background 0.2s;
-			white-space: nowrap;
-		}
-
-		.twitch-dropdown a:hover {
-			background: #9146FF; /* Turns purple when highlighted */
-		}
-
-        .social-group {
+		/* Fixed background image pseudo-element with 30% opacity */
+		body::before {
+			content: "";
 			position: fixed;
-			bottom: 25px;
-			right: 25px;
-			display: flex;
-			flex-direction: column;
-			gap: 15px; /* Space between Twitch and Discord */
-			z-index: 1000;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-image: url('background.jpg'); /* Ensure filename matches your image */
+			background-size: cover;
+			background-position: center bottom;
+			background-repeat: no-repeat;
+			opacity: 0.3;
+			z-index: -1; /* Placed behind all page content */
+			pointer-events: none;
 		}
-
-		.social-float {
-			width: 60px;
-			height: 60px;
-			color: white;
-			border-radius: 50%;
-			display: flex; 
-			align-items: center; 
-			justify-content: center; 
-			box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
-			text-decoration: none; 
-			transition: transform 0.2s;
-		}
-
-		.social-float:hover { transform: scale(1.1); }
-		.social-float i { font-size: 30px; }
-
-		/* BRAND COLORS */
-		.twitch { background-color: #9146FF; }
-		.discord { background-color: #5865F2; }
-
-        .history-header {
-            background: #333;
-            color: white;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 8px;
-            margin-top: 10px;
+        
+        .league-banner { 
+            background: linear-gradient(135deg, var(--emerald-dark), var(--emerald-primary)); 
+            text-align: center; 
+            border-bottom: 4px solid var(--gold-accent); 
+            width: 100%; 
+        }
+        .league-logo { width: 100%; height: auto; display: block; }
+        
+        .main-content { width: 95%; max-width: 1100px; margin: 20px auto; padding-bottom: 50px; }
+        
+        .section-header { 
+            padding: 15px 20px; 
+            background: #fff; 
+            border-radius: 8px 8px 0 0;
+            border-bottom: 3px solid var(--emerald-primary); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .section-header.is-major { 
+            background: linear-gradient(135deg, var(--emerald-dark), #004d31); 
+            color: white; 
+            border-bottom: 4px solid var(--gold-accent); 
+        }
+        
+        #venueName { margin: 0; font-size: 1.4em; font-weight: 800; color: var(--emerald-dark); }
+        .is-major #venueName { color: #fff; }
+        .major-tag { background: var(--gold-accent); color: #000; padding: 4px 12px; border-radius: 4px; font-size: 0.75em; font-weight: 900; letter-spacing: 1px; }
+        
+        .scroller { width: 100%; overflow-x: auto; background: white; margin-bottom: 25px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        table { width: 100%; border-collapse: collapse; white-space: nowrap; }
+        th { background: var(--emerald-primary); color: white; padding: 12px 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 12px 8px; border-bottom: 1px solid #e1efe8; text-align: center; }
+        
+        /* Platform & Name Columns */
+        .icon-col { width: 30px; text-align: center; padding-right: 0; }
+        .player-col { text-align: left !important; padding-left: 8px; font-weight: 600; color: var(--emerald-dark); white-space: nowrap; }
+        
+        .stat-col-fixed { width: 130px; min-width: 130px; background: var(--emerald-dark); }
+        
+        /* Bold-only highlight for winning stat numbers */
+        .stat-winner {
+            font-weight: 800 !important;
+            font-size: 1.05em;
+            color: var(--emerald-dark) !important;
         }
 
-        .history-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out;
-            background: #eee;
-            border-radius: 0 0 8px 8px;
+        .player-link { 
+            color: var(--emerald-dark); 
+            text-decoration: underline; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: color 0.15s ease-in-out;
         }
+        .player-link:hover { color: var(--emerald-primary); }
+        
+        .fa-brands { font-size: 1.1em; vertical-align: middle; }
+        .fa-playstation { color: var(--ps-blue); } 
+        .fa-xbox { color: var(--xbox-green); } 
+        .fa-steam { color: var(--steam-blue); }
+        
+        .to-par-cell { font-weight: 900; background: #f4fbf7; }
+        .under-par { color: var(--under-red); font-weight: bold; }
+        .even-par { color: var(--emerald-primary); font-weight: bold; }
+        
+        .rank-up { color: #2e7d32; }
+        .rank-down { color: #c62828; }
+        
+        h3 { color: var(--emerald-dark); font-size: 1.2em; padding: 10px 5px; margin: 10px 0 5px 0; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .history-header { 
+            background: #fff; padding: 12px 15px; border: 1px solid #c2e5d5; margin-top: 8px; cursor: pointer; 
+            font-weight: 700; display: flex; justify-content: space-between; align-items: center; 
+            border-left: 6px solid var(--emerald-primary); font-size: 14px !important; border-radius: 4px;
+        }
+        .history-header.major-border { border-left-color: var(--gold-accent); }
+        .history-content { display: none; background: white; padding: 10px; border: 1px solid #c2e5d5; border-top: none; border-radius: 0 0 4px 4px; }
 
-        /* EXPANDS THE ACCORDION SMOOTHLY */
-        .history-content.active {
-            max-height: 300px !important; /* Expands box to fit seasons */
-            padding-bottom: 10px;
-        }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
+        .profile-card { background: white; width: 90%; max-width: 520px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: fadeIn 0.2s ease-out; max-height: 90vh; display: flex; flex-direction: column; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .profile-header { background: var(--emerald-primary); color: white; padding: 20px; text-align: center; position: relative; border-bottom: 4px solid var(--gold-accent); }
+        .profile-close { position: absolute; top: 12px; right: 15px; color: white; font-size: 20px; cursor: pointer; opacity: 0.8; }
+        .profile-close:hover { opacity: 1; }
+        .profile-name { font-size: 1.4em; font-weight: 800; margin: 5px 0 0; }
+        
+        .profile-body { padding: 20px; overflow-y: auto; }
+        .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
+        .stat-box { background: var(--emerald-bg); border: 1px solid #bce3d2; border-radius: 8px; padding: 8px 10px; text-align: center; }
+        .stat-label { font-size: 0.72em; text-transform: uppercase; color: #48735e; font-weight: 700; }
+        .stat-value { font-size: 1.15em; font-weight: 800; color: var(--emerald-dark); margin-top: 2px; }
+        
+        .best-score-box { background: #dff5eb; border: 1px solid #a3e2c5; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 12px; }
+        .best-score-title { font-size: 0.72em; text-transform: uppercase; color: var(--emerald-dark); font-weight: 800; }
+        .best-score-val { font-size: 1.05em; font-weight: 800; color: var(--emerald-dark); margin: 3px 0; }
+        .best-score-meta { font-size: 0.78em; color: #48735e; }
+        
+        .form-tracker { text-align: center; margin-bottom: 15px; }
+        .form-title { font-size: 0.72em; text-transform: uppercase; color: #48735e; font-weight: 700; margin-bottom: 8px; }
+        .form-badges { display: flex; justify-content: center; gap: 8px; }
+        
+        .form-badge { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75em; color: white; }
+        .badge-1 { background: var(--gold-accent); color: #000; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .badge-2 { background: var(--silver-accent); color: #000; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .badge-3 { background: var(--bronze-accent); color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .badge-other { background: #495057; color: #fff; }
 
-        .archive-sub-btn {
-            display: block;
-            padding: 12px;
-            margin: 10px;
-            background: #666;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /* ARROW NAVIGATION */
-        .video-carousel-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.3);
-            /* Faded background */
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
-            transition: background 0.3s, opacity 0.3s;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-arrow:hover {
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        .nav-arrow.left {
-            left: 5px;
-        }
-
-        .nav-arrow.right {
-            right: 5px;
-        }
-
-        /* Ensure video-list stays clean */
-        #video-list {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 15px;
-            padding: 10px 0;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-            /* Smooth sliding animation */
-        }
-		
-		/* TEMPORARILY HIDE STABLEFORD & OWGR NAV BUTTONS */
-		button[onclick*="stable" i],
-		button[onclick*="owgr" i],
-		.nav-item[onclick*="stable" i],
-		.nav-item[onclick*="owgr" i] {
-			display: none !important;
-		}
+        .results-section { border-top: 1px solid #e0e0e0; padding-top: 12px; }
+        .results-title { font-size: 0.75em; text-transform: uppercase; color: var(--emerald-dark); font-weight: 800; margin-bottom: 6px; text-align: center; }
+        .results-table-container { max-height: 160px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 6px; }
+        .results-table { width: 100%; font-size: 12px; }
+        .results-table th { background: #f4f6f5; color: #333; font-size: 9px; padding: 6px 8px; border-bottom: 1px solid #ddd; }
+        .results-table td { padding: 6px 8px; border-bottom: 1px solid #eee; }
     </style>
 </head>
+<body>
 
-<body id="body-main">
+<header class="league-banner">
+    <img src="logo.png" alt="League Logo" class="league-logo" onerror="this.style.display='none'">
+</header>
 
-    <div class="container" id="main-area">
-        <div class="nav-wrapper">
-            <div class="nav-menu">
-                <button onclick="showPage('home')" style="background:#555;">Home</button>
-                <button onclick="showPage('emerald')" style="background:#004d00;">Emerald Tour</button>
-                <button onclick="showPage('grip')" style="background:#b30000;">Grip & Rip</button>
-                <button onclick="showPage('links')" style="background:#003366;">Linksland</button>
-                <button onclick="showPage('match')" style="background:#4b0082;">Matchplay</button>
-                <button onclick="showPage('stable')" style="background:#ff8c00;">Stableford</button>
-                <button onclick="showPage('owgr')" style="background:#222222;">LST OWGR</button>
-            </div>
-            </div>
-				<div class="leaderboard-btn-container">
-					<a id="leaderboard-link" target="_blank"></a>
-					<a id="leaderboard-link-2" target="_blank" style="display: none;"></a>
-				</div>
-			</div>
+<div class="main-content">
+    <div id="headerBar" class="section-header">
+        <div class="header-text-group">
+            <h2 id="venueName">⛳ Loading Tour...</h2>
+            <p id="eventDateLabel" style="margin:5px 0 0; font-size:0.85em; opacity:0.85;"></p>
         </div>
-
-        <div id="home" class="page-content active">
-            <img src="logo.png" class="main-logo" alt="LST Logo">
-            <div class="card" style="text-align: center;">
-                <h1>LST Legend Sim Tours</h1>
-                <p>Welcome to Legend Sim Tours (LST) Stock 74, we have a few different societies in here, most of which are using the stock 74 golfer.</p>
-                <p> Whats a stock 74 golfer I hear you ask,</p>
-                <p> The greatest form of realism the game can offer, simply create a new golfer, then use only the 24 rebirth points to allocate to your player taking your overall player to 74,</p>
-                <p> No more attributes can be added, no skills tree, no silly shots unlocked, no swiss army golf bag with a millions shots to get out of trouble, no limited edition clubs, cosmetic items can only applied to golfer, and no manipulated controller,</p>
-                <p> We run an honesty system here, as enjoyment is the most important thing here, we are proud of what we run and offer here, so if you enjoy true sim, and realism then sure you will love whats provided for the great community of Legend true simmers we have here.</p>
-                <p> Each society offers something different, formats, scoring, bonus points etc.</p>
-                <p> Above is a link to each, just click on the link per society to give you an overview of what each society can offer, links to current tournaments and past seasons. Just ask in the chitchat channel if you need anymore help or anything explained there will always be someone about who can help out.</p>
-                <p> Hopefully there is something in here which you enjoy, or they might all be right up your street, remember to have fun and par is always a good score, go get em</p>
-				<p> Click the Social links to join our Discord or watch our regular streamers, including Mr Longpole aka 'Tugga Myshaft' and his faithful caddy Leroy on Twitch.
-                <!-- ANIMATED SETTINGS HTML (HOME PAGE ONLY) -->
-                <div style="width: 100%; border-radius: 20px; overflow: hidden; margin-top: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
-					<iframe id="home-settings-iframe" src="settings.html" style="width: 100%; height: 950px; border: none; display: block; background: #0B1A0D;"></iframe>
-				</div>
-            </div>
-        </div>
-				<div style="text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee;">
-					<img src="https://visitor-badge.laobi.icu/badge?page_id=lst-legends-hub&left_color=gray&right_color=crimson" alt="Visitor Counter">
-				</div>
-				</div>
-		</div>
-
-        <div id="tour-view" class="page-content">
-            <div id="title-container"></div>
-            
-            <div id="video-gallery-card" class="card" style="display:none; padding: 15px 10px;">
-                <h2 style="margin-left: 10px;">Tournament Highlights</h2>
-
-                <div class="video-carousel-container">
-                    <button class="nav-arrow left" onclick="scrollCarousel(-1)">&#10094;</button>
-                    <div id="video-list"></div>
-                    <button class="nav-arrow right" onclick="scrollCarousel(1)">&#10095;</button>
-                </div>
-            </div>
-
-            <!-- MATCHPLAY FORMAT GUIDE IFRAME (Controlled by JS) -->
-            <div id="format-guide-wrapper" style="display: none; width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-                <iframe src="format-guide.html" style="width: 100%; height: 750px; border: none; display: block;"></iframe>
-            </div>
-
-            <div id="archive-container"></div>
-        </div>
-
- <!-- SOCIAL FLOATING BUTTONS -->
-<div class="social-group">
-    <!-- MULTI-ACCOUNT TWITCH MENU -->
-    <div class="twitch-menu-container">
-        <div class="twitch-dropdown">
-            <a href="https://www.twitch.tv/longp0le" target="_blank">longp0le 🎥</a>
-            <a href="https://www.twitch.tv/horusphoenix97" target="_blank">horusphoenix97 ⛳</a>
-            <a href="https://www.twitch.tv/gatitopower" target="_blank">gatitopower 🎮</a>
-			<a href="https://www.twitch.tv/arfabubble" target="_blank">arfabubble 🏌🏻</a>
-			<a href="https://www.twitch.tv/gbwackerguy" target="_blank">gbwackerguy 📽️</a>
-        </div>
-        <button class="social-float twitch" onclick="toggleTwitchMenu(event)">
-            <i class="fab fa-twitch"></i>
-        </button>
+        <div id="sigStatus"></div>
     </div>
 
-    <!-- DISCORD BUTTON -->
-    <a href="https://discord.gg/HRFmSsDWme" target="_blank" class="social-float discord">
-        <i class="fab fa-discord"></i>
-    </a>
+    <h3>Current Tournament</h3>
+    <div class="scroller">
+        <table>
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th class="icon-col"></th>
+                    <th class="player-col">Player</th>
+                    <th>To Par</th>
+                    <th>R1</th>
+                    <th>R2</th>
+                    <th>Total</th>
+                    <th class="stat-col-fixed">Longest Drive</th>
+                    <th class="stat-col-fixed">Greens in Reg</th>
+                    <th style="background:var(--emerald-dark);">Bonus Pts</th>
+                    <th>Pts</th>
+                </tr>
+            </thead>
+            <tbody id="liveBody"></tbody>
+        </table>
+    </div>
+
+    <h3>Season Standings</h3>
+    <div class="scroller">
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th></th>
+                    <th class="icon-col"></th>
+                    <th class="player-col">Player</th>
+                    <th>Played</th>
+                    <th>Wins</th>
+                    <th>ACC</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody id="seasonBody"></tbody>
+        </table>
+    </div>
+
+    <div id="historyContainer"></div>
 </div>
 
-</body>
+<div id="profileModal" class="modal-overlay" onclick="closeProfile(event)">
+    <div class="profile-card" onclick="event.stopPropagation()">
+        <div class="profile-header">
+            <span class="profile-close" onclick="closeProfile()">&times;</span>
+            <div id="modalConsole"></div>
+            <div id="modalName" class="profile-name"></div>
+        </div>
+        <div class="profile-body">
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-label">Played</div><div id="modalPlayed" class="stat-value">0</div></div>
+                <div class="stat-box"><div class="stat-label">Won</div><div id="modalWins" class="stat-value">0</div></div>
+                <div class="stat-box"><div class="stat-label">Accumulated</div><div id="modalAcc" class="stat-value">E</div></div>
+                <div class="stat-box"><div class="stat-label">Season Pts</div><div id="modalPts" class="stat-value">0</div></div>
+                <div class="stat-box"><div class="stat-label">Total Season GIR</div><div id="modalTotalGir" class="stat-value">0</div></div>
+                <div class="stat-box"><div class="stat-label">Max Longest Drive</div><div id="modalMaxLd" class="stat-value">--</div></div>
+            </div>
+            
+            <div class="best-score-box">
+                <div class="best-score-title">⭐ Best Score (To Par)</div>
+                <div id="modalBestVal" class="best-score-val">--</div>
+                <div id="modalBestMeta" class="best-score-meta">No records yet</div>
+            </div>
 
+            <div class="form-tracker">
+                <div class="form-title">Recent Form (Last 5 Weeks)</div>
+                <div id="modalForm" class="form-badges"></div>
+            </div>
+
+            <div class="results-section">
+                <div class="results-title">Weekly Results History</div>
+                <div class="results-table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left;">Date</th>
+                                <th style="text-align:left;">Venue</th>
+                                <th>Pos</th>
+                                <th>To Par</th>
+                                <th>Gross</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalResultsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let globalSeasonData = {};
+
+    const stdPtsTable = {
+        1:500, 2:300, 3:190, 4:135, 5:110, 6:100, 7:90, 8:85, 9:80, 10:75,
+        11:70, 12:65, 13:60, 14:57, 15:55, 16:53, 17:51, 18:49, 19:47, 20:45,
+        21:43, 22:41, 23:39, 24:37, 25:35.5, 26:34, 27:32.5, 28:31, 29:29.5, 30:28,
+        31:26.5, 32:25, 33:23.5, 34:22, 35:21, 36:20, 37:19, 38:18, 39:17, 40:16
+    };
+
+    const sigPtsTable = {
+        1:750, 2:500, 3:350, 4:325, 5:300, 6:270, 7:250, 8:225, 9:200, 10:175,
+        11:155, 12:135, 13:115, 14:105, 15:95, 16:85, 17:75, 18:70, 19:65, 20:60,
+        21:55, 22:53, 23:51, 24:49, 25:47, 26:45, 27:43, 28:41, 29:39, 30:37,
+        31:35, 32:33, 33:31, 34:29, 35:27, 36:26, 37:25, 38:24, 39:23, 40:22
+    };
+
+    function getSinglePositionPts(pos, isSig) {
+        const table = isSig ? sigPtsTable : stdPtsTable;
+        if (table[pos] !== undefined) return table[pos];
+        return Math.max(1, (isSig ? 22 : 16) - (pos - 40));
+    }
+
+    function calculatePtsSplit(firstRank, tiedCount, isSig, ldBonusVal, girBonusVal) {
+        let sum = 0;
+        for (let r = firstRank; r < firstRank + tiedCount; r++) {
+            sum += getSinglePositionPts(r, isSig);
+        }
+        let baseAvg = sum / tiedCount;
+        let bonus = ldBonusVal + girBonusVal;
+        let total = baseAvg + bonus;
+        return { total: Math.round(total * 10) / 10, bonusVal: bonus };
+    }
+
+    async function loadLeaderboard() {
+        try {
+            const response = await fetch('data.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            document.getElementById('venueName').innerText = `⛳ ${data.venue || 'Season Event'}`;
+            document.getElementById('eventDateLabel').innerText = data.date || '';
+            const headerBar = document.getElementById('headerBar');
+            if(data.isSig) {
+                headerBar.classList.add('is-major');
+                document.getElementById('sigStatus').innerHTML = '<span class="major-tag">🏆 SIGNATURE EVENT</span>';
+            }
+            globalSeasonData = data.season || {};
+            renderLeaderboard(data);
+            renderStandings(data.season); 
+            renderHistory(data.history);
+        } catch (e) { console.error("Leaderboard load error:", e); }
+    }
+
+    function getPlatformIcon(p) {
+        const c = (p || "").toLowerCase();
+        if (c.includes('ps')) return '<i class="fa-brands fa-playstation"></i>';
+        if (c.includes('xb')) return '<i class="fa-brands fa-xbox"></i>';
+        return '<i class="fa-brands fa-steam"></i>';
+    }
+
+    function parseNumericStat(val) {
+        if (val === undefined || val === null) return 0;
+        const num = parseFloat(val.toString().replace(/[^0-9.]/g, ''));
+        return isNaN(num) ? 0 : num;
+    }
+
+    function renderLeaderboard(data) {
+        const lBody = document.getElementById('liveBody');
+        lBody.innerHTML = '';
+        const par = parseInt(data.par) || 72;
+        
+        let players = data.players.map(p => {
+            const s = [p.r1, p.r2].map(v => parseInt(v)||0).filter(v => v > 0);
+            const total = s.reduce((a,b) => a+b, 0);
+            const numLd = parseNumericStat(p.ldYardage);
+            const numGir = parseNumericStat(p.girVal);
+            return { ...p, total, toPar: s.length > 0 ? total - (s.length * par) : 999, active: s.length, numLd, numGir };
+        }).sort((a,b) => a.toPar - b.toPar);
+
+        // Calculate max Longest Drive & max GIR across active players
+        let maxLd = 0;
+        let maxGir = 0;
+        players.forEach(p => {
+            if (p.active > 0) {
+                if (p.numLd > maxLd) maxLd = p.numLd;
+                if (p.numGir > maxGir) maxGir = p.numGir;
+            }
+        });
+
+        let ldWinnersCount = maxLd > 0 ? players.filter(p => p.active > 0 && p.numLd === maxLd).length : 0;
+        let girWinnersCount = maxGir > 0 ? players.filter(p => p.active > 0 && p.numGir === maxGir).length : 0;
+
+        players.forEach((p, i) => {
+            if (p.active === 0) return;
+            let firstIdx = i;
+            while (firstIdx > 0 && players[firstIdx - 1].toPar === p.toPar) firstIdx--;
+            
+            let tiedCount = 0;
+            while (firstIdx + tiedCount < players.length && players[firstIdx + tiedCount].toPar === p.toPar) {
+                tiedCount++;
+            }
+
+            const isTied = tiedCount > 1;
+            const rankLabel = isTied ? `T${firstIdx + 1}` : i + 1;
+            
+            const isLdWinner = maxLd > 0 && p.numLd === maxLd;
+            const isGirWinner = maxGir > 0 && p.numGir === maxGir;
+
+            let ldBonusVal = isLdWinner ? (50 / ldWinnersCount) : 0;
+            let girBonusVal = isGirWinner ? (50 / girWinnersCount) : 0;
+
+            let ldDisplay = p.numLd > 0 ? `${p.numLd.toFixed(1)} yds` : '-';
+            let girDisplay = p.numGir > 0 ? p.numGir : '-';
+
+            const ptsData = calculatePtsSplit(firstIdx + 1, tiedCount, data.isSig, ldBonusVal, girBonusVal);
+            const toParDisp = p.toPar === 0 ? "E" : (p.toPar > 0 ? `+${p.toPar}` : p.toPar);
+            
+            lBody.innerHTML += `<tr>
+                <td>${rankLabel}</td>
+                <td class="icon-col">${getPlatformIcon(p.console)}</td>
+                <td class="player-col">${p.name}</td>
+                <td class="to-par-cell ${p.toPar < 0 ? 'under-par' : (p.toPar === 0 ? 'even-par' : '')}">${toParDisp}</td>
+                <td>${p.r1||'-'}</td>
+                <td>${p.r2||'-'}</td>
+                <td>${p.total}</td>
+                <td class="${isLdWinner ? 'stat-winner' : ''}">${ldDisplay}</td>
+                <td class="${isGirWinner ? 'stat-winner' : ''}">${girDisplay}</td>
+                <td style="color:var(--emerald-dark); font-weight:bold;">${ptsData.bonusVal > 0 ? `+${Math.round(ptsData.bonusVal * 10) / 10}` : '-'}</td>
+                <td style="color:var(--emerald-dark); font-weight:bold;">${ptsData.total}</td>
+            </tr>`;
+        });
+    }
+
+    function renderStandings(seasonData) {
+        const sBody = document.getElementById('seasonBody');
+        if (!sBody || !seasonData) return;
+        const sorted = Object.entries(seasonData).map(([name, info]) => ({ name, ...info })).sort((a, b) => b.points - a.points);
+        sBody.innerHTML = '';
+        sorted.forEach((p, i) => {
+            const currentRank = i + 1;
+            const previousRank = parseInt(p.prevRank) || currentRank;
+            let trendHtml = '<span style="color:#aaa">●</span>';
+            if (currentRank < previousRank) trendHtml = '<span class="rank-up">▲</span>';
+            else if (currentRank > previousRank) trendHtml = '<span class="rank-down">▼</span>';
+
+            const accVal = p.acc || 0;
+            const accDisp = accVal === 0 ? "E" : (accVal > 0 ? `+${accVal}` : accVal);
+            
+            sBody.innerHTML += `<tr>
+                <td>${currentRank}</td>
+                <td>${trendHtml}</td>
+                <td class="icon-col">${getPlatformIcon(p.console)}</td>
+                <td class="player-col">
+                    <a class="player-link" onclick="openProfile('${p.name.replace(/'/g, "\\'")}')">${p.name}</a>
+                </td>
+                <td>${p.eventsPlayed || 0}</td>
+                <td style="font-weight:bold; color:var(--under-red);">${p.wins || 0}</td>
+                <td class="${accVal < 0 ? 'under-par' : ''}">${accDisp}</td>
+                <td style="color:var(--emerald-dark); font-weight:bold;">${Math.round((p.points || 0) * 10) / 10}</td>
+            </tr>`;
+        });
+    }
+
+    function openProfile(playerName) {
+        const p = globalSeasonData[playerName];
+        if (!p) return;
+
+        document.getElementById('modalConsole').innerHTML = getPlatformIcon(p.console);
+        document.getElementById('modalName').innerText = playerName;
+        document.getElementById('modalPlayed').innerText = p.eventsPlayed || 0;
+        document.getElementById('modalWins').innerText = p.wins || 0;
+        
+        const accVal = p.acc || 0;
+        document.getElementById('modalAcc').innerText = accVal === 0 ? "E" : (accVal > 0 ? `+${accVal}` : accVal);
+        document.getElementById('modalPts').innerText = Math.round((p.points || 0) * 10) / 10;
+
+        const maxLdVal = p.maxLd || 0;
+        document.getElementById('modalMaxLd').innerText = maxLdVal > 0 ? `${maxLdVal.toFixed(1)} yds` : '--';
+        document.getElementById('modalTotalGir').innerText = p.totalGir || 0;
+
+        let bestRec = null;
+        const historyArr = p.history || [];
+
+        if (historyArr.length > 0) {
+            bestRec = [...historyArr].sort((a, b) => {
+                if (a.toPar !== b.toPar) return a.toPar - b.toPar;
+                return a.gross - b.gross;
+            })[0];
+        }
+
+        if (bestRec) {
+            const tp = bestRec.toPar === 0 ? "E" : (bestRec.toPar > 0 ? `+${bestRec.toPar}` : bestRec.toPar);
+            document.getElementById('modalBestVal').innerText = `${bestRec.gross} (${tp})`;
+            document.getElementById('modalBestMeta').innerText = `@ ${bestRec.venue || 'Tournament'} (${bestRec.date || 'N/A'})`;
+        } else if (p.bestToPar !== undefined && p.bestToPar < 999) {
+            const tp = p.bestToPar === 0 ? "E" : (p.bestToPar > 0 ? `+${p.bestToPar}` : p.bestToPar);
+            document.getElementById('modalBestVal').innerText = `${p.bestTotal} (${tp})`;
+            document.getElementById('modalBestMeta').innerText = `@ ${p.bestVenue || 'Tournament'} (${p.bestDate || 'N/A'})`;
+        } else {
+            document.getElementById('modalBestVal').innerText = "--";
+            document.getElementById('modalBestMeta').innerText = "No records yet";
+        }
+
+        const formDiv = document.getElementById('modalForm');
+        formDiv.innerHTML = '';
+        const formArr = p.form || [];
+        if (formArr.length === 0) {
+            formDiv.innerHTML = '<span style="font-size:0.85em; color:#888;">No recent events</span>';
+        } else {
+            formArr.forEach(pos => {
+                let badgeClass = 'badge-other';
+                if (pos === 1) badgeClass = 'badge-1';
+                else if (pos === 2) badgeClass = 'badge-2';
+                else if (pos === 3) badgeClass = 'badge-3';
+                formDiv.innerHTML += `<div class="form-badge ${badgeClass}">${pos}</div>`;
+            });
+        }
+
+        const rBody = document.getElementById('modalResultsBody');
+        rBody.innerHTML = '';
+
+        if (historyArr.length === 0) {
+            rBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888;">No tournament history logged yet</td></tr>';
+        } else {
+            historyArr.forEach(res => {
+                const tpDisp = res.toPar === 0 ? "E" : (res.toPar > 0 ? `+${res.toPar}` : res.toPar);
+                rBody.innerHTML += `<tr>
+                    <td style="text-align:left;">${res.date}</td>
+                    <td style="text-align:left; font-weight:600;">${res.venue}</td>
+                    <td style="font-weight:700;">${res.pos}</td>
+                    <td class="${res.toPar < 0 ? 'under-par' : ''}">${tpDisp}</td>
+                    <td style="font-weight:700;">${res.gross}</td>
+                </tr>`;
+            });
+        }
+
+        document.getElementById('profileModal').style.display = 'flex';
+    }
+
+    function closeProfile() {
+        document.getElementById('profileModal').style.display = 'none';
+    }
+
+    function renderHistory(historyHTML) {
+        const hDiv = document.getElementById('historyContainer');
+        if (hDiv && historyHTML) { 
+            let temp = document.createElement('div');
+            temp.innerHTML = historyHTML.replace(/>\+999</g, '>--<');
+            temp.querySelectorAll('.history-header').forEach(header => { if (header.innerText.includes('🏆')) header.classList.add('major-border'); });
+            hDiv.innerHTML = `<h3>Weekly History</h3>` + temp.innerHTML; 
+        }
+    }
+
+    function toggleHistory(header) {
+        const content = header.nextElementSibling;
+        const isVisible = content.style.display === "block";
+        document.querySelectorAll('.history-content').forEach(c => c.style.display = "none");
+        content.style.display = isVisible ? "none" : "block";
+    }
+
+    window.onload = loadLeaderboard;
+</script>
+</body>
 </html>
