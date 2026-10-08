@@ -49,7 +49,7 @@
 					{file: "x3noluck.mp4", title: "x3 no luck Friday 😢😢"},
 					{file: "Rendalliodart.mp4", title: "Rendallio dart at Kincruan"},
                     {file: "rendeagle.mp4", title: "Rendallio Eagle at Chubby Pines"},
-                    {file: "collysand.mp4", title: "Colly from the sand"}
+                    {file: "collysand.mp4", title: "Colly from the sand"},
                 ]
             },
             links: { 
@@ -72,23 +72,33 @@
 				]
 			},
             match: { 
-            name: "LST 74 Matchplay",
-            url: "https://lst-2k.github.io/matchplayseason3/",
-            logo: "matchplaylogo.png",
-            shade: "#4b0082",
-            description: `LST Matchplay Championship. Season 3 has now concluded, Congratulations to WingisBack, overcoming a resiliant Rendallio 1Up at Merion East !`,
-            btnText: "Singles Tournament Season 3",
-            url2: "https://lst-2k.github.io/matchplaypairs/",
-            btnText2: "The LST74 Challenge Cup..is here!!...",
-            archive: [
-                { name: "Season 3", url: "https://lst-2k.github.io/matchplayseason3/" },
-                { name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
-                { name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/" }
-            ],
-            settingsImage: "matchplaysettings.png",
-            videos: [
-            ]
-        },
+				name: "LST 74 Matchplay",
+				url: "https://lst-2k.github.io/matchplayseason3/",
+				logo: "matchplaylogo.png",
+				shade: "#4b0082",
+				description: `LST Matchplay Championship. Season 3 has now concluded, Congratulations to WingisBack, overcoming a resiliant Rendallio 1Up at Merion East !`,
+				btnText: "Singles Tournament Season 3",
+				url2: "https://lst-2k.github.io/matchplaypairs/",
+				btnText2: "The LST74 Challenge Cup..is here!!...",
+				archive: [
+					{ name: "Season 3", url: "https://lst-2k.github.io/matchplayseason3/" },
+					{ name: "Season 2", url: "https://lst-2k.github.io/matchplayseason2/" },
+					{ name: "Season 1", url: "https://lst-2k.github.io/matchplayseason1/" }
+				],
+				settingsImage: "matchplaysettings.png",
+				videos: [
+				]
+			},
+			demons: { 
+				name: "Demons 74",
+				logo: "demonlogo.png",
+				shade: "#d32f2f",
+				description: "Welcome to Demons 74! Pure stock 74 sim golf with a fire in its belly.",
+				btnText: "Demons Leaderboard",
+				url: "https://lst-2k.github.io/demons74vctour/",
+				settingsImage: "demonssettings.png",       // Optional: replace with your settings image
+				archive: []
+			},
             stable: {
                 name: "Stableford",
                 url: "https://lst-2k.github.io/stablefordseason2/",
@@ -685,6 +695,7 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
                 <button onclick="showPage('grip')" style="background:#b30000;">Grip & Rip</button>
                 <button onclick="showPage('links')" style="background:#003366;">Linksland</button>
                 <button onclick="showPage('match')" style="background:#4b0082;">Matchplay</button>
+				<button onclick="showPage('demons')" style="background: linear-gradient(135deg, #ff5722, #d32f2f);">Demons 74</button>
                 <button onclick="showPage('stable')" style="background:#ff8c00;">Stableford</button>
                 <button onclick="showPage('owgr')" style="background:#222222;">LST OWGR</button>
             </div>
