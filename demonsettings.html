@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demons 74 — Legend Sim Tours</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --orange: #FF5722;
+  --orange2:#FF7043;
+  --red:    #D32F2F;
+  --cream:  #FFF3E0;
+  --dark:   #1A0505;
+  --mid:    #2C0A0A;
+  --on:     #FF8A65;
+  --off:    #E57373;
+  --sim:    #FFB74D;
+  --other:  #FFCC80;
+  --muted:  #BCAAA4;
+}
+
+body {
+  background: var(--dark);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 48px;
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND ── */
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(211,47,47,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 40% at 20% 100%, rgba(255,87,34,0.2) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 80% 80%, rgba(26,5,5,0.8) 0%, transparent 60%),
+    #1A0505;
+}
+
+/* Grid & Noise */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,87,34,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,87,34,0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* ── POSTER ── */
+.poster {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 580px;
+}
+
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  padding: 0 0 28px;
+}
+
+.header-eyebrow {
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--orange2); font-weight: 700; margin-bottom: 14px;
+  opacity: 0; animation: fadeIn 0.6s ease forwards 0.1s;
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+}
+.eyebrow-line { flex: 1; max-width: 60px; height: 1px; background: rgba(255,87,34,0.4); }
+
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(38px, 10vw, 62px);
+  font-weight: 900; line-height: 1.05;
+  color: var(--cream);
+  text-shadow: 0 4px 24px rgba(0,0,0,0.8), 0 0 50px rgba(211,47,47,0.5);
+  opacity: 0; animation: slideDown 0.7s ease forwards 0.3s;
+}
+.header-title span { color: var(--orange); }
+
+/* Welcome Box inside Poster */
+.welcome-card {
+  background: rgba(44, 10, 10, 0.75);
+  border: 1px solid rgba(255, 87, 34, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  opacity: 0; animation: fadeIn 0.8s ease forwards 0.5s;
+}
+
+.welcome-card p {
+  color: var(--cream);
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.welcome-card p:last-child { margin-bottom: 0; }
+
+/* Animated Divider */
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 22px auto 0; max-width: 320px;
+  opacity: 0; animation: fadeIn 0.6s ease forwards 0.8s;
+}
+.div-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(255,87,34,0.6), transparent); }
+.div-gem {
+  width: 8px; height: 8px; background: var(--orange);
+  transform: rotate(45deg);
+  animation: pulse 2s ease-in-out infinite 1s;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,87,34,0.6); }
+  50%      { box-shadow: 0 0 0 10px rgba(255,87,34,0); }
+}
+
+/* ── SETTINGS TABLE ── */
+.settings-card {
+  background: rgba(44,10,10,0.8);
+  border: 1px solid rgba(255,87,34,0.25);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 25px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+}
+
+.settings-header-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 22px 12px;
+  background: rgba(255,87,34,0.12);
+  border-bottom: 1px solid rgba(255,87,34,0.2);
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 700; color: var(--orange2);
+  opacity: 0; animation: fadeIn 0.5s ease forwards 1s;
+}
+
+.setting-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 13px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  opacity: 0; transform: translateY(28px);
+  transition: background 0.2s ease;
+}
+.setting-row:last-child { border-bottom: none; }
+.setting-row:hover { background: rgba(255,255,255,0.03); }
+
+.setting-row.revealed {
+  animation: slideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.setting-name { font-size: 14px; font-weight: 500; color: var(--cream); flex: 1; }
+.setting-value {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+  padding: 4px 12px; border-radius: 999px; flex-shrink: 0;
+}
+
+.val-on    { color: #FF8A65; background: rgba(255,138,101,0.15); }
+.val-off   { color: #E57373; background: rgba(229,115,115,0.15); }
+.val-gold  { color: #FFB74D; background: rgba(255,183,77,0.15); }
+.val-num   { color: #FFF;    background: rgba(255,255,255,0.1); }
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,87,34,0.3), transparent);
+}
+
+.footer {
+  display: flex; align-items: center; justify-content: center;
+  padding: 18px 22px; background: rgba(0,0,0,0.4);
+  border-top: 1px solid rgba(255,87,34,0.2); opacity: 0; width: 100%;
+}
+
+.footer-logo-img {
+  width: 100%; max-width: 100%; height: auto; display: block;
+  filter: drop-shadow(0 4px 10px rgba(255,87,34,0.4));
+}
+
+.poster-foot {
+  text-align: center; margin-top: 20px; font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: rgba(188,170,164,0.5);
+  opacity: 0; animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="bg-grid"></div>
+
+<div class="poster">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-eyebrow">
+      <div class="eyebrow-line"></div>
+      Legend Sim Tours
+      <div class="eyebrow-line"></div>
+    </div>
+    <h1 class="header-title">Demons <span>74</span></h1>
+    
+    <!-- WELCOME TEXT POSTER BLOCK -->
+    <div class="welcome-card">
+      <p>Welcome to <strong>Demons 74</strong>, the newest battleground in the Legend Sim Tours community! If you're looking for a fresh challenge that tests your skill, consistency, and course management under pressure, you’ve found the right home.</p>
+      <p>Built entirely around the stock 74 golfer, Demons 74 strips away the artificial boosts, skill trees, and extra attributes to bring you pure, authentic sim golf with a serious competitive fire.</p>
+      <p>Step up, dial in your swing, and let’s see if you have what it takes to master Demons 74!</p>
+    </div>
+
+    <div class="divider">
+      <div class="div-line"></div>
+      <div class="div-gem"></div>
+      <div class="div-line"></div>
+    </div>
+  </div>
+
+  <!-- Settings Card -->
+  <div class="settings-card">
+    <div class="settings-header-row">
+      <span>Setting</span>
+      <span>Value</span>
+    </div>
+    <div id="settings-list"></div>
+
+    <div class="footer" id="card-footer">
+      <img src="2k25 logo.png" class="footer-logo-img" alt="PGA Tour 2K25">
+    </div>
+  </div>
+
+  <p class="poster-foot" id="poster-foot">Demons 74 Tour &nbsp;·&nbsp; Pure Stock 74 Realism</p>
+
+</div>
+
+<script>
+const settings = [
+  { name: 'Difficulty',                value: '1.72',       cls: 'val-num' },
+  { name: 'Swing',                     value: 'Legend',     cls: 'val-gold' },
+  { name: 'Rhythm Preference',         value: 'On',         cls: 'val-on' },
+  { name: 'Swing Bias Input Offset',   value: 'On',         cls: 'val-on' },
+  { name: 'Swing Context Input Offset', value: 'On',        cls: 'val-on' },
+  { name: 'Vibration',                 value: 'Off',        cls: 'val-off' },
+  { name: 'Lie Range',                 value: 'Simulation', cls: 'val-gold' },
+  { name: 'Distance Control Assist',   value: 'Off',        cls: 'val-off' },
+  { name: 'Putt Preview',              value: '0',          cls: 'val-num' },
+  { name: 'Course Yardage',            value: 'Book Only',  cls: 'val-gold' },
+  { name: 'Pro Vision',                value: 'All Off',    cls: 'val-off' },
+  { name: 'Scout Camera',              value: 'Off',        cls: 'val-off' },
+  { name: 'Shot Feedback',             value: 'Off',        cls: 'val-off' },
+  { name: 'Lie & Green Grid',          value: 'Off',        cls: 'val-off' },
+  { name: 'Pin Preference',            value: 'Open',       cls: 'val-gold' },
+  { name: 'Aim Marker',                value: 'Off',        cls: 'val-off' },
+  { name: 'Wind Display',              value: 'Meter Only', cls: 'val-gold' },
+  { name: 'Swing',                     value: 'Stick Only', cls: 'val-gold' },
+];
+
+const list = document.getElementById('settings-list');
+settings.forEach((s, i) => {
+  if (i === 6 || i === 12) {
+    const div = document.createElement('div');
+    div.className = 'section-divider';
+    list.appendChild(div);
+  }
+  const row = document.createElement('div');
+  row.className = 'setting-row';
+  row.innerHTML = `<span class="setting-name">${s.name}</span><span class="setting-value ${s.cls}">${s.value}</span>`;
+  list.appendChild(row);
+});
+
+const rows = document.querySelectorAll('.setting-row');
+const footer = document.getElementById('card-footer');
+const posterFoot = document.getElementById('poster-foot');
+
+const BASE_DELAY = 1000;
+const ROW_INTERVAL = 90;
+
+rows.forEach((row, i) => {
+  setTimeout(() => row.classList.add('revealed'), BASE_DELAY + i * ROW_INTERVAL);
+});
+
+const footerDelay = BASE_DELAY + rows.length * ROW_INTERVAL + 200;
+setTimeout(() => {
+  footer.style.animation = 'fadeIn 0.6s ease forwards';
+  footer.style.opacity = '0';
+}, footerDelay);
+
+setTimeout(() => {
+  posterFoot.style.animation = 'fadeIn 0.6s ease forwards';
+}, footerDelay + 300);
+</script>
+</body>
+</html>
