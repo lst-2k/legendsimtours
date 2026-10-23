@@ -95,8 +95,7 @@
 				description: "Welcome to Demons 74 Stock VC Tour.",
 				btnText: "Demons Stock 74 VC Tour Leaderboard",
 				url: "https://lst-2k.github.io/demons74vctour/",
-				archive: [],
-				settingsImage: "demonsettings.html",       // Optional: replace with your settings image
+				settingsHtml: "demons.html", // Points to your demons.html file
 				archive: []
 			},
             stable: {
@@ -204,17 +203,23 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
         tourView.classList.add('active');
         body.style.backgroundColor = data.shade;
 
-        // 1. Render Title, Logo, Description Card, & Tour Settings Image
+        // 1. Render Title, Logo, Description, & Settings (Centered)
         const titleContainer = document.getElementById('title-container');
         titleContainer.innerHTML = `
             <div class="card" style="text-align: center;">
                 <img class="tour-logo-header" src="${data.logo || ''}" alt="${data.name} Logo" style="margin: 0 auto 15px; display: block;">
                 <h1>${data.name}</h1>
                 
-                <!-- Center description text -->
                 ${data.description ? `<p class="description-text" style="text-align: center; max-width: 700px; margin: 0 auto 20px;">${data.description}</p>` : ''}
                 
-                <!-- Tour Settings Image -->
+                <!-- IF SETTINGS HTML EXISTS (DEMONS 74) EMBED IT VIA IFRAME -->
+                ${data.settingsHtml ? `
+                    <div style="width: 100%; border-radius: 20px; overflow: hidden; margin-top: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+                        <iframe src="${data.settingsHtml}?t=${new Date().getTime()}" style="width: 100%; height: 950px; border: none; display: block; background: #1A0505;"></iframe>
+                    </div>
+                ` : ''}
+
+                <!-- OTHERWISE DISPLAY STATIC SETTINGS PNG FOR OTHER PAGES -->
                 ${data.settingsImage ? `<img src="${data.settingsImage}" class="settings-image" alt="${data.name} Settings" style="margin: 20px auto 0; display: block;">` : ''}
             </div>
         `;
@@ -714,19 +719,19 @@ Thanks for everyone’s continued support. Happy golfing.. 🏌️`, // Added ba
 			
 			<p>Welcome to Legend Sim Tours, the premier home for true simulation golf. If you are looking for the absolute peak of realism, integrity, and competition that the game has to offer, you have arrived at the right destination.</p>
 			
-			<p>Across our diverse roster of societies—from the Emerald Tour and Grip & Rip to Linksland, Matchplay, Demons 74, and Stableford—we share a unified philosophy: <strong>pure, authentic simulation golf.</strong></p>
+			<p>Across our diverse roster of societies—from the Emerald Tour and Grip & Rip to Linksland, Matchplay and Demons 74, we share a unified philosophy: <strong>pure, authentic simulation golf.</strong></p>
 			
 			<h2>The Ultimate Test of Sim Golf</h2>
 			
 			<p>Legend Sim Tours is built around true course management, skill, and consistency under pressure. We strip away the artificial aids to test your raw shot-shaping, navigation of tough course conditions, strategic layouts, and demanding greens.</p>
 			
-			<p>Each society offers its own distinct flavor, unique scoring systems, and tour challenges to keep every season fresh. Here, your success is dictated entirely by your swing control, decision-making, and resilience when every shot counts.</p>
+			<p>Each society offers its own distinct flavor, divisions, unique scoring systems, and tour challenges to keep every season fresh. Here, your success is dictated entirely by your swing control, decision-making, and resilience when every shot counts.</p>
 			
 			<h2>Built on Community & Honor</h2>
 			
 			<p>We run a strict honesty system because enjoyment, camaraderie, and sportsmanship are at the heart of everything we do. We are immensely proud of the community we’ve built here among fellow true simmers.</p>
 			
-			<p>Take a look through the society links above to explore current tournament leaderboards, past archives, and specific rules. Whether you are aiming for the top of the OWGR or just trying to grind out a respectable par, remember to have fun—because in LST, par is always a great score.</p>
+			<p>Take a look through the society links above to explore current tournament leaderboards, past archives, and specific rules. Whether you are aiming for the top or just trying to grind out a respectable par, remember to have fun—because in LST, par is always a great score.</p>
 			
 			<p>Click the Social links to join our Discord or watch our regular streamers, including Mr Longpole aka 'Tugga Myshaft' and his faithful caddy Leroy on Twitch. Step up to the tee, dial in your swing, and let’s go get 'em!</p>
 			
